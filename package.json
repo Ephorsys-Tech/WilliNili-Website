@@ -1,0 +1,39 @@
+{
+  "name": "willy-nilly-horticulture-agro-tourism",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-ready Willy Nilly Horticulture & Agro Tourism MVP built with Next.js App Router, JavaScript, MongoDB, and enterprise-grade security.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:security": "vitest run tests/security",
+    "seed": "node scripts/seed-demo.js",
+    "create-admin": "node scripts/create-admin.js"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
+    "jose": "^5.9.6",
+    "lucide-react": "^0.460.0",
+    "mongoose": "^8.8.4",
+    "next": "^14.2.20",
+    "postcss": "^8.4.49",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss": "^3.4.15",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.20",
+    "mongodb-memory-server": "^10.1.2",
+    "vitest": "^2.1.8"
+  }
+}

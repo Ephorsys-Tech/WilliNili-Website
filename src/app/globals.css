@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   WILLY NILLY AGRO-TOURISM DYNAMIC THEME SYSTEM
+   Supports: nature (default), luxury, earth, ocean
+   ============================================================ */
+
+:root,
+[data-theme="nature"] {
+  --color-primary: #15803d;         /* Emerald 700 */
+  --color-primary-hover: #166534;   /* Emerald 800 */
+  --color-primary-light: #dcfce7;   /* Emerald 100 */
+  --color-primary-dark: #14532d;    /* Emerald 900 */
+
+  --color-secondary: #ca8a04;       /* Amber 600 - golden wheat */
+  --color-secondary-hover: #a16207; /* Amber 700 */
+  --color-secondary-light: #fef3c7; /* Amber 100 */
+
+  --color-accent: #059669;          /* Teal / mint */
+  --color-accent-hover: #047857;
+  --color-accent-light: #ccfbf1;
+
+  --color-bg: #f8faf5;             /* Natural organic soft white */
+  --color-bg-alt: #f1f5eb;         /* Light agro cream */
+  --color-bg-dark: #0f2316;        /* Deep foliage dark */
+
+  --color-surface: #ffffff;
+  --color-surface-card: #ffffff;
+  --color-surface-muted: #f4f7f1;
+  --color-border: #e2e8df;
+
+  --color-text-main: #14281d;
+  --color-text-muted: #4b6354;
+  --color-text-light: #7e9988;
+  --color-text-inverted: #ffffff;
+
+  --color-status-success: #16a34a;
+  --color-status-warning: #d97706;
+  --color-status-error: #dc2626;
+  --color-status-info: #0284c7;
+
+  --theme-radius: 0.75rem;
+  --shadow-card: 0 4px 20px -2px rgba(21, 128, 61, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  --shadow-elevation: 0 12px 30px -4px rgba(21, 128, 61, 0.14);
+}
+
+[data-theme="luxury"] {
+  --color-primary: #1e3a2f;         /* Deep British Racing Green */
+  --color-primary-hover: #142820;
+  --color-primary-light: #e5ede8;
+  --color-primary-dark: #0d1b15;
+
+  --color-secondary: #d4af37;       /* Metallic Champagne Gold */
+  --color-secondary-hover: #b89726;
+  --color-secondary-light: #faf5e4;
+
+  --color-accent: #c59b27;
+  --color-accent-hover: #a88118;
+  --color-accent-light: #fef9ea;
+
+  --color-bg: #fbfbfa;
+  --color-bg-alt: #f4f3ef;
+  --color-bg-dark: #121815;
+
+  --color-surface: #ffffff;
+  --color-surface-card: #ffffff;
+  --color-surface-muted: #f3f3f0;
+  --color-border: #e7e5de;
+
+  --color-text-main: #19211c;
+  --color-text-muted: #565f5a;
+  --color-text-light: #87928c;
+  --color-text-inverted: #ffffff;
+
+  --color-status-success: #15803d;
+  --color-status-warning: #c2410c;
+  --color-status-error: #b91c1c;
+  --color-status-info: #1d4ed8;
+
+  --theme-radius: 0.5rem;
+  --shadow-card: 0 4px 24px -2px rgba(30, 58, 47, 0.09);
+  --shadow-elevation: 0 16px 36px -4px rgba(30, 58, 47, 0.16);
+}
+
+[data-theme="earth"] {
+  --color-primary: #c25e2e;         /* Warm Terracotta / Clay */
+  --color-primary-hover: #a24b20;
+  --color-primary-light: #ffedd5;
+  --color-primary-dark: #7c2d12;
+
+  --color-secondary: #3f6212;       /* Olive branch green */
+  --color-secondary-hover: #365314;
+  --color-secondary-light: #ecfccb;
+
+  --color-accent: #d97706;          /* Ochre / Warm Amber */
+  --color-accent-hover: #b45309;
+  --color-accent-light: #fef3c7;
+
+  --color-bg: #fdfbf7;
+  --color-bg-alt: #f7f2ea;
+  --color-bg-dark: #231812;
+
+  --color-surface: #ffffff;
+  --color-surface-card: #ffffff;
+  --color-surface-muted: #f4eee3;
+  --color-border: #eadfce;
+
+  --color-text-main: #2b1d16;
+  --color-text-muted: #6e584d;
+  --color-text-light: #9d8377;
+  --color-text-inverted: #ffffff;
+
+  --color-status-success: #15803d;
+  --color-status-warning: #d97706;
+  --color-status-error: #dc2626;
+  --color-status-info: #0369a1;
+
+  --theme-radius: 1rem;
+  --shadow-card: 0 4px 20px -2px rgba(194, 94, 46, 0.08);
+  --shadow-elevation: 0 12px 32px -4px rgba(194, 94, 46, 0.15);
+}
+
+[data-theme="ocean"] {
+  --color-primary: #0f766e;         /* Deep Sea Teal */
+  --color-primary-hover: #115e59;
+  --color-primary-light: #ccfbf1;
+  --color-primary-dark: #134e4a;
+
+  --color-secondary: #0284c7;       /* Sky Blue */
+  --color-secondary-hover: #0369a1;
+  --color-secondary-light: #e0f2fe;
+
+  --color-accent: #0d9488;
+  --color-accent-hover: #0f766e;
+  --color-accent-light: #e6fffa;
+
+  --color-bg: #f7fafc;
+  --color-bg-alt: #edf4f7;
+  --color-bg-dark: #0a1f26;
+
+  --color-surface: #ffffff;
+  --color-surface-card: #ffffff;
+  --color-surface-muted: #f0f6f8;
+  --color-border: #dae6ea;
+
+  --color-text-main: #0f242c;
+  --color-text-muted: #49636d;
+  --color-text-light: #7b9ba7;
+  --color-text-inverted: #ffffff;
+
+  --color-status-success: #059669;
+  --color-status-warning: #d97706;
+  --color-status-error: #e11d48;
+  --color-status-info: #0284c7;
+
+  --theme-radius: 0.75rem;
+  --shadow-card: 0 4px 20px -2px rgba(15, 118, 110, 0.08);
+  --shadow-elevation: 0 12px 32px -4px rgba(15, 118, 110, 0.15);
+}
+
+/* Glassmorphism & utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 35, 22, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  min-height: 100vh;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-light);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
