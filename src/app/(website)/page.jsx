@@ -25,6 +25,7 @@ import { getPublicRooms } from '@/api/room.api';
 import { getPublicGallery } from '@/api/gallery.api';
 import { EstateVisionSection } from '@/components/home/EstateVisionSection';
 import { EstateConciergeSection } from '@/components/home/EstateConciergeSection';
+import { ParallaxScrollFeatureSection } from '@/components/ui/parallax-scroll-feature-section';
 
 export default function HomePage() {
   const [settings, setSettings] = useState(null);
@@ -115,116 +116,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Categories Showcase */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <Badge variant="primary">Our Core Offerings</Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold text-content-main tracking-tight">
-            Discover Diverse Agro Experiences
-          </h2>
-          <p className="text-content-muted text-sm sm:text-base">
-            From restful stays to grand open-space events and vibrant horticulture saplings, explore our multifaceted campus.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Guest House */}
-          <Card hoverEffect padding="p-6" className="flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-theme bg-emerald-100 text-emerald-800 flex items-center justify-center group-hover:scale-105 transition-transform">
-                <BedDouble className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-bold text-content-main">Guest House</h3>
-              <p className="text-sm text-content-muted leading-relaxed">
-                Quiet, comfortable rooms featuring AC and Non-AC options, attached bathrooms, garden views, and verified hospitality.
-              </p>
-            </div>
-            <div className="pt-6">
-              <Link href="/guest-house" className="inline-flex items-center text-sm font-semibold text-primary hover:text-primary-hover gap-1">
-                Browse Rooms <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </Card>
-
-          {/* Farm House */}
-          <Card hoverEffect padding="p-6" className="flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-theme bg-amber-100 text-amber-800 flex items-center justify-center group-hover:scale-105 transition-transform">
-                <Trees className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-bold text-content-main">Farm House & Events</h3>
-              <p className="text-sm text-content-muted leading-relaxed">
-                Expansive open-air lawns and dining pavilion for destination weddings, family celebrations, anniversaries, and corporate retreats.
-              </p>
-            </div>
-            <div className="pt-6">
-              <Link href="/farm-house" className="inline-flex items-center text-sm font-semibold text-primary hover:text-primary-hover gap-1">
-                Event Details <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </Card>
-
-          {/* Resort (Upcoming) */}
-          <Card hoverEffect padding="p-6" className="flex flex-col justify-between group border-dashed">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-theme bg-blue-100 text-blue-800 flex items-center justify-center group-hover:scale-105 transition-transform">
-                <Compass className="w-6 h-6" />
-              </div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-xl font-bold text-content-main">Resort</h3>
-                <Badge variant="warning">Launching Soon</Badge>
-              </div>
-              <p className="text-sm text-content-muted leading-relaxed">
-                Our luxury eco-resort concept is currently under development. Experience villas, wellness yoga, and organic farm dining soon.
-              </p>
-            </div>
-            <div className="pt-6">
-              <Link href="/resort" className="inline-flex items-center text-sm font-semibold text-content-main hover:text-primary gap-1">
-                Explore Concept <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </Card>
-
-          {/* Horticulture */}
-          <Card hoverEffect padding="p-6" className="flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-theme bg-teal-100 text-teal-800 flex items-center justify-center group-hover:scale-105 transition-transform">
-                <Flower2 className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-bold text-content-main">Horticulture Nursery</h3>
-              <p className="text-sm text-content-muted leading-relaxed">
-                High-yielding fruit plants, organic medicinal herbs, flowering varieties, and agro-forestry saplings nurtured organically.
-              </p>
-            </div>
-            <div className="pt-6">
-              <Link href="/horticulture" className="inline-flex items-center text-sm font-semibold text-primary hover:text-primary-hover gap-1">
-                View Catalog <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </Card>
-
-          {/* Shop Rental (Conditional) */}
-          {shopActive && (
-            <Card hoverEffect padding="p-6" className="flex flex-col justify-between group md:col-span-2 lg:col-span-4 bg-primary-light/20">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Store className="w-5 h-5 text-primary" />
-                    <h3 className="text-xl font-bold text-content-main">Commercial Shop Rentals</h3>
-                    <Badge variant="success">Active Opportunities</Badge>
-                  </div>
-                  <p className="text-sm text-content-muted">
-                    Prime commercial shop spaces now available for agro-vendors, handicrafts, and local artisans.
-                  </p>
-                </div>
-                <Link href="/shop-rental">
-                  <Button variant="primary">Browse Available Shops</Button>
-                </Link>
-              </div>
-            </Card>
-          )}
-        </div>
-      </section>
+      {/* Core Offerings — Smooth Parallax Scroll Feature Showcase */}
+      <ParallaxScrollFeatureSection />
 
       {/* Featured Rooms Section */}
       {featuredRooms.length > 0 && (
