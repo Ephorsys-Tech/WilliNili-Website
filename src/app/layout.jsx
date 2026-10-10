@@ -27,16 +27,16 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#15803d',
+  themeColor: '#0e3d2b',
   width: 'device-width',
   initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="nature" suppressHydrationWarning>
+    <html lang="en" data-theme="willy-nilly" suppressHydrationWarning>
       <body className="antialiased min-h-screen bg-bg text-content-main flex flex-col">
-        <ThemeProvider initialTheme="nature">
+        <ThemeProvider>
           {children}
         </ThemeProvider>
       </body>
