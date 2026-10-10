@@ -21,7 +21,7 @@ import {
 
 const ADMIN_NAV = [
   { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { label: 'Business Info', href: '/admin/business-info', icon: Building2 },
+  // { label: 'Business Info', href: '/admin/business-info', icon: Building2 },
   { label: 'Guest House Rooms', href: '/admin/guest-house', icon: BedDouble },
   { label: 'Booking Requests', href: '/admin/bookings', icon: BookOpenCheck },
   { label: 'Farm House Events', href: '/admin/farm-house', icon: Trees },
