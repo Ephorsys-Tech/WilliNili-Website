@@ -2,43 +2,28 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-const THEMES = [
-  { id: 'nature', name: 'Nature & Agro (Default)', primary: '#15803d', accent: '#ca8a04' },
-  { id: 'luxury', name: 'Luxury Forest & Gold', primary: '#1e3a2f', accent: '#d4af37' },
-  { id: 'earth', name: 'Warm Terracotta & Olive', primary: '#c25e2e', accent: '#3f6212' },
-  { id: 'ocean', name: 'Coastal Teal & Sky', primary: '#0f766e', accent: '#0284c7' },
-];
+const THEME = {
+  id: 'willy-nilly',
+  name: 'Willy Nilly Brand (Forest Green & Gold)',
+  primary: '#0e3d2b',
+  accent: '#c59b27',
+};
 
 const ThemeContext = createContext({
-  theme: 'nature',
+  theme: 'willy-nilly',
   setTheme: () => {},
-  availableThemes: THEMES,
+  availableThemes: [THEME],
 });
 
-export function ThemeProvider({ children, initialTheme = 'nature' }) {
-  const [theme, setThemeState] = useState(initialTheme);
+export function ThemeProvider({ children }) {
+  const [theme] = useState('willy-nilly');
 
   useEffect(() => {
-    // Check saved user preference from localStorage
-    const saved = localStorage.getItem('wn_theme');
-    if (saved && THEMES.some((t) => t.id === saved)) {
-      setThemeState(saved);
-      document.documentElement.setAttribute('data-theme', saved);
-    } else {
-      document.documentElement.setAttribute('data-theme', initialTheme);
-    }
-  }, [initialTheme]);
-
-  const setTheme = (newTheme) => {
-    if (THEMES.some((t) => t.id === newTheme)) {
-      setThemeState(newTheme);
-      localStorage.setItem('wn_theme', newTheme);
-      document.documentElement.setAttribute('data-theme', newTheme);
-    }
-  };
+    document.documentElement.setAttribute('data-theme', 'willy-nilly');
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, availableThemes: THEMES }}>
+    <ThemeContext.Provider value={{ theme, setTheme: () => {}, availableThemes: [THEME] }}>
       {children}
     </ThemeContext.Provider>
   );

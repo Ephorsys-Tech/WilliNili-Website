@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 import { ShieldCheck } from 'lucide-react';
 
 export function AdminHeader({ title, subtitle }) {
@@ -19,11 +17,10 @@ export function AdminHeader({ title, subtitle }) {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-full bg-primary-light text-primary border border-primary/20">
+          <ShieldCheck className="w-3.5 h-3.5 text-secondary" />
           <span>Authenticated Session</span>
         </div>
-        <ThemeSwitcher />
       </div>
     </header>
   );
