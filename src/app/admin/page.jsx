@@ -220,10 +220,10 @@ export default function AdminDashboardPage() {
             <Images className="w-5 h-5 text-primary mx-auto mb-1.5" />
             <span className="text-xs font-medium text-content-main">Curate Gallery</span>
           </Link>
-          <Link href="/admin/business-info" className="p-3.5 rounded-theme border border-surface-border hover:border-primary hover:bg-primary-light/10 transition-colors text-center block">
+          {/* <Link href="/admin/business-info" className="p-3.5 rounded-theme border border-surface-border hover:border-primary hover:bg-primary-light/10 transition-colors text-center block">
             <Trees className="w-5 h-5 text-primary mx-auto mb-1.5" />
             <span className="text-xs font-medium text-content-main">Business Info</span>
-          </Link>
+          </Link> */}
         </div>
       </Card>
     </div>
