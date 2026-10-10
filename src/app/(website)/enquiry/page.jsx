@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { MessageSquare, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -9,6 +10,7 @@ import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Alert } from '@/components/ui/Alert';
+import { BgHero } from '@/components/ui/BgHero';
 import { submitEnquiry } from '@/api/enquiry.api';
 
 export default function GeneralEnquiryPage() {
@@ -68,104 +70,125 @@ export default function GeneralEnquiryPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 space-y-8 animate-fade-in">
-      <div className="text-center space-y-3">
-        <Badge variant="primary">Agro Tourism Desk</Badge>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-content-main tracking-tight">
-          General Service Enquiry
-        </h1>
-        <p className="text-sm text-content-muted max-w-xl mx-auto">
-          Need custom agro arrangements, group visits, school farming workshops, or general assistance? Submit your enquiry below.
-        </p>
-      </div>
-
-      {submittedRef && (
-        <Alert variant="success" title="Enquiry Received Successfully">
-          Your general request has been recorded under reference <strong className="font-mono">{submittedRef}</strong>. Our guest relations team will review your message and reach out shortly.
-        </Alert>
-      )}
-
-      {errors.form && (
-        <Alert variant="error" title="Submission Error">
-          {errors.form}
-        </Alert>
-      )}
-
-      <Card padding="p-6 sm:p-8" className="shadow-elevation">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <Input
-              label="Your Full Name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              error={errors.name}
-              placeholder="e.g. Priyanshu Das"
-              required
-            />
-
-            <Input
-              label="Mobile Number"
-              name="mobile"
-              type="tel"
-              value={formData.mobile}
-              onChange={handleChange}
-              error={errors.mobile}
-              placeholder="+91 98765 43210"
-              required
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <Input
-              label="Email Address"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              error={errors.email}
-              placeholder="you@domain.com"
-              required
-            />
-
-            <Select
-              label="Primary Interest Category"
-              name="enquiryType"
-              value={formData.enquiryType}
-              onChange={handleChange}
-              options={[
-                { value: 'General', label: 'General / Agro Campus Visit' },
-                { value: 'FarmHouse', label: 'Farm House Celebration / Lawn' },
-                { value: 'Horticulture', label: 'Horticulture & Nursery Saplings' },
-                { value: 'Contact', label: 'Corporate Offsite / Partnership' },
-              ]}
-              required
-            />
-          </div>
-
-          <Textarea
-            label="Details of your Request / Questions"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            error={errors.message}
-            rows={4}
-            placeholder="Please detail your visit dates, group size, or questions..."
-            required
-          />
-
-          <Button
-            type="submit"
-            variant="primary"
-            size="lg"
-            isLoading={isSubmitting}
-            className="w-full"
+    <div className="animate-fade-in">
+      {/* ─── Hero Banner ─────────────────────────────────── */}
+      <BgHero
+        image="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=2000&q=85"
+        alt="Fresh organic farm produce at sunrise"
+        size="sm"
+        align="center"
+        eyebrow="Agro Tourism Desk"
+        title={
+          <>
+            General <span style={{ color: '#f0d87a' }}>Service Enquiry</span>
+          </>
+        }
+        subtitle="Need custom agro arrangements, group visits, school farming workshops, or general assistance? Submit your enquiry below and we'll get right back to you."
+        breadcrumbs={[{ label: 'Enquiry' }]}
+        actions={
+          <a
+            href="#enquiry-form"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-semibold shadow-elevation hover:bg-primary-hover transition-all transform hover:-translate-y-0.5"
           >
-            <Send className="w-4 h-4 mr-2" />
-            Submit General Enquiry
-          </Button>
-        </form>
-      </Card>
+            <MessageSquare className="w-4 h-4" />
+            Submit Enquiry
+          </a>
+        }
+      />
+
+      {/* ─── Page Body ───────────────────────────────────── */}
+      <div
+        id="enquiry-form"
+        className="max-w-3xl mx-auto px-4 sm:px-6 py-16 space-y-8"
+      >
+        {submittedRef && (
+          <Alert variant="success" title="Enquiry Received Successfully">
+            Your general request has been recorded under reference <strong className="font-mono">{submittedRef}</strong>. Our guest relations team will review your message and reach out shortly.
+          </Alert>
+        )}
+
+        {errors.form && (
+          <Alert variant="error" title="Submission Error">
+            {errors.form}
+          </Alert>
+        )}
+
+        <Card padding="p-6 sm:p-8" className="shadow-elevation">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <Input
+                label="Your Full Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                error={errors.name}
+                placeholder="e.g. Priyanshu Das"
+                required
+              />
+
+              <Input
+                label="Mobile Number"
+                name="mobile"
+                type="tel"
+                value={formData.mobile}
+                onChange={handleChange}
+                error={errors.mobile}
+                placeholder="+91 98765 43210"
+                required
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <Input
+                label="Email Address"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                error={errors.email}
+                placeholder="you@domain.com"
+                required
+              />
+
+              <Select
+                label="Primary Interest Category"
+                name="enquiryType"
+                value={formData.enquiryType}
+                onChange={handleChange}
+                options={[
+                  { value: 'General', label: 'General / Agro Campus Visit' },
+                  { value: 'FarmHouse', label: 'Farm House Celebration / Lawn' },
+                  { value: 'Horticulture', label: 'Horticulture & Nursery Saplings' },
+                  { value: 'Contact', label: 'Corporate Offsite / Partnership' },
+                ]}
+                required
+              />
+            </div>
+
+            <Textarea
+              label="Details of your Request / Questions"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              error={errors.message}
+              rows={4}
+              placeholder="Please detail your visit dates, group size, or questions..."
+              required
+            />
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              isLoading={isSubmitting}
+              className="w-full"
+            >
+              <Send className="w-4 h-4 mr-2" />
+              Submit General Enquiry
+            </Button>
+          </form>
+        </Card>
+      </div>
     </div>
   );
 }
