@@ -364,7 +364,7 @@ export default function HomePage() {
       {/* ==================================================================== */}
       {/* 01. HERO / MAIN BANNER                                               */}
       {/* ==================================================================== */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-start justify-center overflow-hidden">
         {/* Background Photograph with subtle parallax scale */}
         <motion.div
           initial={{ scale: 1.08 }}
@@ -382,7 +382,7 @@ export default function HomePage() {
         </motion.div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center text-white space-y-7">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-16 text-center text-white space-y-5">
           {/* Official Emblem Logo Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
@@ -410,7 +410,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white drop-shadow-md"
           >
-            Experience Nature, <br className="hidden sm:block" />
+            , <br className="hidden sm:block" />
             <span className="text-secondary-light">Hospitality</span> &amp; Horticulture
           </motion.h1>
 
