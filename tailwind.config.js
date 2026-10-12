@@ -8,6 +8,9 @@ module.exports = {
   darkMode: ["class", '[data-theme="dark"]'],
   theme: {
     extend: {
+      screens: {
+        xs: "420px",
+      },
       colors: {
         primary: {
           DEFAULT: "var(--color-primary)",

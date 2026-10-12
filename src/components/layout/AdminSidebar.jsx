@@ -21,7 +21,7 @@ import {
 
 const ADMIN_NAV = [
   { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { label: 'Business Info', href: '/admin/business-info', icon: Building2 },
+  // { label: 'Business Info', href: '/admin/business-info', icon: Building2 },
   { label: 'Guest House Rooms', href: '/admin/guest-house', icon: BedDouble },
   { label: 'Booking Requests', href: '/admin/bookings', icon: BookOpenCheck },
   { label: 'Farm House Events', href: '/admin/farm-house', icon: Trees },
@@ -44,19 +44,26 @@ export function AdminSidebar({ onLogout, currentAdmin }) {
   return (
     <aside className="w-64 bg-surface border-r border-surface-border flex flex-col h-screen sticky top-0 transition-colors shadow-sm z-30">
       {/* Brand Header */}
-      <div className="p-5 border-b border-surface-border flex items-center justify-between">
-        <div>
-          <span className="text-lg font-bold text-content-main tracking-tight block">
-            Willy Nilly
-          </span>
-          <span className="text-xs text-primary font-semibold tracking-wider uppercase block">
-            Admin Portal
-          </span>
+      <div className="p-4 border-b border-surface-border flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2.5">
+          <img
+            src="/images/logo.png"
+            alt="Willy Nilly"
+            className="h-10 w-auto object-contain"
+          />
+          <div>
+            <span className="text-sm font-bold text-primary tracking-tight block uppercase leading-tight">
+              Willy Nilly
+            </span>
+            <span className="text-[10px] text-secondary font-semibold tracking-wider uppercase block">
+              Admin Portal
+            </span>
+          </div>
         </div>
         <Link
           href="/"
           target="_blank"
-          className="p-1.5 rounded-theme text-content-muted hover:text-primary hover:bg-surface-muted transition-colors"
+          className="p-1.5 rounded-theme text-content-muted hover:text-primary hover:bg-surface-muted transition-colors flex-shrink-0"
           title="View Live Public Website"
         >
           <ExternalLink className="w-4 h-4" />
