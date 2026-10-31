@@ -37,6 +37,7 @@ import { getPublicRooms } from '@/api/room.api';
 import { getPublicPlants } from '@/api/horticulture.api';
 import { getFarmHouseContent } from '@/api/farm-house.api';
 import { getPublicGallery } from '@/api/gallery.api';
+import { ExperiencesStoryScroll } from '@/components/home/ExperiencesStoryScroll';
 
 // ==========================================
 // STATIC VERIFIED DEFAULT DATA (Fail-safe)
@@ -109,25 +110,25 @@ const DEFAULT_ROOMS = [
 ];
 
 const DEFAULT_FARM_HOUSE = {
-  title: 'Willy Nilly Farm House & Open Event Grounds',
-  subtitle: 'A scenic setting for memorable gatherings and milestones',
+  title: 'Sandhya Agro Farm House & Willy Nilly Eco Retreat',
+  subtitle: 'Sagadipatana, Kisan Nagar, Cuttack — Fishing Pond, Sandalwood & 50-Person Picnic Base',
   description:
-    'Spanning 8 acres of manicured agro grounds, Willy Nilly Farm House provides the quintessential open-air destination for destination weddings, family celebrations, corporate retreats, and agro-workshops surrounded by nature.',
+    'Flagship agro retreat in Sagadipatana, Kisan Nagar, Cuttack featuring a freshwater fishing pond, White & Red Sandalwood, Agarwood, Mahogany, Betel Nut groves, Colour Bird & Turkey farming, and curated 50-person day picnic setups with traditional woodfire dining.',
   image:
-    'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1600&q=85',
+    'https://images.unsplash.com/photo-1500076656116-558758c991c1?auto=format&fit=crop&w=1600&q=85',
   facilities: [
-    'Expansive Open Lawns with Natural Shade & Canopy',
-    'Covered Dining & Banquet Pavilion',
-    'Air-Conditioned Host & Bridal Dressing Suites',
-    'Dedicated Catering Yard with Clean Water & Power',
-    'Secure On-Site Vehicle Parking',
-    'Ambient Landscape Fairy Lighting & 100% Power Backup',
+    'Freshwater Angling & Aquaculture Fishing Pond',
+    'White & Red Sandalwood, Agarwood & Mahogany Groves',
+    'Colour Bird Aviary & Free-Range Turkey Farming Yard',
+    'Private Day-Picnic Pavilions (Arranged for Up to 50 People)',
+    'Traditional Woodfire Chulha & Earthen Pot Cooking Yards',
+    'Covered Dining Verandas & Modern Sanitized Restrooms',
   ],
   suitableEvents: [
-    'Destination Weddings & Sangeet',
-    'Milestone Anniversaries & Birthdays',
-    'Corporate Retreats & Offsites',
-    'Agro Workshops & Family Reunions',
+    '50-Person Family & Corporate Day Picnics',
+    'Freshwater Pond Angling & Aquaculture Outings',
+    'Agroforestry & Sandalwood Botanical Tours',
+    'Destination Weddings & Cultural Celebrations',
   ],
 };
 
@@ -271,7 +272,8 @@ export default function HomePage() {
           title: fData.title || prev.title,
           description: fData.description || prev.description,
           facilities: Array.isArray(fData.facilities) && fData.facilities.length > 0 ? fData.facilities : prev.facilities,
-          image: fData.images && fData.images[0] ? fData.images[0] : prev.image,
+          heroImage: fData.heroImage || (fData.images && fData.images[0]) || '',
+          image: fData.heroImage || (fData.images && fData.images[0]) || prev.image,
         }));
       }
       if (Array.isArray(pData) && pData.length > 0) {
@@ -289,74 +291,6 @@ export default function HomePage() {
 
   const businessName = settings?.businessName || 'Willy Nilly';
   const shopActive = Boolean(settings?.shopRentalActive);
-
-  // Business experiences for Section 02
-  const experiencesList = [
-    {
-      id: 'guest-house',
-      title: 'Guest House',
-      description:
-        'Peaceful, comfortable rooms nestled in verdant orchards. AC & Non-AC choices with home-style hospitality.',
-      image:
-        'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
-      badge: 'Restful Stays',
-      badgeVariant: 'primary',
-      ctaText: 'Explore Guest House',
-      href: '/guest-house',
-    },
-    {
-      id: 'farm-house',
-      title: 'Farm House & Events',
-      description:
-        'Sprawling 8-acre open celebration lawns, covered dining pavilion, and scenic spaces for memorable gatherings.',
-      image:
-        'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80',
-      badge: 'Open Lawns',
-      badgeVariant: 'secondary',
-      ctaText: 'Explore Farm House',
-      href: '/farm-house',
-    },
-    {
-      id: 'horticulture',
-      title: 'Horticulture & Nursery',
-      description:
-        'Thriving plant nursery showcasing grafted fruit trees, indigenous medicinal herbs, and forestry saplings.',
-      image:
-        'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80',
-      badge: 'Plant Nursery',
-      badgeVariant: 'primary',
-      ctaText: 'Explore Plants',
-      href: '/horticulture',
-    },
-    {
-      id: 'resort',
-      title: 'Resort — Coming Soon',
-      description:
-        'Upcoming luxury eco-retreat featuring private bioclimatic villas, organic farm dining, and wellness trails.',
-      image:
-        'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
-      badge: 'Launching Soon',
-      badgeVariant: 'warning',
-      ctaText: 'Resort Preview',
-      href: '/resort',
-    },
-    ...(shopActive
-      ? [
-          {
-            id: 'shop-rental',
-            title: 'Shop Rental',
-            description:
-              'Prime commercial arcade units located along our main entrance promenade, ideal for agro & artisanal retail.',
-            image:
-              'https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=800&q=80',
-            badge: 'Commercial Lease',
-            badgeVariant: 'neutral',
-            ctaText: 'View Units',
-            href: '/shop-rental',
-          },
-        ]
-      : []),
-  ];
 
   return (
     <div className="relative overflow-hidden bg-bg text-content-main selection:bg-primary-light selection:text-primary-dark">
@@ -478,77 +412,34 @@ export default function HomePage() {
       {/* ==================================================================== */}
       {/* 02. EXPLORE OUR EXPERIENCES                                          */}
       {/* ==================================================================== */}
-      <section id="experiences" className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="experiences" className="relative bg-bg pt-20 sm:pt-28">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14 space-y-3"
+          className="text-center max-w-3xl mx-auto mb-10 px-4 sm:px-6 lg:px-8 space-y-3"
         >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-light text-primary-dark text-xs font-semibold">
             <Leaf className="w-3.5 h-3.5" />
             <span>Offerings at a Glance</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-content-main tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-content-main tracking-tight">
             Explore Our Experiences
           </h2>
           <p className="text-content-muted text-base sm:text-lg">
-            Discover each facet of Willy Nilly — from calm bedroom retreats and open festival grounds to organic botanical saplings.
+            Discover each facet of {businessName} — from calm bedroom retreats and open festival grounds to organic botanical saplings.
           </p>
         </motion.div>
 
-        {/* Experience Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {experiencesList.map((exp, idx) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <Card
-                hoverEffect
-                padding="p-0"
-                className="h-full flex flex-col group border border-surface-border bg-surface overflow-hidden"
-              >
-                {/* Image Header */}
-                <div className="relative h-48 sm:h-52 overflow-hidden bg-surface-muted">
-                  <img
-                    src={exp.image}
-                    alt={exp.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 right-3">
-                    <Badge variant={exp.badgeVariant}>{exp.badge}</Badge>
-                  </div>
-                </div>
-
-                {/* Body Content */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-content-main group-hover:text-primary transition-colors">
-                      {exp.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-content-muted leading-relaxed line-clamp-3">
-                      {exp.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-2">
-                    <Link href={exp.href}>
-                      <Button variant="outline" size="sm" className="w-full justify-between">
-                        <span>{exp.ctaText}</span>
-                        <ChevronRight className="w-4 h-4 text-primary" />
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+        {/* Dynamic Story Scroll Experience Showcases */}
+        <ExperiencesStoryScroll
+          businessName={businessName}
+          featuredRooms={featuredRooms}
+          farmHouse={farmHouse}
+          plants={plants}
+          shopActive={shopActive}
+        />
       </section>
 
       {/* ==================================================================== */}

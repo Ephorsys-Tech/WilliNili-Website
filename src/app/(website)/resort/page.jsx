@@ -21,20 +21,21 @@ export default function ResortPage() {
       .catch((err) => console.error(err));
   }, []);
 
-  const resortName = content?.resortName || 'Willy Nilly Eco Resort';
-  const launchStatus = content?.launchStatus || 'Launching Soon';
+  const resortName = content?.resortName || 'Willy Nilly Eco Resort & Allora Jungle Sanctuary';
+  const launchStatus = content?.launchStatus || 'Top Priority: Launching Before Dec 2026';
   const launchMessage =
     content?.launchMessage ||
-    'Our premier eco-luxury resort is currently under master planned development. Online booking is strictly disabled until official grand inauguration.';
+    'Part of the Willy Nilly Agro Eco Tourism Project (Official Launch: Before December 2026). Featuring the upcoming Allora Jungle Resort in Odapada, Dhenkanal nestled within 5,000 cashew and mango mother plants.';
   const conceptDescription =
     content?.conceptDescription ||
-    'A sanctuary where rustic agro charm meets sustainable modern luxury. Featuring bio-climatic private villas, natural pools, Ayurvedic wellness center, organic farm-to-table fine dining, and serene nature trails.';
+    'A sanctuary where rustic agro charm meets sustainable modern luxury. Centered around Allora Agro Forestry in Gobindaprasad, Odapada, Dhenkanal with 5,000 mother trees of cashew and mango, bio-climatic private forest villas, natural lagoon pool, and organic farm dining.';
   const featuresPlanned = content?.featuresPlanned || [
-    'Private Luxury Eco Cottages & Tree Villas',
-    'Natural Chemical-Free Swimming Lagoon',
-    'Ayurvedic Wellness & Yoga Pavilion',
-    'Farm-to-Fork Organic Dining Restaurant',
-    'Guided Agro & Bird Watching Trails',
+    'Private Luxury Eco Forest Cottages & Tree Canopy Villas',
+    'Allora Agro Forestry Sanctuary with 5,000 Mother Plants (Kaju & Mango)',
+    'Natural Chemical-Free Bio-Swimming Lagoon',
+    'Ayurvedic Wellness & Morning Forest Yoga Pavilion',
+    'Farm-to-Fork Organic Dining with Smoked Bamboo Cuisine',
+    'Guided Agro & Deep-Nature Bird Watching Trails in Dhenkanal',
   ];
 
   return (
@@ -45,7 +46,7 @@ export default function ResortPage() {
         alt="Luxury eco resort pool at twilight"
         size="lg"
         align="center"
-        eyebrow={launchStatus}
+        eyebrow="Top Priority Target • Launching Before December 2026"
         title={
           <>
             <span style={{ color: '#f0d87a' }}>{resortName}</span>
@@ -54,10 +55,10 @@ export default function ResortPage() {
         subtitle={launchMessage}
         breadcrumbs={[{ label: 'Resort' }]}
         stats={[
-          { value: 'Eco Villas', label: 'Private Cottages' },
-          { value: 'Natural Pool', label: 'Chemical-Free Lagoon' },
-          { value: 'Wellness', label: 'Ayurvedic Pavilion' },
-          { value: 'Farm Dining', label: 'Organic Restaurant' },
+          { value: 'Odapada, Dhenkanal', label: 'Allora Jungle Setting' },
+          { value: '5,000 Mother Trees', label: 'Cashew & Mango Forest' },
+          { value: 'Eco Tree Villas', label: 'Canopy Living' },
+          { value: 'Target: Dec 2026', label: 'Grand Unveiling' },
         ]}
         actions={
           <>
@@ -107,8 +108,13 @@ export default function ResortPage() {
             </p>
 
             <div className="pt-2 flex flex-wrap gap-3">
+              <Link href="/farm-house/allora-agro-forestry-jungle-resort-dhenkanal">
+                <Button variant="primary" className="font-bold">
+                  Read Allora Jungle Resort Guide
+                </Button>
+              </Link>
               <Link href="/guest-house">
-                <Button variant="primary">
+                <Button variant="outline">
                   Stay at Guest House Today
                 </Button>
               </Link>
