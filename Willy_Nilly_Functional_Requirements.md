@@ -83,6 +83,13 @@ Promote the property as an open space for events and celebrations. Support:
 - Optional guest capacity if the client wants it shown (TBD).
 - **Enquire Now** action leading to an event enquiry form.
 
+- **Dynamic Farm Location Gallery**: Include a high-resolution image showcase with lightbox zoom and perspective counters.
+- **Nearest Tourist Attractions in Odisha**: Display nearby heritage, eco-lagoon, coastal agro-belts, and craft villages with travel distance, travel times, culture highlights, indigenous farming methods, traditional food, and interactive map links.
+- **Individual Dynamic Blog & Travel Guide Pages**: Each farm experience and Odisha tourist attraction has its own dedicated editorial dynamic blog page (`/farm-house/[slug]`) complete with history, culture, agricultural methods, woodfire recipes, photo journals, day itineraries, and direct tour reservation forms.
+- **Multi-Color Tourist-Centric Navigation Bar (No Blur Effect)**: The website navigation bar features a solid, crisp, non-blur background with distinct vibrant color-coding, icons, and micro-badges for each business category (Farm House in Emerald Green, Guest House in Royal Amber, Horticulture in Leaf Green, Resort in Purple, Gallery in Cyan, etc.) plus a top tourist helpline strip so tourists can instantly understand each service at a glance.
+- **Live Content Updates**: Content is dynamically stored and editable via the Administrator panel (`/admin/farm-house`).
+- **Responsive & Premium Aesthetics**: Glowing typography, high contrast, smooth transitions, and mobile-first responsive cards.
+
 The Administrator manages property information, photographs, facilities, event information, and enquiries.
 
 ### 3.5 Resort — Upcoming
@@ -422,3 +429,39 @@ These are technical recommendations, not requirements explicitly mandated by the
 ## Source note
 
 This document is derived from the supplied *Business Website – Product Requirements Document*, Version 1.0, dated October 2026 (25 pages). The source includes sections on project overview, objectives, target visitors, website structure, Home, About Us, categories, Gallery, bookings, enquiries, Contact Us, Administrator management, business rules, user journeys, client content, pending decisions, scope, and future expansion.
+
+## Implementation Plan
+
+### 1. Design & Prototyping
+- Create high‑fidelity mockups for the Farm House page using premium color schemes, glowing typography, and glass‑morphism components.
+- Generate UI assets (icons, illustrations) via `generate_image` if needed.
+- Review designs with stakeholder for approval.
+
+### 2. Front‑end Development
+- Add a new React component `FarmLocationGallery.jsx` under `src/components/farm` to render an image carousel (e.g., Swiper.js) and a map widget.
+- Extend the existing Farm House page (`src/app/(website)/farm/page.jsx`) to include the new component and tourist‑attraction cards.
+- Apply CSS variables for the premium palette; use CSS animations for glowing text effects.
+- Ensure all styles are responsive using media queries and flex/grid layouts.
+
+### 3. CMS Integration
+- Define CMS schema for `farmImages` and `touristPlaces` (image, title, description, link).
+- Implement API endpoints (`/api/farm/gallery`, `/api/farm/attractions`) in the backend to fetch data.
+- Connect the front‑end component to these endpoints, enabling dynamic content updates.
+
+### 4. Accessibility & Performance
+- Optimize images (WebP, lazy‑load) and enable CDN caching.
+- Add ARIA labels and ensure color contrast meets WCAG AA.
+- Test page load time with Lighthouse; aim for a **Score > 90**.
+
+### 5. Testing & QA
+- Write unit tests for the new React component.
+- Perform cross‑device testing on mobile, tablet, and desktop browsers.
+- Conduct visual regression tests to verify the premium UI styling.
+
+### 6. Deployment
+- Merge changes into `main` and run the CI pipeline (`npm run build && npm run start`).
+- Verify the live site reflects the new Farm House page with dynamic gallery and tourist places.
+
+### 7. Documentation
+- Update this functional requirements document with the new bullets and the implementation plan.
+- Add developer docs in `README.md` describing how to update farm images and tourist attractions via the CMS.

@@ -14,6 +14,12 @@ const envSchema = z.object({
   UPLOAD_MAX_BYTES: z.coerce.number().default(5242880),
   ALLOWED_MIME_TYPES: z.string().default('image/jpeg,image/png,image/webp'),
   NEXT_PUBLIC_DEFAULT_THEME: z.enum(['nature', 'luxury', 'earth', 'ocean']).default('nature'),
+  // Cloudinary Media Configuration (Optional with graceful fallback)
+  CLOUDINARY_CLOUD_NAME: z.string().optional().default(''),
+  NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string().optional().default(''),
+  CLOUDINARY_API_KEY: z.string().optional().default(''),
+  CLOUDINARY_API_SECRET: z.string().optional().default(''),
+  CLOUDINARY_FOLDER: z.string().optional().default('willy_nilly'),
 });
 
 const parsed = envSchema.safeParse(process.env);
