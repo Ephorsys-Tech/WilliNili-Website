@@ -21,7 +21,7 @@ export function Footer() {
       .then((data) => {
         if (isMounted && data) setSettings(data);
       })
-      .catch(() => {});
+      .catch(() => { });
     return () => {
       isMounted = false;
     };
@@ -39,7 +39,7 @@ export function Footer() {
       {/* ─── Ambient Landscape Backdrop (Pahad, Jharna & Village Culture) ─── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
         <img
-          src="/images/village-pahad-jharna.jpg"
+          src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg"
           alt="Rural Odisha Landscape with Mountains, Waterfall and Village"
           className="w-full h-full object-cover object-center scale-105"
         />
@@ -53,7 +53,7 @@ export function Footer() {
           <div className="space-y-4 bg-black/20 md:bg-transparent backdrop-blur-xs md:backdrop-blur-none p-4 md:p-0 rounded-2xl">
             <Link href="/" className="inline-block group">
               <img
-                src="/images/logo.png"
+                src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
                 alt="Willy Nilly Official Logo"
                 className="h-20 w-auto object-contain transition-transform group-hover:scale-105 drop-shadow-md"
               />
@@ -61,7 +61,7 @@ export function Footer() {
             <p className="text-sm text-emerald-50/90 leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
               Experience the tranquility of sustainable agro living, lush orchards, comfortable guest house accommodations, open celebration grounds, and thriving horticulture nurseries.
             </p>
-           
+
           </div>
 
           {/* Quick Links to Public Offerings */}
@@ -216,14 +216,14 @@ export function Footer() {
         {/* Notice, Policy Links & Copyright */}
         <div className="mt-12 pt-8 border-t border-white/20 text-xs text-stone-300">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-           
+
             <div className="flex items-center gap-4 text-stone-200">
-              <Link href="/about#policies" className="hover:text-[#F5D061] transition-colors drop-shadow-sm">
+              <Link href="/privacy-policy" className="hover:text-[#F5D061] transition-colors drop-shadow-sm">
                 Privacy Policy
               </Link>
               <span className="text-stone-400">•</span>
-              <Link href="/about#terms" className="hover:text-[#F5D061] transition-colors drop-shadow-sm">
-                Terms of Service
+              <Link href="/terms-and-conditions" className="hover:text-[#F5D061] transition-colors drop-shadow-sm">
+                Terms and Conditions
               </Link>
               <span className="text-stone-400">•</span>
               <Link href="/contact" className="hover:text-[#F5D061] transition-colors drop-shadow-sm">

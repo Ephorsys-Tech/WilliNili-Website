@@ -99,9 +99,8 @@ export default function RoomDetailPage() {
                   key={idx}
                   type="button"
                   onClick={() => setActiveImage(idx)}
-                  className={`w-20 h-20 flex-shrink-0 rounded-theme border-2 overflow-hidden transition-all ${
-                    activeImage === idx ? 'border-primary ring-2 ring-primary/20' : 'border-surface-border opacity-70'
-                  }`}
+                  className={`w-20 h-20 flex-shrink-0 rounded-theme border-2 overflow-hidden transition-all ${activeImage === idx ? 'border-primary ring-2 ring-primary/20' : 'border-surface-border opacity-70'
+                    }`}
                 >
                   <img src={img} alt={`${room.name} ${idx + 1}`} className="w-full h-full object-cover" />
                 </button>
