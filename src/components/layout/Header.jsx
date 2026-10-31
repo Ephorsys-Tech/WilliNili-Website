@@ -213,7 +213,7 @@ export function Header() {
           {/* Official Brand Logo */}
           <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group py-1" aria-label="Willy Nilly Home">
             <img
-              src="/images/logo.png"
+              src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
               alt="Willy Nilly Official Logo"
               width={160}
               height={72}

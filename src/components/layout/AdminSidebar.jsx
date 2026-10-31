@@ -47,7 +47,7 @@ export function AdminSidebar({ onLogout, currentAdmin }) {
       <div className="p-4 border-b border-surface-border flex items-center justify-between gap-2">
         <div className="flex items-center gap-2.5">
           <img
-            src="/images/logo.png"
+            src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
             alt="Willy Nilly"
             className="h-10 w-auto object-contain"
           />

@@ -10,7 +10,8 @@ export function CloudinaryUploader({
   onChange,
   label = 'Upload Image',
   folder = 'willy_nilly',
-  helpText = 'Supports JPEG, PNG, WebP up to 5MB. Uploads to Cloudinary CDN.',
+  helpText = 'Supports JPEG, PNG, WebP up to 5MB from your device.',
+  aspectRatio = 'aspect-video sm:aspect-[21/9]',
   className = '',
 }) {
   const [isUploading, setIsUploading] = useState(false);
@@ -77,7 +78,7 @@ export function CloudinaryUploader({
       {/* Image Preview Card if value exists */}
       {value ? (
         <div className="relative group rounded-2xl border border-surface-border overflow-hidden bg-surface-muted/40 p-2">
-          <div className="relative aspect-video sm:aspect-[21/9] w-full rounded-xl overflow-hidden bg-stone-900/10">
+          <div className={`relative ${aspectRatio} w-full rounded-xl overflow-hidden bg-stone-900/10`}>
             <img
               src={value}
               alt="Uploaded Preview"
@@ -88,7 +89,7 @@ export function CloudinaryUploader({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="px-3.5 py-1.5 rounded-xl bg-white text-stone-900 text-xs font-bold shadow-md hover:bg-stone-100 transition-all flex items-center gap-1.5"
+                className="px-3.5 py-1.5 rounded-xl bg-white text-stone-900 text-xs font-bold shadow-md hover:bg-stone-100 transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <Upload className="w-3.5 h-3.5" />
                 <span>Replace</span>
@@ -99,7 +100,7 @@ export function CloudinaryUploader({
                   onChange('');
                   setProvider(null);
                 }}
-                className="px-3.5 py-1.5 rounded-xl bg-rose-600 text-white text-xs font-bold shadow-md hover:bg-rose-700 transition-all flex items-center gap-1.5"
+                className="px-3.5 py-1.5 rounded-xl bg-rose-600 text-white text-xs font-bold shadow-md hover:bg-rose-700 transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
                 <span>Remove</span>
@@ -114,9 +115,21 @@ export function CloudinaryUploader({
             </span>
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#0E3D2B] font-semibold text-[10px]">
               <Cloud className="w-3 h-3 text-secondary" />
-              <span>{value.includes('cloudinary') || provider === 'cloudinary' ? 'Cloudinary CDN' : 'Local Storage'}</span>
+              <span>{value.includes('cloudinary') || provider === 'cloudinary' ? 'Cloudinary CDN' : 'Device Upload'}</span>
             </span>
           </div>
+
+          {/* Hidden File Input for Replace */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={(e) => {
+              if (e.target.files?.[0]) handleFile(e.target.files[0]);
+            }}
+            className="hidden"
+            disabled={isUploading}
+          />
         </div>
       ) : (
         /* Dropzone Card */
@@ -145,7 +158,7 @@ export function CloudinaryUploader({
           {isUploading ? (
             <div className="py-4 flex flex-col items-center justify-center gap-2">
               <LoadingSpinner size="md" />
-              <p className="text-xs font-semibold text-secondary">Uploading to Cloudinary CDN...</p>
+              <p className="text-xs font-semibold text-secondary">Uploading image from device...</p>
             </div>
           ) : (
             <div className="space-y-2">

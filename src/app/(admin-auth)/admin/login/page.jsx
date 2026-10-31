@@ -89,7 +89,7 @@ export default function AdminLoginPage() {
             {/* Willy Nilly Emblem Logo */}
             <Link href="/" className="inline-block group transition-transform hover:scale-105">
               <img
-                src="/images/logo.png"
+                src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
                 alt="Willy Nilly Official Emblem Logo"
                 className="w-24 sm:w-28 md:w-32 h-auto drop-shadow-2xl"
               />

@@ -17,7 +17,7 @@ const envSchema = z.object({
   // Cloudinary Media Configuration (Optional with graceful fallback)
   CLOUDINARY_CLOUD_NAME: z.string().optional().default(''),
   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string().optional().default(''),
-  CLOUDINARY_API_KEY: z.string().optional().default(''),
+  CLOUDINARY_API_KEY: z.coerce.string().optional().default(''),
   CLOUDINARY_API_SECRET: z.string().optional().default(''),
   CLOUDINARY_FOLDER: z.string().optional().default('willy_nilly'),
 });
