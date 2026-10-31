@@ -66,6 +66,45 @@ export async function getOrCreateFarmHouseContent() {
   let farmHouse = await FarmHouse.findOne();
   if (!farmHouse) {
     farmHouse = await FarmHouse.create({});
+  } else {
+    let needsSave = false;
+    const defaults = new FarmHouse();
+
+    // Clean any legacy dummy Unsplash or local destination images from images array
+    if (Array.isArray(farmHouse.images) && farmHouse.images.length > 0) {
+      const cleaned = farmHouse.images.filter(
+        (url) => url && !url.includes('images.unsplash.com') && !url.includes('/images/destinations/')
+      );
+      if (cleaned.length !== farmHouse.images.length) {
+        farmHouse.images = cleaned;
+        needsSave = true;
+      }
+    }
+
+    // Clean any legacy dummy images from touristPlaces
+    if (Array.isArray(farmHouse.touristPlaces) && farmHouse.touristPlaces.length > 0) {
+      farmHouse.touristPlaces.forEach((place) => {
+        if (
+          place.image &&
+          (place.image.includes('images.unsplash.com') || place.image.includes('/images/destinations/'))
+        ) {
+          place.image = '';
+          needsSave = true;
+        }
+      });
+    }
+
+    if (!farmHouse.touristPlaces || farmHouse.touristPlaces.length === 0) {
+      farmHouse.touristPlaces = defaults.touristPlaces;
+      needsSave = true;
+    }
+    if (!farmHouse.agroExperiences || farmHouse.agroExperiences.length === 0) {
+      farmHouse.agroExperiences = defaults.agroExperiences;
+      needsSave = true;
+    }
+    if (needsSave) {
+      await farmHouse.save();
+    }
   }
   return farmHouse;
 }

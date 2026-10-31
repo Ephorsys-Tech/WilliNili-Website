@@ -33,12 +33,41 @@ export const updateSiteSettingsSchema = z.object({
 export const updateFarmHouseSchema = z.object({
   title: z.string().trim().min(2).max(150).optional(),
   description: z.string().trim().min(10).max(5000).optional(),
+  heroImage: z.string().trim().optional(),
   propertyArea: z.string().trim().max(100).optional(),
   guestCapacity: z.string().trim().max(100).optional(),
   facilities: z.array(z.string().trim()).optional(),
   suitableEvents: z.array(z.string().trim()).optional(),
   images: z.array(z.string().trim()).optional(),
   locationGuide: z.string().trim().max(500).optional(),
+  touristPlaces: z
+    .array(
+      z.object({
+        name: z.string().trim(),
+        category: z.string().trim().optional(),
+        distance: z.string().trim().optional(),
+        travelTime: z.string().trim().optional(),
+        description: z.string().trim(),
+        cultureHighlight: z.string().trim().optional(),
+        cuisineHighlight: z.string().trim().optional(),
+        farmingMethod: z.string().trim().optional(),
+        image: z.string().trim().optional(),
+        mapUrl: z.string().trim().optional(),
+      })
+    )
+    .optional(),
+  agroExperiences: z
+    .array(
+      z.object({
+        title: z.string().trim(),
+        subtitle: z.string().trim().optional(),
+        icon: z.string().trim().optional(),
+        description: z.string().trim(),
+        features: z.array(z.string().trim()).optional(),
+        tag: z.string().trim().optional(),
+      })
+    )
+    .optional(),
 });
 
 export const updateResortSchema = z.object({

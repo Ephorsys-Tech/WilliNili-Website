@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import fs from 'fs/promises';
 import { BadRequestError } from '../errors/AppError.js';
 import { env } from '../config/env.js';
+import { uploadToCloudinary, isCloudinaryConfigured } from '../services/cloudinary.service.js';
 
 const ALLOWED_MIME_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 const ALLOWED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp']);
@@ -53,7 +54,7 @@ export function validateImageBuffer(buffer) {
   throw new BadRequestError('Invalid file signature. Only authentic JPEG, PNG, and WebP images are permitted.');
 }
 
-export async function saveSecureImage(fileBuffer, originalFilename = '') {
+export async function saveSecureImage(fileBuffer, originalFilename = '', options = {}) {
   const maxBytes = env.UPLOAD_MAX_BYTES || 5242880;
   if (fileBuffer.length > maxBytes) {
     throw new BadRequestError(`File size exceeds limit of ${Math.round(maxBytes / 1024 / 1024)}MB`);
@@ -61,6 +62,27 @@ export async function saveSecureImage(fileBuffer, originalFilename = '') {
 
   const detectedMime = validateImageBuffer(fileBuffer);
 
+  // 1. If Cloudinary credentials are configured, upload to Cloudinary CDN
+  if (isCloudinaryConfigured) {
+    try {
+      const cldResult = await uploadToCloudinary(fileBuffer, {
+        folder: options.folder || env.CLOUDINARY_FOLDER || 'willy_nilly',
+      });
+      return {
+        url: cldResult.url,
+        publicId: cldResult.publicId,
+        mimeType: detectedMime,
+        size: cldResult.size || fileBuffer.length,
+        width: cldResult.width,
+        height: cldResult.height,
+        provider: 'cloudinary',
+      };
+    } catch (cldErr) {
+      console.warn('[Cloudinary Warning] Upload failed, falling back to local storage:', cldErr?.message);
+    }
+  }
+
+  // 2. Safe local disk fallback (used if Cloudinary is not configured or fails)
   let ext = '.jpg';
   if (detectedMime === 'image/png') ext = '.png';
   if (detectedMime === 'image/webp') ext = '.webp';
@@ -77,5 +99,6 @@ export async function saveSecureImage(fileBuffer, originalFilename = '') {
     filename: randomName,
     mimeType: detectedMime,
     size: fileBuffer.length,
+    provider: 'local',
   };
 }
