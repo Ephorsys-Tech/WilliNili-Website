@@ -115,7 +115,7 @@ export default function PrivacyPolicyPage() {
             <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 space-y-1 text-sm text-stone-800">
               <p><strong>Willy Nilly Agro Tourism &amp; Farm</strong></p>
               <p>Green Valley Road, State Highway, Odisha, India</p>
-              <p>Email: <a href="mailto:info@willynilly.in" className="text-emerald-800 font-medium underline">info@willynilly.in</a></p>
+              <p>Email: <a href="mailto:willynillyodisha@gmail.com" className="text-emerald-800 font-medium underline">willynillyodisha@gmail.com</a></p>
               <p>Phone: <a href="tel:+919876543210" className="text-emerald-800 font-medium underline">+91 98765 43210</a></p>
             </div>
           </section>

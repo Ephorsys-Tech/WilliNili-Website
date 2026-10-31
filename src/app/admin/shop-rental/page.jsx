@@ -26,9 +26,10 @@ const DEFAULT_SHOP = {
   sizeSqFt: 250,
   rentAmount: 12000,
   rentPeriod: 'Monthly',
-  location: 'Agro Campus Main Entrance Arcade',
+  floorLevel: 'Ground Floor',
+  location: 'Ground Floor, Willy Nilly Guest House Building (Main Entrance Wing)',
   description: '',
-  facilities: ['Shutter Door', 'Electricity Connection', 'Front Paved Road'],
+  facilities: ['Shutter Door', 'Electricity Connection', 'Front Paved Road', 'Shared Restroom Access'],
   images: [],
   isAvailable: true,
 };
@@ -103,7 +104,8 @@ export default function ShopRentalAdminPage() {
       sizeSqFt: s.sizeSqFt || 200,
       rentAmount: s.rentAmount || 0,
       rentPeriod: s.rentPeriod || 'Monthly',
-      location: s.location || '',
+      floorLevel: s.floorLevel || 'Ground Floor',
+      location: s.location || 'Ground Floor, Willy Nilly Guest House Building',
       description: s.description || '',
       facilities: s.facilities || [],
       images: s.images || [],
@@ -251,7 +253,16 @@ export default function ShopRentalAdminPage() {
                     </td>
                     <td className="p-4">{s.sizeSqFt} Sq. Ft.</td>
                     <td className="p-4 font-bold text-content-main">₹{s.rentAmount} /{s.rentPeriod}</td>
-                    <td className="p-4 text-content-muted">{s.location}</td>
+                    <td className="p-4">
+                      <div className="space-y-1">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                          Ground Floor
+                        </span>
+                        <div className="text-content-muted text-[11px] max-w-[200px] truncate" title={s.location}>
+                          {s.location}
+                        </div>
+                      </div>
+                    </td>
                     <td className="p-4">
                       <Badge variant={s.isAvailable ? 'success' : 'neutral'}>
                         {s.isAvailable ? 'Available' : 'Occupied'}
@@ -336,13 +347,44 @@ export default function ShopRentalAdminPage() {
             />
           </div>
 
-          <Input
-            label="Location Description"
-            value={formData.location}
-            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            placeholder="e.g. Main Entrance Gate Complex, Ground Floor"
-            required
-          />
+          {/* Co-Location with Guest House Helper Box */}
+          <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 space-y-1">
+            <div className="flex items-center gap-2 font-bold text-emerald-900">
+              <Store className="w-4 h-4 text-emerald-700" />
+              <span>Co-Located on Ground Floor of Willy Nilly Guest House</span>
+            </div>
+            <p className="text-emerald-800 text-[11px] leading-relaxed">
+              All commercial rental shops are located on the ground floor promenade of the main Guest House complex (guest rooms and suites are situated on upper floors).
+            </p>
+          </div>
+
+          <div className="space-y-1.5">
+            <Input
+              label="Location (Ground Floor of Guest House Building)"
+              value={formData.location}
+              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              placeholder="e.g. Ground Floor, Willy Nilly Guest House Building (Main Entrance Wing)"
+              required
+            />
+            {/* Quick Presets */}
+            <div className="flex flex-wrap items-center gap-1.5 pt-1">
+              <span className="text-[10px] text-content-muted font-semibold">Quick Presets:</span>
+              {[
+                'Ground Floor, Guest House Main Front Arcade',
+                'Ground Floor, Guest House East Promenade',
+                'Ground Floor, Guest House Courtyard Wing',
+              ].map((locPreset) => (
+                <button
+                  key={locPreset}
+                  type="button"
+                  onClick={() => setFormData({ ...formData, location: locPreset })}
+                  className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-surface-muted hover:bg-emerald-100 text-content-main hover:text-emerald-900 border border-surface-border transition-colors cursor-pointer"
+                >
+                  + {locPreset.replace('Ground Floor, Guest House ', '')}
+                </button>
+              ))}
+            </div>
+          </div>
 
           <Textarea
             label="Shop Description"

@@ -42,6 +42,7 @@ import { slugify } from '@/lib/utils';
 export default function FarmBlogDetailPage() {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
+  const [allTouristPlaces, setAllTouristPlaces] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [lightboxImg, setLightboxImg] = useState(null);
 
@@ -68,6 +69,7 @@ export default function FarmBlogDetailPage() {
       .then((data) => {
         if (!isMounted) return;
         const dynamicPlaces = data?.touristPlaces || [];
+        setAllTouristPlaces(dynamicPlaces);
         const found = getFarmBlogBySlug(slug, dynamicPlaces);
         setPost(found);
         if (found) {
@@ -189,6 +191,19 @@ export default function FarmBlogDetailPage() {
 
   // Related posts (excluding current)
   const relatedPosts = farmBlogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+
+  // Nearest tourist places configured by admin (excluding current post if matched)
+  const nearestTouristPlaces = allTouristPlaces.filter((p) => {
+    if (!p || !p.name) return false;
+    const pSlug = slugify(p.name);
+    if (pSlug === post.slug || post.slug?.includes(pSlug) || pSlug.includes(post.slug)) return false;
+    if (p.displayOnFarmhouseBlog === false) return false;
+    if (p.nearFarmhouse && p.nearFarmhouse !== 'All Farmhouses') {
+      const assigned = slugify(p.nearFarmhouse);
+      if (!post.slug?.includes(assigned) && !assigned.includes(post.slug)) return false;
+    }
+    return true;
+  });
 
   return (
     <article className="min-h-screen bg-bg pb-24 animate-fade-in">
@@ -605,6 +620,147 @@ export default function FarmBlogDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* ─── Downside: Nearest Tourist Places Display ────────────────────────── */}
+      {nearestTouristPlaces.length > 0 && (
+        <section className="w-full max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 border-t border-surface-border mt-16 space-y-8 animate-fade-in">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-800 text-white">
+                <Compass className="w-3.5 h-3.5 text-secondary" />
+                Nearby Sightseeing &amp; Day Excursions
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-content-main">
+                Nearest Tourist Places from this Farmhouse
+              </h2>
+              <p className="text-sm text-content-muted max-w-2xl leading-relaxed">
+                Discover authentic Odisha living heritage, sacred shrines, craft hamlets, and pristine nature destinations located within easy reach of {post.title.split('(')[0].trim()}.
+              </p>
+            </div>
+
+            <div className="text-xs text-content-muted font-medium flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-primary" />
+              <span>{nearestTouristPlaces.length} Curated Nearby Places</span>
+            </div>
+          </div>
+
+          {/* Grid of Tourist Places */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {nearestTouristPlaces.map((place, idx) => {
+              const placeSlug = slugify(place.name);
+              const hasImage = Boolean(
+                place.image &&
+                typeof place.image === 'string' &&
+                !place.image.includes('images.unsplash.com') &&
+                !place.image.includes('/images/destinations/')
+              );
+
+              return (
+                <div
+                  key={idx}
+                  className="group flex flex-col bg-surface-card rounded-2xl border border-surface-border overflow-hidden card-rich-hover shadow-card transition-all duration-300 hover:shadow-elevation"
+                >
+                  {/* Visual Image Preview */}
+                  <div className="relative aspect-[16/10] overflow-hidden bg-surface-muted flex items-center justify-center">
+                    {hasImage ? (
+                      <img
+                        src={place.image}
+                        alt={place.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-emerald-900/10 via-emerald-800/5 to-surface-muted flex flex-col items-center justify-center text-center p-4">
+                        <Landmark className="w-10 h-10 text-primary/60 mb-2" />
+                        <span className="text-xs font-semibold text-content-muted">Scenic Odisha Heritage</span>
+                      </div>
+                    )}
+
+                    {/* Category Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-primary text-white shadow-sm">
+                        {place.category || 'Odisha Heritage'}
+                      </span>
+                    </div>
+
+                    {/* Distance Pill */}
+                    {(place.distance || place.travelTime) && (
+                      <div className="absolute bottom-3 right-3">
+                        <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-black/75 text-white backdrop-blur-md border border-white/20 shadow-sm flex items-center gap-1">
+                          <Clock className="w-3 h-3 text-secondary" />
+                          {place.distance ? `${place.distance}` : ''}
+                          {place.distance && place.travelTime ? ' • ' : ''}
+                          {place.travelTime || ''}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Card Body */}
+                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <h3 className="text-base sm:text-lg font-bold text-content-main group-hover:text-primary transition-colors line-clamp-2">
+                        {place.name}
+                      </h3>
+                      <p className="text-xs text-content-muted line-clamp-3 leading-relaxed">
+                        {place.description}
+                      </p>
+                    </div>
+
+                    {/* Highlights: Culture, Food, Nature */}
+                    {(place.cultureHighlight || place.cuisineHighlight || place.farmingMethod) && (
+                      <div className="pt-3 border-t border-surface-border/70 space-y-1.5 text-[11px] text-content-muted">
+                        {place.cultureHighlight && (
+                          <div className="flex items-start gap-1.5 line-clamp-1">
+                            <Sparkles className="w-3.5 h-3.5 text-secondary flex-shrink-0 mt-0.5" />
+                            <span><strong>Culture:</strong> {place.cultureHighlight}</span>
+                          </div>
+                        )}
+                        {place.cuisineHighlight && (
+                          <div className="flex items-start gap-1.5 line-clamp-1">
+                            <Utensils className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                            <span><strong>Food:</strong> {place.cuisineHighlight}</span>
+                          </div>
+                        )}
+                        {place.farmingMethod && (
+                          <div className="flex items-start gap-1.5 line-clamp-1">
+                            <Wheat className="w-3.5 h-3.5 text-amber-600 flex-shrink-0 mt-0.5" />
+                            <span><strong>Agro:</strong> {place.farmingMethod}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Action Buttons */}
+                    <div className="pt-3 border-t border-surface-border flex items-center justify-between gap-2">
+                      <Link
+                        href={`/farm-house/${placeSlug}`}
+                        className="text-xs font-bold text-primary group-hover:text-primary-hover transition-colors inline-flex items-center gap-1 hover:underline"
+                      >
+                        <span>Explore Guide &amp; Story</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </Link>
+
+                      {place.mapUrl && (
+                        <a
+                          href={place.mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 rounded-lg text-content-muted hover:text-primary hover:bg-surface-muted transition-colors flex items-center gap-1 text-[11px]"
+                          title="Open Directions in Google Maps"
+                        >
+                          <MapPin className="w-3.5 h-3.5" />
+                          <span>Map</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* ─── Related Articles & Stories ──────────────────────────── */}
       {relatedPosts.length > 0 && (

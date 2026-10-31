@@ -47,8 +47,8 @@ export default function GalleryPage() {
     <div className="animate-fade-in">
       {/* ─── Hero Banner ─────────────────────────────────── */}
       <BgHero
-        image="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=2000&q=85"
-        alt="Lush nursery greenhouse with tropical plants"
+        image="https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg"
+        alt="Lush campus views and green agro landscape"
         size="sm"
         align="center"
         eyebrow="Campus Showcase"

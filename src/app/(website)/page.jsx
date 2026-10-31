@@ -48,7 +48,7 @@ const DEFAULT_SETTINGS = {
   aboutStory:
     'Nestled amidst lush greenery and fertile soils, Willy Nilly is a premier agro-tourism sanctuary and horticulture retreat dedicated to organic living, tranquil guest hospitality, and celebration spaces in natural countryside surroundings.',
   phonePrimary: '+91 98765 43210',
-  emailPrimary: 'info@willynilly.in',
+  emailPrimary: 'willynillyodisha@gmail.com',
   address: 'Willy Nilly Agro Campus, Green Valley Road, State Highway, India',
   businessHours: 'Guest House: 24/7 Check-in | Horticulture Nursery: 8:00 AM – 6:00 PM',
   locationMapUrl: 'https://maps.google.com/?q=Willy+Nilly+Agro+Campus',
@@ -289,7 +289,7 @@ export default function HomePage() {
     };
   }, []);
 
-  const businessName = settings?.businessName || 'Willy Nilly';
+  const businessName = 'Willy Nilly Agro Eco Tourism & Farm';
   const shopActive = Boolean(settings?.shopRentalActive);
 
   return (
@@ -299,18 +299,26 @@ export default function HomePage() {
       {/* 01. HERO / MAIN BANNER                                               */}
       {/* ==================================================================== */}
       <section className="relative min-h-[90vh] flex items-start justify-center overflow-hidden">
-        {/* Background Photograph with subtle parallax scale */}
+        {/* Background Video with subtle scale and overlay */}
         <motion.div
-          initial={{ scale: 1.08 }}
+          initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.8, ease: 'easeOut' }}
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 overflow-hidden"
         >
-          <img
-            src="https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif"
-            alt="Willy Nilly Agro Landscape"
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover object-center"
-          />
+            poster="https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif"
+          >
+            <source
+              src="https://res.cloudinary.com/aibkshp5/video/upload/v1793440738/hero.mp4"
+              type="video/mp4"
+            />
+          </video>
           {/* Gradient Overlay for exceptional text contrast */}
           <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/95 via-bg-dark/65 to-black/40" />
         </motion.div>
@@ -344,7 +352,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white drop-shadow-md"
           >
-            , <br className="hidden sm:block" />
+            Nature, <br className="hidden sm:block" />
             <span className="text-secondary-light">Hospitality</span> &amp; Horticulture
           </motion.h1>
 

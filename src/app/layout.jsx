@@ -24,6 +24,18 @@ export const metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo.png', type: 'image/png' },
+      { url: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png', type: 'image/png' },
+    ],
+    shortcut: ['/favicon.ico', '/logo.png'],
+    apple: [
+      { url: '/logo.png', sizes: '180x180', type: 'image/png' },
+      { url: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 };
 
 export const viewport = {
@@ -35,6 +47,11 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="willy-nilly" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+      </head>
       <body className="antialiased min-h-screen bg-bg text-content-main flex flex-col">
         <ThemeProvider>
           {children}

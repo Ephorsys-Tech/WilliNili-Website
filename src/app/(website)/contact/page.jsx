@@ -35,7 +35,7 @@ export default function ContactPage() {
     settings?.address ||
     'Willy Nilly Agro Campus, Green Valley Road, State Highway, Odisha';
   const phone = settings?.phonePrimary || '+91 98765 43210';
-  const email = settings?.emailPrimary || 'info@willynilly.in';
+  const email = settings?.emailPrimary || 'willynillyodisha@gmail.com';
   const hours =
     settings?.businessHours || 'Guest House: 24/7 Check-in | Farm & Nursery: 8 AM - 6 PM';
 

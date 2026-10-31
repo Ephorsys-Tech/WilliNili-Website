@@ -124,51 +124,6 @@ export default function SettingsAdminPage() {
           </Button>
         </div>
       </Card>
-
-      {/* System Health & Security Overview */}
-      <Card padding="p-6 sm:p-8" className="space-y-4">
-        <div className="flex items-center gap-2 border-b border-surface-border pb-3">
-          <ShieldCheck className="w-5 h-5 text-emerald-600" />
-          <h3 className="text-base font-bold text-content-main">Production Security & Health Telemetry</h3>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-          <div className="p-4 rounded-theme bg-surface-muted/50 border border-surface-border space-y-1">
-            <span className="text-content-muted font-medium">Database Engine</span>
-            <p className="font-bold text-content-main flex items-center gap-1.5 mt-1">
-              <Database className="w-4 h-4 text-primary" />
-              <span>MongoDB ({health?.database || 'connected'})</span>
-            </p>
-          </div>
-
-          <div className="p-4 rounded-theme bg-surface-muted/50 border border-surface-border space-y-1">
-            <span className="text-content-muted font-medium">System Health</span>
-            <p className="font-bold text-content-main mt-1">
-              <Badge variant={health?.status === 'healthy' ? 'success' : 'warning'}>
-                {health?.status || 'Active'}
-              </Badge>
-            </p>
-          </div>
-
-          <div className="p-4 rounded-theme bg-surface-muted/50 border border-surface-border space-y-1">
-            <span className="text-content-muted font-medium">Node Process Uptime</span>
-            <p className="font-bold text-content-main mt-1">
-              {health?.uptimeSeconds ? `${health.uptimeSeconds} seconds` : 'Active'}
-            </p>
-          </div>
-        </div>
-
-        <div className="p-4 rounded-theme bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 space-y-1">
-          <p className="font-semibold">Enterprise Security Hardening Active:</p>
-          <ul className="list-disc list-inside text-[11px] space-y-0.5 text-emerald-800">
-            <li>HttpOnly, SameSite=lax secure session cookies with JWT revocation</li>
-            <li>NoSQL injection sanitization removing dollar keys on all inbound mutations</li>
-            <li>Sliding window rate limiters defending auth endpoints and public request forms</li>
-            <li>Safe file upload pipeline verifying magic number image signatures (JPEG, PNG, WebP)</li>
-            <li>Clickjacking (X-Frame-Options: DENY) and MIME-sniffing protection enabled</li>
-          </ul>
-        </div>
-      </Card>
     </div>
   );
 }

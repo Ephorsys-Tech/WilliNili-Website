@@ -68,6 +68,8 @@ const FarmHouseSchema = new mongoose.Schema(
           farmingMethod: { type: String, default: '' },
           image: { type: String, default: '' },
           mapUrl: { type: String, default: '' },
+          displayOnFarmhouseBlog: { type: Boolean, default: true },
+          nearFarmhouse: { type: String, default: 'All Farmhouses' },
         },
       ],
       default: [
