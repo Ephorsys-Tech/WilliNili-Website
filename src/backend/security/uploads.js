@@ -63,7 +63,11 @@ export async function saveSecureImage(fileBuffer, originalFilename = '', options
   const detectedMime = validateImageBuffer(fileBuffer);
 
   // 1. If Cloudinary credentials are configured, upload to Cloudinary CDN
-  if (isCloudinaryConfigured) {
+  const isCldReady = typeof isCloudinaryConfigured === 'function'
+    ? isCloudinaryConfigured()
+    : Boolean(isCloudinaryConfigured);
+
+  if (isCldReady) {
     try {
       const cldResult = await uploadToCloudinary(fileBuffer, {
         folder: options.folder || env.CLOUDINARY_FOLDER || 'willy_nilly',
@@ -78,11 +82,12 @@ export async function saveSecureImage(fileBuffer, originalFilename = '', options
         provider: 'cloudinary',
       };
     } catch (cldErr) {
-      console.warn('[Cloudinary Warning] Upload failed, falling back to local storage:', cldErr?.message);
+      console.error('[Cloudinary Upload Error]', cldErr);
+      throw new BadRequestError(`Cloudinary upload failed: ${cldErr.message || 'Unknown error'}`);
     }
   }
 
-  // 2. Safe local disk fallback (used if Cloudinary is not configured or fails)
+  // 2. Safe local disk fallback (used ONLY if Cloudinary is not configured)
   let ext = '.jpg';
   if (detectedMime === 'image/png') ext = '.png';
   if (detectedMime === 'image/webp') ext = '.webp';

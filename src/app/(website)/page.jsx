@@ -307,7 +307,7 @@ export default function HomePage() {
           className="absolute inset-0 z-0"
         >
           <img
-            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=85"
+            src="https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif"
             alt="Willy Nilly Agro Landscape"
             className="w-full h-full object-cover object-center"
           />
@@ -326,7 +326,7 @@ export default function HomePage() {
           >
             <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/10 backdrop-blur-md p-2 border-2 border-secondary/40 shadow-elevation flex items-center justify-center">
               <img
-                src="/images/logo.png"
+                src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
                 alt="Willy Nilly Official Emblem"
                 className="w-full h-full object-contain drop-shadow"
               />

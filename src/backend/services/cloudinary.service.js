@@ -1,29 +1,56 @@
 import { v2 as cloudinary } from 'cloudinary';
 import { env } from '../config/env.js';
 
-// Configure Cloudinary if credentials are present
-const cloudName =
-  process.env.CLOUDINARY_CLOUD_NAME ||
-  process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
-  env.CLOUDINARY_CLOUD_NAME ||
-  env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-const apiKey = process.env.CLOUDINARY_API_KEY || env.CLOUDINARY_API_KEY;
-const apiSecret = process.env.CLOUDINARY_API_SECRET || env.CLOUDINARY_API_SECRET;
+/**
+ * Dynamically resolves Cloudinary credentials from process.env or validated env config.
+ * Always ensures the latest credentials from .env / .env.local are active.
+ */
+export function getCloudinaryConfig() {
+  const cloudName = String(
+    process.env.CLOUDINARY_CLOUD_NAME |
+    process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
+    env.CLOUDINARY_CLOUD_NAME ||
+    env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
+    ''
+  ).trim();
 
-export const isCloudinaryConfigured = Boolean(
-  cloudName && apiKey && apiSecret &&
-  cloudName.trim() !== '' &&
-  apiKey.trim() !== '' &&
-  apiSecret.trim() !== ''
-);
+  const apiKey = String(
+    process.env.CLOUDINARY_API_KEY ||
+    env.CLOUDINARY_API_KEY ||
+    ''
+  ).trim();
 
-if (isCloudinaryConfigured) {
-  cloudinary.config({
-    cloud_name: cloudName,
-    api_key: apiKey,
-    api_secret: apiSecret,
-    secure: true,
-  });
+  const apiSecret = String(
+    process.env.CLOUDINARY_API_SECRET ||
+    env.CLOUDINARY_API_SECRET ||
+    ''
+  ).trim();
+
+  const isConfigured = Boolean(cloudName && apiKey && apiSecret);
+
+  if (isConfigured) {
+    cloudinary.config({
+      cloud_name: cloudName,
+      api_key: apiKey,
+      api_secret: apiSecret,
+      secure: true,
+    });
+  }
+
+  return {
+    isConfigured,
+    cloudName,
+    apiKey,
+    apiSecret,
+  };
+}
+
+/**
+ * Check if Cloudinary is configured with valid credentials.
+ * @returns {boolean}
+ */
+export function isCloudinaryConfigured() {
+  return getCloudinaryConfig().isConfigured;
 }
 
 /**
@@ -33,8 +60,9 @@ if (isCloudinaryConfigured) {
  * @returns {Promise<Object>}
  */
 export async function uploadToCloudinary(buffer, options = {}) {
-  if (!isCloudinaryConfigured) {
-    throw new Error('Cloudinary is not configured with active credentials');
+  const config = getCloudinaryConfig();
+  if (!config.isConfigured) {
+    throw new Error('Cloudinary is not configured with active credentials. Please check CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET in your environment.');
   }
 
   const folder = options.folder || env.CLOUDINARY_FOLDER || 'willy_nilly';
@@ -79,8 +107,15 @@ export async function uploadToCloudinary(buffer, options = {}) {
  * @returns {Promise<Object>}
  */
 export async function deleteFromCloudinary(publicId) {
-  if (!isCloudinaryConfigured || !publicId) return null;
+  if (!isCloudinaryConfigured() || !publicId) return null;
   try {
+    const config = getCloudinaryConfig();
+    cloudinary.config({
+      cloud_name: config.cloudName,
+      api_key: config.apiKey,
+      api_secret: config.apiSecret,
+      secure: true,
+    });
     return await cloudinary.uploader.destroy(publicId);
   } catch (err) {
     console.error('[Cloudinary Destroy Error]', err);
@@ -92,4 +127,5 @@ export default {
   uploadToCloudinary,
   deleteFromCloudinary,
   isCloudinaryConfigured,
+  getCloudinaryConfig,
 };
