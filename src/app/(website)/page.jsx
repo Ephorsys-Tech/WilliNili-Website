@@ -1032,19 +1032,11 @@ export default function HomePage() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-elevation border border-surface-border bg-surface aspect-[4/5] group">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+                src="https://res.cloudinary.com/aibkshp5/image/upload/v1793429126/willy_nilly/tourist_places/e72icevlouwmal5t0lsl.jpg"
                 alt="Willy Nilly Founder"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
-                <h3 className="text-xl font-bold text-white">Mr. Sarat Kumar Singh</h3>
-                <p className="text-xs uppercase tracking-wider text-secondary-light font-medium mt-0.5">
-                  Founder &amp; Visionary
-                </p>
-                <p className="text-xs text-white/80 mt-2 italic leading-relaxed">
-                  &ldquo;We didn&apos;t set out to manufacture an escape. We simply nurtured soil so people could breathe again.&rdquo;
-                </p>
-              </div>
+              
             </div>
           </motion.div>
         </div>
@@ -1114,10 +1106,10 @@ export default function HomePage() {
                   <div>
                     <span className="font-semibold text-content-main block">Email Desk:</span>
                     <a
-                      href={`mailto:${settings?.emailPrimary || DEFAULT_SETTINGS.emailPrimary}`}
+                      href={`mailto:${ DEFAULT_SETTINGS.emailPrimary}`}
                       className="hover:text-primary transition-colors"
                     >
-                      {settings?.emailPrimary || DEFAULT_SETTINGS.emailPrimary}
+                      { DEFAULT_SETTINGS.emailPrimary}
                     </a>
                   </div>
                 </div>

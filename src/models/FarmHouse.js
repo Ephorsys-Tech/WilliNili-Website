@@ -14,7 +14,7 @@ const FarmHouseSchema = new mongoose.Schema(
     },
     heroImage: {
       type: String,
-      default: '',
+      default: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624287/willy_nilly/destinations/sandhya-agro-farm-house.jpg',
     },
     propertyArea: {
       type: String,
@@ -49,7 +49,12 @@ const FarmHouseSchema = new mongoose.Schema(
     },
     images: {
       type: [String],
-      default: [],
+      default: [
+        'https://res.cloudinary.com/aibkshp5/image/upload/v1793624287/willy_nilly/destinations/sandhya-agro-farm-house.jpg',
+        'https://res.cloudinary.com/aibkshp5/image/upload/v1793624288/willy_nilly/destinations/sangeeta-grafting-nursery.jpg',
+        'https://res.cloudinary.com/aibkshp5/image/upload/v1793624285/willy_nilly/destinations/allora-jungle-resort.jpg',
+        'https://res.cloudinary.com/aibkshp5/image/upload/v1793624286/willy_nilly/destinations/farm-birds-poultry.jpg',
+      ],
     },
     locationGuide: {
       type: String,
@@ -86,7 +91,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Fresh pond fish curry, clay-pot desi chicken, woodfire Dalma, and fresh farm-harvested betel leaf.',
           farmingMethod:
             'Multi-tier agroforestry with White/Red Sandalwood, Agarwood, Betel Nut palms, aquaculture pond, and free-range turkey/poultry yards.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624287/willy_nilly/destinations/sandhya-agro-farm-house.jpg',
           mapUrl: 'https://maps.google.com/?q=Kisan+Nagar+Cuttack+Odisha',
         },
         {
@@ -102,7 +107,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Sweet tender Niali green coconut water, clay-cup tea, and fresh seasonal mango tastings.',
           farmingMethod:
             'Scientific wedge & epicotyl grafting, shade-tunnel hardening, and disease-resistant organic potting.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624288/willy_nilly/destinations/sangeeta-grafting-nursery.jpg',
           mapUrl: 'https://maps.google.com/?q=Niali+Cuttack+Odisha',
         },
         {
@@ -118,7 +123,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Smoked bamboo delicacies, pure wild forest honey, and woodfire chulha cuisine served on sal leaves.',
           farmingMethod:
             '5,000 certified mother plant gene blocks, contour water harvesting lakes, and bio-diverse micro-forestry.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624285/willy_nilly/destinations/allora-jungle-resort.jpg',
           mapUrl: 'https://maps.google.com/?q=Odapada+Dhenkanal+Odisha',
         },
         {
@@ -134,7 +139,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Farm-to-fork 100% organic regional banquet featuring indigenous grains, fresh harvest, and woodfire flavours.',
           farmingMethod:
             'Integrated agro-forestry, solar micro-irrigation, zero-waste composting, and biological conservation.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624289/willy_nilly/destinations/willy-nilly-agro-circuit.jpg',
           mapUrl: 'https://maps.google.com/?q=Cuttack+Odisha',
         },
         {
@@ -150,7 +155,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Warm clay-pot Chhenagaja, sweet coconut water, and traditional woodfire temple delicacies.',
           farmingMethod:
             'Traditional betel-vine cultivation (Paan Baraja) with indigenous bamboo trellis, integrated agro-forestry, and natural canal irrigation.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg',
           mapUrl: 'https://maps.google.com/?q=Raghurajpur+Odisha',
         },
         {
@@ -166,7 +171,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Authentic village Dalma (slow-cooked lentils with raw papaya & roasted cumin), Ghanta Tarkari, and steaming aromatic rice served on Sal leaves.',
           farmingMethod:
             'Alluvial riverbank organic farming, multi-crop paddy rotation, and seasonal yellow mustard fields.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif',
           mapUrl: 'https://maps.google.com/?q=Dhauli+Shanti+Stupa+Odisha',
         },
         {
@@ -182,7 +187,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Freshly baked caramelized Chhena Poda in sal leaves and clay-cup spiced chai.',
           farmingMethod:
             'Integrated rural backyard horticulture, organic banana plantations, and community seed saving.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793429126/willy_nilly/tourist_places/e72icevlouwmal5t0lsl.jpg',
           mapUrl: 'https://maps.google.com/?q=Pipili+Odisha',
         },
         {
@@ -198,7 +203,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Coastal Odia freshwater crab curry, clay pot smoked fish, and cooling earthen-pot Pakhala with lemon leaves and fried seasonal greens.',
           farmingMethod:
             'Traditional wetland eco-aquaculture, tidal water harvesting, and indigenous saline-tolerant rice cultivation.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg',
           mapUrl: 'https://maps.google.com/?q=Mangalajodi+Chilika+Odisha',
         },
         {
@@ -214,7 +219,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Tender sweet green coconuts, Kakara Pitha, Arisa Pitha, and fresh tree-ripened coastal mangoes.',
           farmingMethod:
             'Coastal sand-dune stabilization farming, cashew nut orchards, and rain-fed organic groundnut cultivation.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif',
           mapUrl: 'https://maps.google.com/?q=Konark+Sun+Temple+Odisha',
         },
         {
@@ -230,7 +235,7 @@ const FarmHouseSchema = new mongoose.Schema(
             'Pure forest honey, roasted sweet tubers, Mandia (ragi) porridge, and herbal detox infusions.',
           farmingMethod:
             'Organic medicinal plant polyculture, bio-composting, and solar-powered micro-irrigation trials.',
-          image: '',
+          image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624285/willy_nilly/destinations/allora-jungle-resort.jpg',
           mapUrl: 'https://maps.google.com/?q=Chandaka+Sanctuary+Odisha',
         },
       ],

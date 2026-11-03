@@ -70,10 +70,10 @@ export async function getOrCreateFarmHouseContent() {
     let needsSave = false;
     const defaults = new FarmHouse();
 
-    // Clean any legacy dummy Unsplash or local destination images from images array
+    // Clean any legacy dummy Unsplash images from images array
     if (Array.isArray(farmHouse.images) && farmHouse.images.length > 0) {
       const cleaned = farmHouse.images.filter(
-        (url) => url && !url.includes('images.unsplash.com') && !url.includes('/images/destinations/')
+        (url) => url && !url.includes('images.unsplash.com')
       );
       if (cleaned.length !== farmHouse.images.length) {
         farmHouse.images = cleaned;
@@ -81,12 +81,12 @@ export async function getOrCreateFarmHouseContent() {
       }
     }
 
-    // Clean any legacy dummy images from touristPlaces
+    // Clean any legacy dummy Unsplash images from touristPlaces
     if (Array.isArray(farmHouse.touristPlaces) && farmHouse.touristPlaces.length > 0) {
       farmHouse.touristPlaces.forEach((place) => {
         if (
           place.image &&
-          (place.image.includes('images.unsplash.com') || place.image.includes('/images/destinations/'))
+          place.image.includes('images.unsplash.com')
         ) {
           place.image = '';
           needsSave = true;

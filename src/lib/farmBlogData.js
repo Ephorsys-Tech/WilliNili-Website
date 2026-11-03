@@ -1,3 +1,19 @@
+export const destinationImages = {
+  "sandhya-agro-farm-house-kisan-nagar-cuttack": "https://res.cloudinary.com/aibkshp5/image/upload/v1793624287/willy_nilly/destinations/sandhya-agro-farm-house.jpg",
+  "sangeeta-grafting-nursery-juanga-niali": "https://res.cloudinary.com/aibkshp5/image/upload/v1793624288/willy_nilly/destinations/sangeeta-grafting-nursery.jpg",
+  "allora-agro-forestry-jungle-resort-dhenkanal": "https://res.cloudinary.com/aibkshp5/image/upload/v1793624285/willy_nilly/destinations/allora-jungle-resort.jpg",
+  "willy-nilly-agro-eco-tourism-project-2026": "https://res.cloudinary.com/aibkshp5/image/upload/v1793624289/willy_nilly/destinations/willy-nilly-agro-circuit.jpg",
+  "raghurajpur-heritage-craft-agro-village": "https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg",
+  "dhauli-shanti-stupa-daya-river-agro-valley": "https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif",
+  "pipili-artisan-village-organic-hub": "https://res.cloudinary.com/aibkshp5/image/upload/v1793429126/willy_nilly/tourist_places/e72icevlouwmal5t0lsl.jpg",
+  "chilika-lake-mangalajodi-eco-tourism-corridor": "https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg",
+  "konark-sun-temple-coastal-cashew-agro-belt": "https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif",
+  "chandaka-dampara-agro-nature-sanctuary": "https://res.cloudinary.com/aibkshp5/image/upload/v1793624285/willy_nilly/destinations/allora-jungle-resort.jpg",
+  "authentic-agro-farming-methods": "https://res.cloudinary.com/aibkshp5/image/upload/v1793624287/willy_nilly/destinations/sandhya-agro-farm-house.jpg",
+  "traditional-odia-farm-fresh-dining": "https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg",
+  "serene-rural-stay-cultural-lifestyle": "https://res.cloudinary.com/aibkshp5/image/upload/v1793624289/willy_nilly/destinations/willy-nilly-agro-circuit.jpg"
+};
+
 import { slugify } from './utils.js';
 
 export const farmBlogPosts = [
@@ -17,7 +33,7 @@ export const farmBlogPosts = [
     distance: 'Basecamp Destination (Kisan Nagar, Cuttack)',
     travelTime: '40 mins from Cuttack / 60 mins from Bhubaneswar',
     bestSeason: 'All Seasons (Ideal Oct to April for Picnics & Angling)',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624287/willy_nilly/destinations/sandhya-agro-farm-house.jpg',
     mapUrl: 'https://maps.google.com/?q=Kisan+Nagar+Cuttack+Odisha',
     quickFacts: {
       location: 'Sagadipatana, Barda, Kisan Nagar, Cuttack (Katak), Odisha',
@@ -120,7 +136,7 @@ Advance booking for 50-person picnics and day outings is recommended. You can su
     distance: '28 km from Sandhya Farm House (Niali, Cuttack)',
     travelTime: '35 mins scenic drive via Niali Highway',
     bestSeason: 'Year-Round (Peak Planting: July to March)',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624288/willy_nilly/destinations/sangeeta-grafting-nursery.jpg',
     mapUrl: 'https://maps.google.com/?q=Niali+Cuttack+Odisha',
     quickFacts: {
       location: 'Juanga, Niali, Cuttack (Katak) District, Odisha',
@@ -200,7 +216,7 @@ For tourists staying at Sandhya Agro Farm House or traveling along the Cuttack-P
     distance: '55 km from Sandhya Farm House (Odapada, Dhenkanal)',
     travelTime: '1 hr 15 mins scenic highway drive via NH55',
     bestSeason: 'September to April (Pleasant Jungle Weather & Stargazing)',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624285/willy_nilly/destinations/allora-jungle-resort.jpg',
     mapUrl: 'https://maps.google.com/?q=Odapada+Dhenkanal+Odisha',
     quickFacts: {
       location: 'Gobindaprasad, Odapada, Dhenkanal District, Odisha',
@@ -281,7 +297,7 @@ Surrounded by clean mountain air and unblemished forest corridors, this destinat
     distance: 'Integrated State Tourism Circuit (Cuttack & Dhenkanal)',
     travelTime: 'Full Multi-Destination Experience',
     bestSeason: 'Official Launching Before December 2026 (Pre-Booking Open)',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624289/willy_nilly/destinations/willy-nilly-agro-circuit.jpg',
     mapUrl: 'https://maps.google.com/?q=Cuttack+Odisha',
     quickFacts: {
       launchDeadline: 'Targeted Grand Launch Before December 2026',
@@ -363,7 +379,7 @@ Contact our tour coordination desk using the online inquiry form below or connec
     distance: '22 km from Farm',
     travelTime: '35 mins drive',
     bestSeason: 'October to March',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg',
     mapUrl: 'https://maps.google.com/?q=Raghurajpur+Heritage+Village+Odisha',
     quickFacts: {
       location: 'Puri District, Odisha (22 km South from Willy Nilly Farm)',
@@ -441,7 +457,7 @@ Upon return to the farm in the late afternoon, unwind on our spacious rustic ver
     distance: '12 km from Farm',
     travelTime: '20 mins drive',
     bestSeason: 'Year-Round (Best Mornings & Sunsets)',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif',
     mapUrl: 'https://maps.google.com/?q=Dhauli+Shanti+Stupa+Odisha',
     quickFacts: {
       location: 'Dhauli Hills, Daya River Basin (12 km from Willy Nilly Farm)',
@@ -506,7 +522,7 @@ In the winter months, the valley transforms into a bright yellow sea of blossomi
     distance: '16 km from Farm',
     travelTime: '25 mins drive',
     bestSeason: 'Year-Round',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793429126/willy_nilly/tourist_places/e72icevlouwmal5t0lsl.jpg',
     mapUrl: 'https://maps.google.com/?q=Pipili+Applique+Village+Odisha',
     quickFacts: {
       location: 'National Highway 316, Pipili, Odisha (16 km from Farm)',
@@ -556,7 +572,7 @@ The leaves impart an irreplaceable smoky aroma while the outer crust caramelizes
     distance: '45 km from Farm',
     travelTime: '55 mins drive',
     bestSeason: 'November to February (Migratory Bird Season)',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg',
     mapUrl: 'https://maps.google.com/?q=Mangalajodi+Chilika+Lake+Odisha',
     quickFacts: {
       location: 'Northern edge of Chilika Lake, Khordha District, Odisha (45 km from Farm)',
@@ -612,7 +628,7 @@ It is accompanied by fresh green Saaga Bhaja (crispy stir-fried leafy greens wit
     distance: '38 km from Farm',
     travelTime: '45 mins drive',
     bestSeason: 'October to March',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif',
     mapUrl: 'https://maps.google.com/?q=Konark+Sun+Temple+Odisha',
     quickFacts: {
       location: 'Konark, Puri Coastline, Odisha (38 km from Farm)',
@@ -666,7 +682,7 @@ During the harvest season, the air carries the sweet, pungent aroma of ripening 
     distance: '28 km from Farm',
     travelTime: '40 mins drive',
     bestSeason: 'October to April',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624285/willy_nilly/destinations/allora-jungle-resort.jpg',
     mapUrl: 'https://maps.google.com/?q=Chandaka+Nature+Sanctuary+Odisha',
     quickFacts: {
       location: 'Chandaka Wildlife Division, Khordha/Cuttack (28 km from Farm)',
@@ -718,7 +734,7 @@ Farmers utilize dryland organic farming practices to grow climate-resilient mill
     distance: 'On-Site at Willy Nilly Farm',
     travelTime: '0 mins (Located at the Farm)',
     bestSeason: 'All Year Round',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624287/willy_nilly/destinations/sandhya-agro-farm-house.jpg',
     mapUrl: '',
     quickFacts: {
       location: 'Willy Nilly Farm House, 8-Acre Agro Retreat',
@@ -774,7 +790,7 @@ Guided by our agrarian staff, you will learn the rhythm of sowing, weeding, and 
     distance: 'On-Site at Willy Nilly Farm',
     travelTime: '0 mins',
     bestSeason: 'All Year Round',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg',
     mapUrl: '',
     quickFacts: {
       location: 'Willy Nilly Farm House Dining Pavilion',
@@ -830,7 +846,7 @@ Before serving, we crush fresh lemon leaves (Kagaji Lembu Patra), crushed ginger
     distance: 'On-Site at Willy Nilly Farm',
     travelTime: '0 mins',
     bestSeason: 'All Year Round',
-    image: '',
+    image: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624289/willy_nilly/destinations/willy-nilly-agro-circuit.jpg',
     mapUrl: '',
     quickFacts: {
       location: 'Willy Nilly Farm House & Cottage Grounds',
@@ -876,17 +892,20 @@ export function getFarmBlogBySlug(slug, dynamicPlaces = []) {
   const cleanDynamicImage =
     matchedPlace?.image &&
     typeof matchedPlace.image === 'string' &&
-    !matchedPlace.image.includes('images.unsplash.com') &&
-    !matchedPlace.image.includes('/images/destinations/')
+    !matchedPlace.image.includes('images.unsplash.com')
       ? matchedPlace.image.trim()
       : '';
+
+  const fallbackImage =
+    destinationImages[slug] ||
+    'https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg';
 
   // 2. Check curated in-depth blog posts
   const directMatch = farmBlogPosts.find((p) => p.slug === slug);
   if (directMatch) {
     return {
       ...directMatch,
-      image: cleanDynamicImage || directMatch.image || '',
+      image: cleanDynamicImage || directMatch.image || fallbackImage,
       ...(matchedPlace
         ? {
             subtitle: matchedPlace.description || directMatch.subtitle,
@@ -919,7 +938,7 @@ export function getFarmBlogBySlug(slug, dynamicPlaces = []) {
       distance: matchedPlace.distance || 'Near Willy Nilly Farm',
       travelTime: matchedPlace.travelTime || 'Short drive',
       bestSeason: 'October to March',
-      image: cleanDynamicImage,
+      image: cleanDynamicImage || fallbackImage,
       mapUrl: matchedPlace.mapUrl || '',
       quickFacts: {
         location: `${matchedPlace.name}, Odisha`,

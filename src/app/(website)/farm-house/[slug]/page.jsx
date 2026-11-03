@@ -310,43 +310,34 @@ export default function FarmBlogDetailPage() {
 
       {/* ─── Hero Cover Photo (Expansive Cinematic Panorama) ──────── */}
       <div className="w-full max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mb-12 sm:mb-16">
-        <div
-          onClick={() => post.image && setLightboxImg(post.image)}
-          className={`relative w-full h-[320px] sm:h-[440px] md:h-[500px] lg:h-[580px] xl:h-[640px] rounded-3xl overflow-hidden shadow-elevation border border-surface-border group ${
-            post.image ? 'cursor-pointer' : ''
-          }`}
-        >
-          {post.image ? (
-            <img
-              src={post.image}
-              alt={post.title}
-              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-          ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-gradient-to-br from-[#0e3d2b] via-[#09261a] to-[#04120c] text-center select-none">
-              <div className="w-16 h-16 rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary mb-3 border border-secondary/30 shadow-md">
-                <Compass className="w-8 h-8 text-secondary" />
+        {(() => {
+          const heroCover =
+            post.image && typeof post.image === 'string' && post.image.trim() !== ''
+              ? post.image.trim()
+              : 'https://res.cloudinary.com/aibkshp5/image/upload/v1793624287/willy_nilly/destinations/sandhya-agro-farm-house.jpg';
+
+          return (
+            <div
+              onClick={() => heroCover && setLightboxImg(heroCover)}
+              className="relative w-full h-[320px] sm:h-[440px] md:h-[500px] lg:h-[580px] xl:h-[640px] rounded-3xl overflow-hidden shadow-elevation border border-surface-border group cursor-pointer"
+            >
+              <img
+                src={heroCover}
+                alt={post.title}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity pointer-events-none" />
+              <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-semibold flex items-center gap-1.5">
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span>Click to expand</span>
               </div>
-              <span className="text-xs font-bold text-secondary uppercase tracking-wider">
-                {post.category}
-              </span>
-              <p className="text-xl sm:text-2xl font-extrabold text-white mt-1 max-w-xl line-clamp-2">
-                {post.title}
-              </p>
+              <div className="absolute bottom-4 left-4 max-w-lg text-white pointer-events-none">
+                <p className="text-xs font-semibold text-secondary-light">Odisha Agro &amp; Cultural Odyssey</p>
+                <p className="text-sm font-bold text-white drop-shadow-sm">{post.quickFacts?.location || post.title}</p>
+              </div>
             </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity pointer-events-none" />
-          {post.image && (
-            <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-semibold flex items-center gap-1.5">
-              <Maximize2 className="w-3.5 h-3.5" />
-              <span>Click to expand</span>
-            </div>
-          )}
-          <div className="absolute bottom-4 left-4 max-w-lg text-white pointer-events-none">
-            <p className="text-xs font-semibold text-secondary-light">Odisha Agro &amp; Cultural Odyssey</p>
-            <p className="text-sm font-bold text-white drop-shadow-sm">{post.quickFacts?.location || post.title}</p>
-          </div>
-        </div>
+          );
+        })()}
       </div>
 
       {/* ─── Main Article Content + Sticky Sidebar Layout ─────────── */}
@@ -648,12 +639,13 @@ export default function FarmBlogDetailPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {nearestTouristPlaces.map((place, idx) => {
               const placeSlug = slugify(place.name);
-              const hasImage = Boolean(
+              const placeImage =
                 place.image &&
                 typeof place.image === 'string' &&
-                !place.image.includes('images.unsplash.com') &&
-                !place.image.includes('/images/destinations/')
-              );
+                place.image.trim() !== '' &&
+                !place.image.includes('images.unsplash.com')
+                  ? place.image.trim()
+                  : 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg';
 
               return (
                 <div
@@ -662,19 +654,12 @@ export default function FarmBlogDetailPage() {
                 >
                   {/* Visual Image Preview */}
                   <div className="relative aspect-[16/10] overflow-hidden bg-surface-muted flex items-center justify-center">
-                    {hasImage ? (
-                      <img
-                        src={place.image}
-                        alt={place.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-emerald-900/10 via-emerald-800/5 to-surface-muted flex flex-col items-center justify-center text-center p-4">
-                        <Landmark className="w-10 h-10 text-primary/60 mb-2" />
-                        <span className="text-xs font-semibold text-content-muted">Scenic Odisha Heritage</span>
-                      </div>
-                    )}
+                    <img
+                      src={placeImage}
+                      alt={place.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
 
                     {/* Category Badge */}
                     <div className="absolute top-3 left-3">
@@ -784,19 +769,25 @@ export default function FarmBlogDetailPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {relatedPosts.map((rPost, idx) => (
-              <Link
-                key={idx}
-                href={`/farm-house/${rPost.slug}`}
-                className="group flex flex-col bg-surface-card rounded-2xl border border-surface-border overflow-hidden card-rich-hover shadow-card"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden bg-surface-muted">
-                  <img
-                    src={rPost.image}
-                    alt={rPost.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
+            {relatedPosts.map((rPost, idx) => {
+              const rImg =
+                rPost.image && typeof rPost.image === 'string' && rPost.image.trim() !== ''
+                  ? rPost.image.trim()
+                  : 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg';
+
+              return (
+                <Link
+                  key={idx}
+                  href={`/farm-house/${rPost.slug}`}
+                  className="group flex flex-col bg-surface-card rounded-2xl border border-surface-border overflow-hidden card-rich-hover shadow-card"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden bg-surface-muted">
+                    <img
+                      src={rImg}
+                      alt={rPost.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
                   <div className="absolute top-3 left-3">
                     <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-primary text-white">
                       {rPost.category}
@@ -820,7 +811,8 @@ export default function FarmBlogDetailPage() {
                   </span>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </section>
       )}

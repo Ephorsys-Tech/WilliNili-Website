@@ -72,7 +72,7 @@ export default function AdminLoginPage() {
       {/* ─── Landscape Panoramic Background (Pahad, Village, Sunrise) ─── */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <img
-          src="/images/village-pahad-jharna.jpg"
+          src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg"
           alt="Rural Landscape with Mountains and Village Cottages"
           className="w-full h-full object-cover object-center scale-105"
         />
@@ -239,17 +239,12 @@ export default function AdminLoginPage() {
 
                 {/* Forgot your password? link */}
                 <div className="flex justify-end pt-0.5">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setInfoMessage(
-                        'Password reset: Please contact the system administrator or verify server environment credentials.'
-                      )
-                    }
+                  <Link
+                    href="/admin/forgot-password"
                     className="text-xs font-semibold text-[#0E3D2B] hover:text-[#C59B27] transition-colors cursor-pointer"
                   >
                     Forgot your password?
-                  </button>
+                  </Link>
                 </div>
 
                 {/* Submit Button */}

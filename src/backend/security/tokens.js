@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { SignJWT, jwtVerify } from 'jose';
 import { env } from '../config/env.js';
 
@@ -42,4 +43,22 @@ export function getSessionCookieOptions() {
     path: '/',
     maxAge: env.SESSION_MAX_AGE_SECONDS || 86400,
   };
+}
+
+/**
+ * Generates a high-entropy cryptographically secure random token (256-bit)
+ * and its SHA-256 hash for database storage.
+ */
+export function generateResetToken() {
+  const rawToken = crypto.randomBytes(32).toString('hex');
+  const hashedToken = crypto.createHash('sha256').update(rawToken).digest('hex');
+  return { rawToken, hashedToken };
+}
+
+/**
+ * Computes the SHA-256 hash of a submitted raw reset token.
+ */
+export function hashToken(rawToken) {
+  if (!rawToken || typeof rawToken !== 'string') return '';
+  return crypto.createHash('sha256').update(rawToken).digest('hex');
 }

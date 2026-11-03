@@ -94,9 +94,9 @@ async function main() {
   if (!name) name = 'Sarat Kumar Singh';
 
   if (!email && process.stdin.isTTY) {
-    email = await prompt('Enter Administrator Email [default: admin@willynilly.in]: ');
+    email = await prompt('Enter Administrator Email [default: willynillyodisha@gmail.com]: ');
   }
-  if (!email) email = 'admin@willynilly.in';
+  if (!email) email = 'willynillyodisha@gmail.com';
 
   if (!password && process.stdin.isTTY) {
     password = await prompt('Enter Admin Password (min 8 characters): ');
@@ -105,7 +105,7 @@ async function main() {
   if (!password) {
     console.error('Error: Password is required. Supply via --password "YourPassword" or CLI prompt.');
     console.log('\nExample:');
-    console.log('  node scripts/create-admin.js --name "Sarat Kumar Singh" --email "admin@willynilly.in" --password "Admin@12345"\n');
+    console.log('  node scripts/create-admin.js --name "Sarat Kumar Singh" --email "willynillyodisha@gmail.com" --password "Admin@12345"\n');
     process.exit(1);
   }
 
