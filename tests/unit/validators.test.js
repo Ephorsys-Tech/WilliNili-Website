@@ -4,6 +4,8 @@ import { createEnquirySchema } from '../../src/backend/validators/enquiry.valida
 import { roomSchema } from '../../src/backend/validators/room.validator.js';
 import { plantSchema } from '../../src/backend/validators/plant.validator.js';
 import { shopRentalSchema } from '../../src/backend/validators/shopRental.validator.js';
+import { galleryItemSchema } from '../../src/backend/validators/gallery.validator.js';
+import { loginSchema, forgotPasswordSchema, resetPasswordSchema } from '../../src/backend/validators/auth.validator.js';
 
 describe('Schema Validators Unit Tests', () => {
   describe('Booking Request Validator', () => {
@@ -154,6 +156,118 @@ describe('Schema Validators Unit Tests', () => {
 
       const result = shopRentalSchema.safeParse(validShop);
       expect(result.success).toBe(true);
+    });
+  });
+
+  describe('Gallery Item Validator', () => {
+    it('accepts valid gallery photo data', () => {
+      const validPhoto = {
+        title: 'Guest House Garden Pavilion',
+        album: 'Guest House',
+        imageUrl: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/photo.jpg',
+        caption: 'Serene pavilion view surrounded by green trees',
+        isPublic: true,
+      };
+
+      const result = galleryItemSchema.safeParse(validPhoto);
+      expect(result.success).toBe(true);
+    });
+
+    it('rejects gallery item with missing or too short title', () => {
+      const badPhoto = {
+        title: 'A', // Too short
+        album: 'Property',
+        imageUrl: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/photo.jpg',
+      };
+
+      const result = galleryItemSchema.safeParse(badPhoto);
+      expect(result.success).toBe(false);
+    });
+
+    it('rejects invalid album category', () => {
+      const badAlbum = {
+        title: 'Nice Garden',
+        album: 'InvalidAlbumName',
+        imageUrl: 'https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/photo.jpg',
+      };
+
+      const result = galleryItemSchema.safeParse(badAlbum);
+      expect(result.success).toBe(false);
+    });
+
+    it('rejects malicious or invalid image URLs', () => {
+      const xssPhoto = {
+        title: 'Malicious Photo',
+        album: 'General',
+        imageUrl: 'javascript:alert(1)',
+      };
+
+      const result = galleryItemSchema.safeParse(xssPhoto);
+      expect(result.success).toBe(false);
+    });
+  });
+
+  describe('Authentication & Password Reset Validators', () => {
+    it('validates correct email for forgot password requests', () => {
+      const valid = { email: 'willynillyodisha@gmail.com' };
+      expect(forgotPasswordSchema.safeParse(valid).success).toBe(true);
+
+      const invalidEmail = { email: 'not-an-email' };
+      expect(forgotPasswordSchema.safeParse(invalidEmail).success).toBe(false);
+
+      const empty = { email: '' };
+      expect(forgotPasswordSchema.safeParse(empty).success).toBe(false);
+    });
+
+    it('enforces strong password criteria and matching confirmation on reset password', () => {
+      const validReset = {
+        token: 'a'.repeat(64),
+        password: 'StrongPass@2026',
+        confirmPassword: 'StrongPass@2026',
+      };
+      expect(resetPasswordSchema.safeParse(validReset).success).toBe(true);
+
+      // Mismatched passwords
+      const mismatch = {
+        token: 'a'.repeat(64),
+        password: 'StrongPass@2026',
+        confirmPassword: 'DifferentPass@2026',
+      };
+      const mismatchResult = resetPasswordSchema.safeParse(mismatch);
+      expect(mismatchResult.success).toBe(false);
+      expect(mismatchResult.error.issues[0].message).toMatch(/Passwords do not match/);
+
+      // Weak password: missing special character
+      const noSpecial = {
+        token: 'a'.repeat(64),
+        password: 'StrongPass2026',
+        confirmPassword: 'StrongPass2026',
+      };
+      expect(resetPasswordSchema.safeParse(noSpecial).success).toBe(false);
+
+      // Weak password: missing uppercase
+      const noUpper = {
+        token: 'a'.repeat(64),
+        password: 'strongpass@2026',
+        confirmPassword: 'strongpass@2026',
+      };
+      expect(resetPasswordSchema.safeParse(noUpper).success).toBe(false);
+
+      // Too short: less than 8 characters
+      const tooShort = {
+        token: 'a'.repeat(64),
+        password: 'Ab1!',
+        confirmPassword: 'Ab1!',
+      };
+      expect(resetPasswordSchema.safeParse(tooShort).success).toBe(false);
+
+      // Malformed token
+      const badToken = {
+        token: 'short-token',
+        password: 'StrongPass@2026',
+        confirmPassword: 'StrongPass@2026',
+      };
+      expect(resetPasswordSchema.safeParse(badToken).success).toBe(false);
     });
   });
 });

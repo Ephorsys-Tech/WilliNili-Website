@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { BedDouble, Users, Check, Calendar, ArrowRight, Info, Wind } from 'lucide-react';
+import { BedDouble, Users, Check, Calendar, ArrowRight, Info, Wind, Store } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -90,6 +90,30 @@ export default function GuestHousePage() {
         <Alert variant="info" title="Booking Request Policy">
           Guest House stays operate on a <strong>request-first basis</strong>. Submitting a booking form registers your request with our administration team, who will review availability and contact you directly to confirm. Instant online booking and advance online payments are outside the current scope.
         </Alert>
+
+        {/* Ground Floor Commercial & Farm Store Notice */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-surface border border-surface-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="p-2.5 rounded-xl bg-emerald-100 text-emerald-800 flex-shrink-0">
+              <Store className="w-5 h-5" />
+            </span>
+            <div>
+              <strong className="text-content-main font-bold block text-sm sm:text-base">
+                Ground Floor Commercial Shopping &amp; Agro Arcade
+              </strong>
+              <span className="text-content-muted text-xs leading-relaxed">
+                Convenient organic snack shops, nursery saplings, handicrafts, and daily essentials are situated directly on the ground floor of this Guest House building.
+              </span>
+            </div>
+          </div>
+          <Link
+            href="/shop-rental"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-primary text-primary hover:bg-primary hover:text-white font-semibold text-xs transition-colors flex-shrink-0"
+          >
+            <span>Browse Shop Rentals</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
 
         {/* Filter Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-2 pt-2">

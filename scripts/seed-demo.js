@@ -87,7 +87,7 @@ async function seed() {
     ],
     phonePrimary: '+91 98765 43210',
     phoneSecondary: '+91 98765 43211',
-    emailPrimary: 'info@willynilly.in',
+    emailPrimary: 'willynillyodisha@gmail.com',
     address: 'Willy Nilly Agro Campus, Green Valley Road, State Highway, India',
     locationMapUrl: 'https://maps.google.com',
     businessHours: 'Guest House: 24/7 Check-in | Horticulture Nursery: 8:00 AM – 6:00 PM',
@@ -389,9 +389,10 @@ async function seed() {
       sizeSqFt: 350,
       rentAmount: 14000,
       rentPeriod: 'Monthly',
-      location: 'Main Agro Campus Entrance Plaza, Ground Floor',
+      floorLevel: 'Ground Floor',
+      location: 'Ground Floor, Willy Nilly Guest House Building (Main Entrance Wing)',
       description:
-        'High-visibility commercial retail space right at the main campus entrance. Ideal for organic grocery, seed retailer, handicraft gallery, or tourist gift store.',
+        'High-visibility commercial retail space situated on the ground floor of Willy Nilly Guest House. Ideal for organic grocery, seed retailer, handicraft gallery, or tourist gift store with direct footfall from staying guests and campus visitors.',
       facilities: [
         'Motorized Rolling Shutter',
         'Commercial 3-Phase Electricity',
@@ -410,9 +411,10 @@ async function seed() {
       sizeSqFt: 240,
       rentAmount: 9500,
       rentPeriod: 'Monthly',
-      location: 'East Agro Promenade near Nursery Pathway',
+      floorLevel: 'Ground Floor',
+      location: 'Ground Floor, Willy Nilly Guest House Building (East Arcade)',
       description:
-        'Cozy corner commercial unit perfectly positioned along the visitor walking path. Suitable for artisanal bakery, herbal juice bar, or eco cafe.',
+        'Cozy corner commercial unit situated on the ground floor beneath the guest house suites. Suitable for artisanal bakery, herbal juice bar, or eco cafe with direct patio access.',
       facilities: [
         'Wide Display Frontage',
         'Water Drainage & Sink Setup',
@@ -431,9 +433,10 @@ async function seed() {
       sizeSqFt: 420,
       rentAmount: 16500,
       rentPeriod: 'Monthly',
-      location: 'Service Lane Adjacent to Plant Nursery',
+      floorLevel: 'Ground Floor',
+      location: 'Ground Floor, Willy Nilly Guest House Building (Service & Depot Wing)',
       description:
-        'Spacious unit with rear loading access, ideal for farm equipment rental, organic fertilizers, and horticulture supply depot.',
+        'Spacious unit on the ground floor with rear loading access, ideal for farm equipment rental, organic fertilizers, and horticulture supply depot.',
       facilities: [
         'Heavy-Duty Rolling Shutter',
         'Rear Loading Dock',

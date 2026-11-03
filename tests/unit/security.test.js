@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { hashPassword, comparePassword } from '../../src/backend/security/passwords.js';
-import { createSessionToken, verifySessionToken } from '../../src/backend/security/tokens.js';
+import { createSessionToken, verifySessionToken, generateResetToken, hashToken } from '../../src/backend/security/tokens.js';
 import { sanitizeNoSql, preventPathTraversal, escapeHtml } from '../../src/backend/security/sanitizer.js';
 import { checkRateLimit, resetRateLimit } from '../../src/backend/security/rateLimiter.js';
 import { validateImageBuffer } from '../../src/backend/security/uploads.js';
@@ -54,6 +54,36 @@ describe('Security Layer Unit Tests', () => {
 
       const verified = await verifySessionToken(tampered);
       expect(verified).toBeNull();
+    });
+  });
+
+  describe('Password Reset Tokens (OWASP A07 / Cryptographic Storage)', () => {
+    it('generates 256-bit cryptographically random tokens and matching SHA-256 hashes', () => {
+      const { rawToken, hashedToken } = generateResetToken();
+
+      expect(typeof rawToken).toBe('string');
+      expect(rawToken.length).toBe(64); // 32 bytes hex encoded = 64 characters
+      expect(typeof hashedToken).toBe('string');
+      expect(hashedToken.length).toBe(64); // SHA-256 hex digest = 64 characters
+      expect(rawToken).not.toBe(hashedToken);
+
+      // Verify hashing determinism
+      const computedHash = hashToken(rawToken);
+      expect(computedHash).toBe(hashedToken);
+    });
+
+    it('generates completely unique tokens on each invocation', () => {
+      const token1 = generateResetToken();
+      const token2 = generateResetToken();
+
+      expect(token1.rawToken).not.toBe(token2.rawToken);
+      expect(token1.hashedToken).not.toBe(token2.hashedToken);
+    });
+
+    it('handles falsy or invalid inputs gracefully in hashToken', () => {
+      expect(hashToken('')).toBe('');
+      expect(hashToken(null)).toBe('');
+      expect(hashToken(undefined)).toBe('');
     });
   });
 

@@ -67,7 +67,7 @@ const SiteSettingsSchema = new mongoose.Schema(
     },
     emailPrimary: {
       type: String,
-      default: 'info@willynilly.in',
+      default: 'willynillyodisha@gmail.com',
     },
     address: {
       type: String,

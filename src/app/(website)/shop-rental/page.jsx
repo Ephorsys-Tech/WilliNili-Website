@@ -46,24 +46,24 @@ export default function ShopRentalPage() {
     <div className="animate-fade-in">
       {/* ─── Hero Banner ─────────────────────────────────── */}
       <BgHero
-        image="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=2000&q=85"
-        alt="Commercial promenade with retail shop fronts"
+        image="https://res.cloudinary.com/aibkshp5/image/upload/v1793430591/village-pahad-jharna.jpg"
+        alt="Commercial shop rentals on the ground floor of Willy Nilly Guest House"
         size="sm"
         align="center"
-        eyebrow="Module Activated"
+        eyebrow="Guest House Ground Floor"
         title={
           <>
-            Commercial{' '}
-            <span style={{ color: '#f0d87a' }}>Shop Rentals</span>
+            Ground Floor{' '}
+            <span style={{ color: '#f0d87a' }}>Commercial Shops</span>
           </>
         }
-        subtitle="Prime commercial spaces located along the high-footfall entrance of Willy Nilly Agro Campus. Ideal for handicrafts, nursery supplies, and organic food vendors."
+        subtitle="Prime commercial retail spaces situated directly on the ground floor of the Willy Nilly Guest House building. Benefit from consistent daily footfall of residing guests, tourists, and agro-travelers with 24/7 security and high-visibility parking."
         breadcrumbs={[{ label: 'Shop Rental' }]}
         stats={[
-          { value: 'Prime', label: 'High-Footfall Location' },
-          { value: 'Agro', label: 'Campus Frontage' },
+          { value: 'Ground Floor', label: 'Guest House Building' },
+          { value: 'Resident', label: 'Captive Guest Footfall' },
           { value: 'Flexible', label: 'Lease Periods' },
-          { value: 'Secure', label: '24/7 Campus Security' },
+          { value: '24/7', label: 'Campus Security' },
         ]}
         actions={
           <Link
@@ -78,6 +78,28 @@ export default function ShopRentalPage() {
 
       {/* ─── Page Body ───────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
+        {/* Co-Location Notice: Ground Floor of Guest House */}
+        <div className="bg-surface rounded-2xl border border-surface-border p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-800 text-white text-xs font-bold uppercase tracking-wider">
+              <MapPin className="w-3.5 h-3.5 text-secondary" />
+              Co-Located with Willy Nilly Guest House
+            </div>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-content-main">
+              Ground Floor Commercial Arcade Beneath Guest Suites
+            </h2>
+            <p className="text-sm text-content-muted max-w-3xl leading-relaxed">
+              Our commercial retail units are situated on the <strong>ground floor of the main Guest House building</strong>. The floors directly above house AC &amp; Deluxe family guest suites, ensuring your enterprise (organic food, nursery plants, handicrafts, snacks, or daily supplies) receives organic, high-intent daily footfall from staying tourists, weekend holidaymakers, and event visitors.
+            </p>
+          </div>
+          <Link
+            href="/guest-house"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-primary text-primary hover:bg-primary hover:text-white font-semibold text-xs transition-colors flex-shrink-0"
+          >
+            <span>Explore Guest House Suites</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
         {isLoading ? (
           <LoadingSpinner text="Checking shop listings..." />
         ) : shops.length === 0 ? (
@@ -102,8 +124,11 @@ export default function ShopRentalPage() {
                   ) : (
                     <Store className="w-12 h-12 text-content-light" />
                   )}
-                  <div className="absolute top-3 left-3">
+                  <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
                     <Badge variant="primary">Shop #{shop.shopNumber}</Badge>
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950/80 text-emerald-200 border border-emerald-500/30 backdrop-blur-sm">
+                      Ground Floor • Guest House
+                    </span>
                   </div>
                   <div className="absolute top-3 right-3">
                     <Badge variant={shop.isAvailable ? 'success' : 'neutral'}>
@@ -123,9 +148,9 @@ export default function ShopRentalPage() {
                         {shop.sizeSqFt} Sq. Ft.
                       </span>
                       <span>&bull;</span>
-                      <span className="flex items-center gap-1 truncate">
-                        <MapPin className="w-3.5 h-3.5 text-primary" />
-                        {shop.location}
+                      <span className="flex items-center gap-1 truncate text-emerald-800 font-medium">
+                        <MapPin className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                        {shop.location.includes('Ground Floor') ? shop.location : `Ground Floor (Guest House) • ${shop.location}`}
                       </span>
                     </div>
                     <p className="text-xs text-content-muted mt-3 line-clamp-3 leading-relaxed">

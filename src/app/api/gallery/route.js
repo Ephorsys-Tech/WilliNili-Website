@@ -2,7 +2,7 @@ import { handleRoute } from '@/backend/middleware/routeHandler';
 import { requireAdmin } from '@/backend/middleware/authMiddleware';
 import { galleryItemSchema } from '@/backend/validators/gallery.validator';
 import { listPublicGallery, listAdminGallery, createGalleryItem } from '@/backend/services/gallery.service';
-import { sanitizeNoSql } from '@/backend/security/sanitizer';
+import { sanitizeNoSql, escapeHtml } from '@/backend/security/sanitizer';
 
 export const GET = handleRoute(async (req) => {
   const { searchParams } = new URL(req.url);
@@ -23,6 +23,14 @@ export const POST = handleRoute(async (req) => {
   const admin = await requireAdmin(req);
   const raw = await req.json();
   const sanitized = sanitizeNoSql(raw);
+
+  if (typeof sanitized.title === 'string') {
+    sanitized.title = escapeHtml(sanitized.title.trim());
+  }
+  if (typeof sanitized.caption === 'string') {
+    sanitized.caption = escapeHtml(sanitized.caption.trim());
+  }
+
   const validated = galleryItemSchema.parse(sanitized);
 
   return createGalleryItem(validated, admin);

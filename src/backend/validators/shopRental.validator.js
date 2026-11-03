@@ -7,6 +7,7 @@ export const shopRentalSchema = z.object({
   rentAmount: z.coerce.number().min(0, 'Rent amount must be non-negative'),
   rentPeriod: z.enum(['Monthly', 'Quarterly', 'Annual']).default('Monthly'),
   location: z.string().trim().min(2, 'Location is required').max(200),
+  floorLevel: z.string().trim().default('Ground Floor').optional(),
   description: z.string().trim().min(10, 'Description must be at least 10 characters'),
   facilities: z.array(z.string().trim()).default([]),
   images: z.array(z.string().trim()).default([]),

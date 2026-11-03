@@ -48,7 +48,7 @@ const DEFAULT_SETTINGS = {
   aboutStory:
     'Nestled amidst lush greenery and fertile soils, Willy Nilly is a premier agro-tourism sanctuary and horticulture retreat dedicated to organic living, tranquil guest hospitality, and celebration spaces in natural countryside surroundings.',
   phonePrimary: '+91 98765 43210',
-  emailPrimary: 'info@willynilly.in',
+  emailPrimary: 'willynillyodisha@gmail.com',
   address: 'Willy Nilly Agro Campus, Green Valley Road, State Highway, India',
   businessHours: 'Guest House: 24/7 Check-in | Horticulture Nursery: 8:00 AM – 6:00 PM',
   locationMapUrl: 'https://maps.google.com/?q=Willy+Nilly+Agro+Campus',
@@ -289,7 +289,7 @@ export default function HomePage() {
     };
   }, []);
 
-  const businessName = settings?.businessName || 'Willy Nilly';
+  const businessName = 'Willy Nilly Agro Eco Tourism & Farm';
   const shopActive = Boolean(settings?.shopRentalActive);
 
   return (
@@ -298,116 +298,144 @@ export default function HomePage() {
       {/* ==================================================================== */}
       {/* 01. HERO / MAIN BANNER                                               */}
       {/* ==================================================================== */}
-      <section className="relative min-h-[90vh] flex items-start justify-center overflow-hidden">
-        {/* Background Photograph with subtle parallax scale */}
-        <motion.div
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.8, ease: 'easeOut' }}
-          className="absolute inset-0 z-0"
-        >
-          <img
-            src="https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif"
-            alt="Willy Nilly Agro Landscape"
-            className="w-full h-full object-cover object-center"
-          />
-          {/* Gradient Overlay for exceptional text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/95 via-bg-dark/65 to-black/40" />
-        </motion.div>
+      
+<section className="relative min-h-[90vh] flex items-start justify-center overflow-hidden">
+  {/* Background Video with fallback image */}
+  <motion.div
+    initial={{ scale: 1.05 }}
+    animate={{ scale: 1 }}
+    transition={{ duration: 1.8, ease: "easeOut" }}
+    className="absolute inset-0 z-0 overflow-hidden"
+  >
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      poster="https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif"
+      className="w-full h-full object-cover object-center"
+    >
+      <source
+        src="https://res.cloudinary.com/aibkshp5/video/upload/v1793440738/hero.mp4"
+        type="video/mp4"
+      />
+    </video>
 
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-16 text-center text-white space-y-5">
-          {/* Official Emblem Logo Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="flex flex-col items-center justify-center gap-3"
-          >
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/10 backdrop-blur-md p-2 border-2 border-secondary/40 shadow-elevation flex items-center justify-center">
-              <img
-                src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
-                alt="Willy Nilly Official Emblem"
-                className="w-full h-full object-contain drop-shadow"
-              />
-            </div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-wide text-white shadow-sm">
-              <Sparkles className="w-4 h-4 text-secondary-light" />
-              <span>Official Agro-Tourism &amp; Horticulture Sanctuary</span>
-            </div>
-          </motion.div>
+    {/* Gradient Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/95 via-bg-dark/65 to-black/40" />
+  </motion.div>
 
-          {/* Main Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white drop-shadow-md"
-          >
-            , <br className="hidden sm:block" />
-            <span className="text-secondary-light">Hospitality</span> &amp; Horticulture
-          </motion.h1>
+  {/* Hero Content */}
+  <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-16 text-center text-white space-y-5">
 
-          {/* Short Introduction */}
-          <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="max-w-3xl mx-auto text-base sm:text-xl text-white/90 leading-relaxed font-normal"
-          >
-            Welcome to <strong className="font-semibold text-white">{businessName}</strong>. Unwind in serene Guest House accommodations, celebrate milestones across scenic Farm House grounds, explore indigenous botanical nurseries, and discover mindful rural living.
-          </motion.p>
+    {/* Official Emblem Logo Badge */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.85 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7, delay: 0.15 }}
+      className="flex flex-col items-center justify-center gap-3"
+    >
+      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/10 backdrop-blur-md p-2 border-2 border-secondary/40 shadow-elevation flex items-center justify-center">
+        <img
+          src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
+          alt="Willy Nilly Official Emblem"
+          className="w-full h-full object-contain drop-shadow"
+        />
+      </div>
 
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-wrap items-center justify-center gap-4 pt-4"
-          >
-            <a
-              href="#experiences"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-theme bg-primary text-white font-semibold shadow-elevation hover:bg-primary-hover transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-            >
-              <span>Explore Our Experiences</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-wide text-white shadow-sm">
+        <Sparkles className="w-4 h-4 text-secondary-light" />
+        <span>Official Agro-Tourism &amp; Horticulture Sanctuary</span>
+      </div>
+    </motion.div>
 
-            <Link
-              href="/enquiry"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-theme bg-white/15 backdrop-blur-md border border-white/30 text-white font-semibold hover:bg-white hover:text-content-main transition-all transform hover:-translate-y-0.5"
-            >
-              <Send className="w-4 h-4" />
-              <span>Enquire Now</span>
-            </Link>
-          </motion.div>
+    {/* Main Headline */}
+    <motion.h1
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+      className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white drop-shadow-md"
+    >
+      Nature, Comfort,
+      <br className="hidden sm:block" />
+      <span className="text-secondary-light">
+        Hospitality
+      </span>{" "}
+      &amp; Horticulture
+    </motion.h1>
 
-          {/* Value Badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto pt-10 text-left border-t border-white/15"
-          >
-            <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
-              <p className="text-xl sm:text-2xl font-bold text-white">8+ Acres</p>
-              <p className="text-xs text-white/80">Lush Agro Campus</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
-              <p className="text-xl sm:text-2xl font-bold text-white">Guest House</p>
-              <p className="text-xs text-white/80">Restful Country Stays</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
-              <p className="text-xl sm:text-2xl font-bold text-white">Event Lawns</p>
-              <p className="text-xs text-white/80">Celebrations &amp; Gatherings</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
-              <p className="text-xl sm:text-2xl font-bold text-white">Plant Nursery</p>
-              <p className="text-xs text-white/80">Fruit &amp; Herbal Saplings</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+    {/* Short Introduction */}
+    <motion.p
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      className="max-w-3xl mx-auto text-base sm:text-xl text-white/90 leading-relaxed font-normal"
+    >
+      Welcome to{" "}
+      <strong className="font-semibold text-white">
+        {businessName}
+      </strong>
+      . Unwind in serene Guest House accommodations, celebrate
+      milestones across scenic Farm House grounds, explore
+      indigenous botanical nurseries, and discover mindful
+      rural living.
+    </motion.p>
+
+    {/* Call To Action Buttons */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.5 }}
+      className="flex flex-wrap items-center justify-center gap-4 pt-4"
+    >
+      <a
+        href="#experiences"
+        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-theme bg-primary text-white font-semibold shadow-elevation hover:bg-primary-hover transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+      >
+        <span>Explore Our Experiences</span>
+        <ArrowRight className="w-4 h-4" />
+      </a>
+
+      <Link
+        href="/enquiry"
+        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-theme bg-white/15 backdrop-blur-md border border-white/30 text-white font-semibold hover:bg-white hover:text-content-main transition-all transform hover:-translate-y-0.5"
+      >
+        <Send className="w-4 h-4" />
+        <span>Enquire Now</span>
+      </Link>
+    </motion.div>
+
+    {/* Value Badges */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 0.7 }}
+      className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto pt-10 text-left border-t border-white/15"
+    >
+      <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
+        <p className="text-xl sm:text-2xl font-bold text-white">8+ Acres</p>
+        <p className="text-xs text-white/80">Lush Agro Campus</p>
+      </div>
+
+      <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
+        <p className="text-xl sm:text-2xl font-bold text-white">Guest House</p>
+        <p className="text-xs text-white/80">Restful Country Stays</p>
+      </div>
+
+      <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
+        <p className="text-xl sm:text-2xl font-bold text-white">Event Lawns</p>
+        <p className="text-xs text-white/80">Celebrations &amp; Gatherings</p>
+      </div>
+
+      <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
+        <p className="text-xl sm:text-2xl font-bold text-white">Plant Nursery</p>
+        <p className="text-xs text-white/80">Fruit &amp; Herbal Saplings</p>
+      </div>
+    </motion.div>
+  </div>
+</section>
+
 
       {/* ==================================================================== */}
       {/* 02. EXPLORE OUR EXPERIENCES                                          */}
@@ -1024,19 +1052,11 @@ export default function HomePage() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-elevation border border-surface-border bg-surface aspect-[4/5] group">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+                src="https://res.cloudinary.com/aibkshp5/image/upload/v1793429126/willy_nilly/tourist_places/e72icevlouwmal5t0lsl.jpg"
                 alt="Willy Nilly Founder"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
-                <h3 className="text-xl font-bold text-white">Mr. Sarat Kumar Singh</h3>
-                <p className="text-xs uppercase tracking-wider text-secondary-light font-medium mt-0.5">
-                  Founder &amp; Visionary
-                </p>
-                <p className="text-xs text-white/80 mt-2 italic leading-relaxed">
-                  &ldquo;We didn&apos;t set out to manufacture an escape. We simply nurtured soil so people could breathe again.&rdquo;
-                </p>
-              </div>
+              
             </div>
           </motion.div>
         </div>
@@ -1106,10 +1126,10 @@ export default function HomePage() {
                   <div>
                     <span className="font-semibold text-content-main block">Email Desk:</span>
                     <a
-                      href={`mailto:${settings?.emailPrimary || DEFAULT_SETTINGS.emailPrimary}`}
+                      href={`mailto:${ DEFAULT_SETTINGS.emailPrimary}`}
                       className="hover:text-primary transition-colors"
                     >
-                      {settings?.emailPrimary || DEFAULT_SETTINGS.emailPrimary}
+                      { DEFAULT_SETTINGS.emailPrimary}
                     </a>
                   </div>
                 </div>

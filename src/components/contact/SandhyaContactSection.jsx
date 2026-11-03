@@ -108,7 +108,7 @@ export function SandhyaContactSection({ settings }) {
 
   const phonePrimary = settings?.phonePrimary || '+91 98765 43210';
   const phoneSecondary = settings?.phoneSecondary || '+91 98765 43211';
-  const emailPrimary = settings?.emailPrimary || 'info@willynilly.in';
+  const emailPrimary = settings?.emailPrimary || 'willynillyodisha@gmail.com';
   const address =
     settings?.address || 'Willy Nilly Agro Campus, Green Valley Road, State Highway, Odisha';
   const hours =

@@ -53,6 +53,8 @@ export const updateFarmHouseSchema = z.object({
         farmingMethod: z.string().trim().optional(),
         image: z.string().trim().optional(),
         mapUrl: z.string().trim().optional(),
+        displayOnFarmhouseBlog: z.boolean().optional(),
+        nearFarmhouse: z.string().trim().optional(),
       })
     )
     .optional(),

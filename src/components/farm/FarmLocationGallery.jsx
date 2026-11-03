@@ -28,8 +28,7 @@ export function FarmLocationGallery({
       url &&
       typeof url === 'string' &&
       url.trim() !== '' &&
-      !url.includes('images.unsplash.com') &&
-      !url.includes('/images/destinations/')
+      !url.includes('images.unsplash.com')
   );
 
   const captions = [

@@ -29,7 +29,7 @@ export function Footer() {
 
   const businessName = 'Willy Nilly Agro Tourism & Farm';
   const phone = '+91 98765 43210';
-  const email = 'info@willynilly.in';
+  const email = settings?.emailPrimary || 'willynillyodisha@gmail.com';
   const address = 'Willy Nilly Agro Campus, Green Valley Road, State Highway, India';
   const hours = 'Guest House: 24/7 Check-in | Horticulture Nursery: 8:00 AM – 6:00 PM';
   const shopActive = Boolean(settings?.shopRentalActive);
