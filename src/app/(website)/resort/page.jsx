@@ -80,71 +80,7 @@ export default function ResortPage() {
       />
 
       {/* ─── Page Body: Concept Architecture & Notice ──────── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
 
-        {/* Disabled Booking Notice */}
-        <div className="flex justify-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-theme bg-surface border border-surface-border text-xs font-semibold text-content-muted shadow-sm">
-            <Ban className="w-4 h-4 text-rose-500" />
-            <span>Public Bookings Currently Disabled — Concept Phase</span>
-          </div>
-        </div>
-
-        <Alert variant="info" title="Official Project Notice">
-          In accordance with the agreed Willy Nilly roadmap, the eco-resort is under design and architectural finalization. Reservations and online payments remain strictly disabled until the founder authorizes official inauguration. Please visit our active Guest House or Farm House spaces in the meantime.
-        </Alert>
-
-        {/* Concept Architecture */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <Badge variant="primary">Architectural Concept</Badge>
-            <h2 className="text-3xl font-bold text-content-main leading-tight">
-              Harmonizing Luxury Living with Sustainable Agro Ecology
-            </h2>
-            <p className="text-base text-content-muted leading-relaxed">
-              {conceptDescription}
-            </p>
-            <p className="text-sm text-content-muted leading-relaxed">
-              Every structure is designed using local indigenous materials, passive solar cooling, recycled water management, and organic landscapes to ensure zero disruption to the fertile surrounding farmlands.
-            </p>
-
-            <div className="pt-2 flex flex-wrap gap-3">
-              <Link href="/farm-house/allora-agro-forestry-jungle-resort-dhenkanal">
-                <Button variant="primary" className="font-bold">
-                  Read Allora Jungle Resort Guide
-                </Button>
-              </Link>
-              <Link href="/guest-house">
-                <Button variant="outline">
-                  Stay at Guest House Today
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button variant="outline">
-                  Inquire with Management
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          <Card padding="p-8" className="bg-surface-muted/60 space-y-6">
-            <div className="w-12 h-12 rounded-theme bg-primary/10 text-primary flex items-center justify-center">
-              <Compass className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-bold text-content-main">Planned Resort Amenities</h3>
-            <ul className="space-y-3">
-              {featuresPlanned.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-primary-light/60 text-primary-dark font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
-                    {idx + 1}
-                  </span>
-                  <span className="text-sm text-content-main font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </Card>
-        </div>
-      </div>
 
       {/* ─── Explore Pentha & Bhitarkanika Tourism Circuit ─── */}
       <PenthaBhitarkanikaTourism />
