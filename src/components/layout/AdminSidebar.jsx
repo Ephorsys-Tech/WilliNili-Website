@@ -25,7 +25,7 @@ const ADMIN_NAV = [
   { label: 'Guest House Rooms', href: '/admin/guest-house', icon: BedDouble },
   { label: 'Booking Requests', href: '/admin/bookings', icon: BookOpenCheck },
   { label: 'Farm House Events', href: '/admin/farm-house', icon: Trees },
-  { label: 'Resort (Coming Soon)', href: '/admin/resort', icon: Compass },
+  // { label: 'Resort (Coming Soon)', href: '/admin/resort', icon: Compass },
   { label: 'Horticulture Plants', href: '/admin/horticulture', icon: Flower2 },
   { label: 'Shop Rental', href: '/admin/shop-rental', icon: Store },
   { label: 'Gallery Curation', href: '/admin/gallery', icon: Images },
