@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Flower2, Plus, Edit, Trash2, Sprout, Search } from 'lucide-react';
+import { Flower2, Plus, Edit, Trash2, Sprout, Search, X, Image as ImageIcon } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Modal } from '@/components/ui/Modal';
 import { Alert } from '@/components/ui/Alert';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { CloudinaryUploader } from '@/components/admin/CloudinaryUploader';
 import { getAdminPlants, createPlant, updatePlant, archivePlant } from '@/api/horticulture.api';
 
 const DEFAULT_PLANT = {
@@ -44,6 +45,7 @@ export default function HorticultureAdminPage() {
   const [formData, setFormData] = useState(DEFAULT_PLANT);
   const [isSaving, setIsSaving] = useState(false);
   const [alertState, setAlertState] = useState(null);
+  const [showManualUrl, setShowManualUrl] = useState(false);
 
   const fetchPlants = async () => {
     try {
@@ -64,6 +66,7 @@ export default function HorticultureAdminPage() {
   const handleOpenCreate = () => {
     setEditingPlant(null);
     setFormData(DEFAULT_PLANT);
+    setShowManualUrl(false);
     setIsModalOpen(true);
   };
 
@@ -81,6 +84,7 @@ export default function HorticultureAdminPage() {
       heightSize: p.heightSize || '',
       images: p.images || [],
     });
+    setShowManualUrl(false);
     setIsModalOpen(true);
   };
 
@@ -203,7 +207,7 @@ export default function HorticultureAdminPage() {
                         <button
                           type="button"
                           onClick={() => handleOpenEdit(p)}
-                          className="p-1.5 rounded-theme text-content-muted hover:text-primary hover:bg-surface-muted"
+                          className="p-1.5 rounded-theme text-content-muted hover:text-primary hover:bg-surface-muted cursor-pointer"
                           title="Edit Plant"
                         >
                           <Edit className="w-4 h-4" />
@@ -211,7 +215,7 @@ export default function HorticultureAdminPage() {
                         <button
                           type="button"
                           onClick={() => handleArchive(p._id)}
-                          className="p-1.5 rounded-theme text-content-muted hover:text-status-error hover:bg-surface-muted"
+                          className="p-1.5 rounded-theme text-content-muted hover:text-status-error hover:bg-surface-muted cursor-pointer"
                           title="Archive Plant"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -239,6 +243,7 @@ export default function HorticultureAdminPage() {
               label="Plant Common Name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              placeholder="e.g. Mango (Amrapali)"
               required
             />
             <Input
@@ -291,20 +296,12 @@ export default function HorticultureAdminPage() {
             required
           />
 
-          <div className="grid grid-cols-2 gap-4">
-            <Input
-              label="Standard Pot / Height Size"
-              value={formData.heightSize}
-              onChange={(e) => setFormData({ ...formData, heightSize: e.target.value })}
-              placeholder="e.g. 2-3 Feet Bag"
-            />
-            <Input
-              label="Image URL"
-              value={formData.images[0] || ''}
-              onChange={(e) => setFormData({ ...formData, images: [e.target.value].filter(Boolean) })}
-              placeholder="https://... or /uploads/..."
-            />
-          </div>
+          <Input
+            label="Standard Pot / Height Size"
+            value={formData.heightSize}
+            onChange={(e) => setFormData({ ...formData, heightSize: e.target.value })}
+            placeholder="e.g. 1-2 Feet Nursery Pot"
+          />
 
           <Textarea
             label="Care & Cultivation Instructions"
@@ -312,6 +309,115 @@ export default function HorticultureAdminPage() {
             onChange={(e) => setFormData({ ...formData, careInstructions: e.target.value })}
             rows={2}
           />
+
+          {/* Plant Photo Upload from Device */}
+          <div className="space-y-3 pt-2 border-t border-surface-border">
+            <CloudinaryUploader
+              label="Plant Photo (Upload from Device)"
+              value={formData.images?.[0] || ''}
+              folder="willy_nilly/horticulture"
+              aspectRatio="aspect-video"
+              onChange={(url) => {
+                setFormData((prev) => {
+                  const rest = (prev.images || []).slice(1);
+                  return {
+                    ...prev,
+                    images: url ? [url, ...rest] : rest,
+                  };
+                });
+              }}
+              helpText="Select or drag a plant photo from your computer or phone (JPEG, PNG, WebP up to 5MB). Uploads directly to your Cloudinary storage."
+            />
+
+            {/* Additional Plant Photos Gallery (Optional) */}
+            <div className="pt-2 border-t border-surface-border/60">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-semibold text-content-main flex items-center gap-1.5">
+                  <ImageIcon className="w-3.5 h-3.5 text-primary" />
+                  Additional Plant Photos ({Math.max(0, (formData.images?.length || 0) - 1)})
+                </span>
+              </div>
+
+              {/* Display existing additional photos as thumbnails with delete button */}
+              {(formData.images?.length || 0) > 1 && (
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-3">
+                  {formData.images.slice(1).map((imgUrl, idx) => (
+                    <div
+                      key={idx}
+                      className="relative group rounded-xl overflow-hidden aspect-video border border-surface-border bg-surface-muted"
+                    >
+                      <img
+                        src={imgUrl}
+                        alt={`Additional view ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData((prev) => {
+                            const newImages = [...prev.images];
+                            newImages.splice(idx + 1, 1);
+                            return { ...prev, images: newImages };
+                          });
+                        }}
+                        className="absolute top-1 right-1 p-1 bg-rose-600/90 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rose-700 shadow-sm cursor-pointer"
+                        title="Remove photo"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Upload extra photo from device */}
+              <CloudinaryUploader
+                label=""
+                value=""
+                folder="willy_nilly/horticulture"
+                aspectRatio="aspect-video"
+                onChange={(extraUrl) => {
+                  if (extraUrl) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      images: [...(prev.images || []), extraUrl],
+                    }));
+                  }
+                }}
+                helpText="Click to upload another view from your device to add to this plant's gallery."
+              />
+            </div>
+
+            {/* Optional manual URL entry toggle */}
+            <div className="pt-1">
+              <button
+                type="button"
+                onClick={() => setShowManualUrl(!showManualUrl)}
+                className="text-[11px] text-content-muted hover:text-primary transition-colors underline cursor-pointer"
+              >
+                {showManualUrl ? 'Hide direct URL input' : 'Or enter direct image URL manually'}
+              </button>
+              {showManualUrl && (
+                <div className="mt-2">
+                  <Input
+                    label="Direct Image URL"
+                    value={formData.images?.[0] || ''}
+                    onChange={(e) => {
+                      const val = e.target.value.trim();
+                      setFormData((prev) => {
+                        const rest = (prev.images || []).slice(1);
+                        return {
+                          ...prev,
+                          images: val ? [val, ...rest] : rest,
+                        };
+                      });
+                    }}
+                    placeholder="https://... or /uploads/..."
+                  />
+                </div>
+              )}
+            </div>
+          </div>
 
           <div className="flex justify-end gap-3 pt-4 border-t border-surface-border">
             <Button type="button" variant="ghost" onClick={() => setIsModalOpen(false)}>

@@ -31,6 +31,12 @@ const ShopRentalSchema = new mongoose.Schema(
     location: {
       type: String,
       required: [true, 'Location details are required'],
+      default: 'Ground Floor, Guest House Building, Willy Nilly Campus',
+      trim: true,
+    },
+    floorLevel: {
+      type: String,
+      default: 'Ground Floor',
       trim: true,
     },
     description: {

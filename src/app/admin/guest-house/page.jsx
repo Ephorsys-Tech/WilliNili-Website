@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { BedDouble, Plus, Edit, Trash2, Check, X, Eye } from 'lucide-react';
+import { BedDouble, Plus, Edit, Trash2, Check, X, Eye, Image as ImageIcon } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Modal } from '@/components/ui/Modal';
 import { Alert } from '@/components/ui/Alert';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { CloudinaryUploader } from '@/components/admin/CloudinaryUploader';
 import { getAdminRooms, createRoom, updateRoom, archiveRoom } from '@/api/room.api';
 
 const DEFAULT_ROOM = {
@@ -37,6 +38,7 @@ export default function GuestHouseAdminPage() {
   const [formData, setFormData] = useState(DEFAULT_ROOM);
   const [isSaving, setIsSaving] = useState(false);
   const [alertState, setAlertState] = useState(null);
+  const [showManualUrl, setShowManualUrl] = useState(false);
 
   const fetchRooms = async () => {
     try {
@@ -57,6 +59,7 @@ export default function GuestHouseAdminPage() {
   const handleOpenCreate = () => {
     setEditingRoom(null);
     setFormData(DEFAULT_ROOM);
+    setShowManualUrl(false);
     setIsModalOpen(true);
   };
 
@@ -77,6 +80,7 @@ export default function GuestHouseAdminPage() {
       images: room.images || [],
       isAvailable: Boolean(room.isAvailable),
     });
+    setShowManualUrl(false);
     setIsModalOpen(true);
   };
 
@@ -195,7 +199,7 @@ export default function GuestHouseAdminPage() {
                         <button
                           type="button"
                           onClick={() => handleOpenEdit(room)}
-                          className="p-1.5 rounded-theme text-content-muted hover:text-primary hover:bg-surface-muted"
+                          className="p-1.5 rounded-theme text-content-muted hover:text-primary hover:bg-surface-muted cursor-pointer"
                           title="Edit Room"
                         >
                           <Edit className="w-4 h-4" />
@@ -203,7 +207,7 @@ export default function GuestHouseAdminPage() {
                         <button
                           type="button"
                           onClick={() => handleArchive(room._id)}
-                          className="p-1.5 rounded-theme text-content-muted hover:text-status-error hover:bg-surface-muted"
+                          className="p-1.5 rounded-theme text-content-muted hover:text-status-error hover:bg-surface-muted cursor-pointer"
                           title="Archive Room"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -230,6 +234,7 @@ export default function GuestHouseAdminPage() {
             label="Room Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            placeholder="e.g. Deluxe Garden Room"
             required
           />
 
@@ -300,12 +305,114 @@ export default function GuestHouseAdminPage() {
             required
           />
 
-          <Input
-            label="Image URL (e.g. /images/room1.jpg or uploaded URL)"
-            value={formData.images[0] || ''}
-            onChange={(e) => setFormData({ ...formData, images: [e.target.value].filter(Boolean) })}
-            placeholder="https://... or /uploads/..."
-          />
+          {/* Room Photo Upload from Device */}
+          <div className="space-y-3 pt-2 border-t border-surface-border">
+            <CloudinaryUploader
+              label="Room Photo (Upload from Device)"
+              value={formData.images?.[0] || ''}
+              folder="willy_nilly/rooms"
+              aspectRatio="aspect-video"
+              onChange={(url) => {
+                setFormData((prev) => {
+                  const rest = (prev.images || []).slice(1);
+                  return {
+                    ...prev,
+                    images: url ? [url, ...rest] : rest,
+                  };
+                });
+              }}
+              helpText="Select or drag a room photo from your computer or phone (JPEG, PNG, WebP up to 5MB)."
+            />
+
+            {/* Additional Room Photos Gallery (Optional) */}
+            <div className="pt-2 border-t border-surface-border/60">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-semibold text-content-main flex items-center gap-1.5">
+                  <ImageIcon className="w-3.5 h-3.5 text-primary" />
+                  Additional Room Photos ({Math.max(0, (formData.images?.length || 0) - 1)})
+                </span>
+              </div>
+
+              {/* Display existing additional photos as thumbnails with delete button */}
+              {(formData.images?.length || 0) > 1 && (
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-3">
+                  {formData.images.slice(1).map((imgUrl, idx) => (
+                    <div
+                      key={idx}
+                      className="relative group rounded-xl overflow-hidden aspect-video border border-surface-border bg-surface-muted"
+                    >
+                      <img
+                        src={imgUrl}
+                        alt={`Additional room view ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData((prev) => {
+                            const newImages = [...prev.images];
+                            newImages.splice(idx + 1, 1);
+                            return { ...prev, images: newImages };
+                          });
+                        }}
+                        className="absolute top-1 right-1 p-1 bg-rose-600/90 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rose-700 shadow-sm cursor-pointer"
+                        title="Remove photo"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Upload extra photo from device */}
+              <CloudinaryUploader
+                label=""
+                value=""
+                folder="willy_nilly/rooms"
+                aspectRatio="aspect-video"
+                onChange={(extraUrl) => {
+                  if (extraUrl) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      images: [...(prev.images || []), extraUrl],
+                    }));
+                  }
+                }}
+                helpText="Click to upload another photo from your device to add to this room's gallery."
+              />
+            </div>
+
+            {/* Optional manual URL entry toggle */}
+            <div className="pt-1">
+              <button
+                type="button"
+                onClick={() => setShowManualUrl(!showManualUrl)}
+                className="text-[11px] text-content-muted hover:text-primary transition-colors underline cursor-pointer"
+              >
+                {showManualUrl ? 'Hide direct URL input' : 'Or enter direct image URL manually'}
+              </button>
+              {showManualUrl && (
+                <div className="mt-2">
+                  <Input
+                    label="Direct Image URL"
+                    value={formData.images?.[0] || ''}
+                    onChange={(e) => {
+                      const val = e.target.value.trim();
+                      setFormData((prev) => {
+                        const rest = (prev.images || []).slice(1);
+                        return {
+                          ...prev,
+                          images: val ? [val, ...rest] : rest,
+                        };
+                      });
+                    }}
+                    placeholder="https://... or /uploads/..."
+                  />
+                </div>
+              )}
+            </div>
+          </div>
 
           <div className="flex items-center gap-6 pt-2">
             <label className="flex items-center gap-2 cursor-pointer">

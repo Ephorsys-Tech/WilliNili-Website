@@ -66,19 +66,28 @@ export default function HorticulturePage() {
         subtitle="Nurture your garden and agro fields with healthy, organically grown saplings, high-yielding fruit trees, and therapeutic medicinal flora from our certified nursery."
         breadcrumbs={[{ label: 'Horticulture' }]}
         stats={[
-          { value: 'Fruit Plants', label: 'Grafted Varieties' },
-          { value: 'Medicinal', label: 'Herbal & Ayurvedic' },
-          { value: 'Forestry', label: 'Agro Saplings' },
-          { value: 'Seasonal', label: 'Availability Updates' },
+          { value: '2 Lakh+ Plants', label: 'Mango & Kaju for Sale' },
+          { value: 'Juanga, Niali', label: 'Sangeeta Grafting Hub' },
+          { value: '5,000 Mother Trees', label: 'Allora Agro Forestry' },
+          { value: 'Dec 2026', label: 'Willy Nilly Eco Project' },
         ]}
         actions={
-          <a
-            href="#plant-catalog"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-semibold shadow-elevation hover:bg-primary-hover transition-all transform hover:-translate-y-0.5"
-          >
-            <Sprout className="w-4 h-4" />
-            Browse Plant Catalog
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="#plant-catalog"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-semibold shadow-elevation hover:bg-primary-hover transition-all transform hover:-translate-y-0.5"
+            >
+              <Sprout className="w-4 h-4" />
+              Browse Plant Catalog
+            </a>
+            <Link
+              href="/farm-house/sangeeta-grafting-nursery-juanga-niali"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/15 backdrop-blur-md border border-white/30 text-white font-semibold hover:bg-white hover:text-content-main transition-all shadow-sm"
+            >
+              <span>Sangeeta Nursery (2 Lakh Plants)</span>
+              <ArrowRight className="w-4 h-4 text-amber-300" />
+            </Link>
+          </div>
         }
       />
 

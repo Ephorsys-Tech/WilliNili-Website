@@ -25,7 +25,7 @@ const ADMIN_NAV = [
   { label: 'Guest House Rooms', href: '/admin/guest-house', icon: BedDouble },
   { label: 'Booking Requests', href: '/admin/bookings', icon: BookOpenCheck },
   { label: 'Farm House Events', href: '/admin/farm-house', icon: Trees },
-  { label: 'Resort (Coming Soon)', href: '/admin/resort', icon: Compass },
+  // { label: 'Resort (Coming Soon)', href: '/admin/resort', icon: Compass },
   { label: 'Horticulture Plants', href: '/admin/horticulture', icon: Flower2 },
   { label: 'Shop Rental', href: '/admin/shop-rental', icon: Store },
   { label: 'Gallery Curation', href: '/admin/gallery', icon: Images },
@@ -47,7 +47,7 @@ export function AdminSidebar({ onLogout, currentAdmin }) {
       <div className="p-4 border-b border-surface-border flex items-center justify-between gap-2">
         <div className="flex items-center gap-2.5">
           <img
-            src="/images/logo.png"
+            src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
             alt="Willy Nilly"
             className="h-10 w-auto object-contain"
           />

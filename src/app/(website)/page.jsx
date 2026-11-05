@@ -37,6 +37,8 @@ import { getPublicRooms } from '@/api/room.api';
 import { getPublicPlants } from '@/api/horticulture.api';
 import { getFarmHouseContent } from '@/api/farm-house.api';
 import { getPublicGallery } from '@/api/gallery.api';
+import { ExperiencesGrid } from '@/components/home/ExperiencesGrid';
+import { ResortComingSoonSection } from '@/components/home/ResortComingSoonSection';
 
 // ==========================================
 // STATIC VERIFIED DEFAULT DATA (Fail-safe)
@@ -47,7 +49,7 @@ const DEFAULT_SETTINGS = {
   aboutStory:
     'Nestled amidst lush greenery and fertile soils, Willy Nilly is a premier agro-tourism sanctuary and horticulture retreat dedicated to organic living, tranquil guest hospitality, and celebration spaces in natural countryside surroundings.',
   phonePrimary: '+91 98765 43210',
-  emailPrimary: 'info@willynilly.in',
+  emailPrimary: 'willynillyodisha@gmail.com',
   address: 'Willy Nilly Agro Campus, Green Valley Road, State Highway, India',
   businessHours: 'Guest House: 24/7 Check-in | Horticulture Nursery: 8:00 AM – 6:00 PM',
   locationMapUrl: 'https://maps.google.com/?q=Willy+Nilly+Agro+Campus',
@@ -109,25 +111,25 @@ const DEFAULT_ROOMS = [
 ];
 
 const DEFAULT_FARM_HOUSE = {
-  title: 'Willy Nilly Farm House & Open Event Grounds',
-  subtitle: 'A scenic setting for memorable gatherings and milestones',
+  title: 'Sandhya Agro Farm House & Willy Nilly Eco Retreat',
+  subtitle: 'Sagadipatana, Kisan Nagar, Cuttack — Fishing Pond, Sandalwood & 50-Person Picnic Base',
   description:
-    'Spanning 8 acres of manicured agro grounds, Willy Nilly Farm House provides the quintessential open-air destination for destination weddings, family celebrations, corporate retreats, and agro-workshops surrounded by nature.',
+    'Flagship agro retreat in Sagadipatana, Kisan Nagar, Cuttack featuring a freshwater fishing pond, White & Red Sandalwood, Agarwood, Mahogany, Betel Nut groves, Colour Bird & Turkey farming, and curated 50-person day picnic setups with traditional woodfire dining.',
   image:
-    'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1600&q=85',
+    'https://images.unsplash.com/photo-1500076656116-558758c991c1?auto=format&fit=crop&w=1600&q=85',
   facilities: [
-    'Expansive Open Lawns with Natural Shade & Canopy',
-    'Covered Dining & Banquet Pavilion',
-    'Air-Conditioned Host & Bridal Dressing Suites',
-    'Dedicated Catering Yard with Clean Water & Power',
-    'Secure On-Site Vehicle Parking',
-    'Ambient Landscape Fairy Lighting & 100% Power Backup',
+    'Freshwater Angling & Aquaculture Fishing Pond',
+    'White & Red Sandalwood, Agarwood & Mahogany Groves',
+    'Colour Bird Aviary & Free-Range Turkey Farming Yard',
+    'Private Day-Picnic Pavilions (Arranged for Up to 50 People)',
+    'Traditional Woodfire Chulha & Earthen Pot Cooking Yards',
+    'Covered Dining Verandas & Modern Sanitized Restrooms',
   ],
   suitableEvents: [
-    'Destination Weddings & Sangeet',
-    'Milestone Anniversaries & Birthdays',
-    'Corporate Retreats & Offsites',
-    'Agro Workshops & Family Reunions',
+    '50-Person Family & Corporate Day Picnics',
+    'Freshwater Pond Angling & Aquaculture Outings',
+    'Agroforestry & Sandalwood Botanical Tours',
+    'Destination Weddings & Cultural Celebrations',
   ],
 };
 
@@ -271,7 +273,8 @@ export default function HomePage() {
           title: fData.title || prev.title,
           description: fData.description || prev.description,
           facilities: Array.isArray(fData.facilities) && fData.facilities.length > 0 ? fData.facilities : prev.facilities,
-          image: fData.images && fData.images[0] ? fData.images[0] : prev.image,
+          heroImage: fData.heroImage || (fData.images && fData.images[0]) || '',
+          image: fData.heroImage || (fData.images && fData.images[0]) || prev.image,
         }));
       }
       if (Array.isArray(pData) && pData.length > 0) {
@@ -287,76 +290,8 @@ export default function HomePage() {
     };
   }, []);
 
-  const businessName = settings?.businessName || 'Willy Nilly';
+  const businessName = 'Willy Nilly Agro Eco Tourism & Farm';
   const shopActive = Boolean(settings?.shopRentalActive);
-
-  // Business experiences for Section 02
-  const experiencesList = [
-    {
-      id: 'guest-house',
-      title: 'Guest House',
-      description:
-        'Peaceful, comfortable rooms nestled in verdant orchards. AC & Non-AC choices with home-style hospitality.',
-      image:
-        'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
-      badge: 'Restful Stays',
-      badgeVariant: 'primary',
-      ctaText: 'Explore Guest House',
-      href: '/guest-house',
-    },
-    {
-      id: 'farm-house',
-      title: 'Farm House & Events',
-      description:
-        'Sprawling 8-acre open celebration lawns, covered dining pavilion, and scenic spaces for memorable gatherings.',
-      image:
-        'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80',
-      badge: 'Open Lawns',
-      badgeVariant: 'secondary',
-      ctaText: 'Explore Farm House',
-      href: '/farm-house',
-    },
-    {
-      id: 'horticulture',
-      title: 'Horticulture & Nursery',
-      description:
-        'Thriving plant nursery showcasing grafted fruit trees, indigenous medicinal herbs, and forestry saplings.',
-      image:
-        'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80',
-      badge: 'Plant Nursery',
-      badgeVariant: 'primary',
-      ctaText: 'Explore Plants',
-      href: '/horticulture',
-    },
-    {
-      id: 'resort',
-      title: 'Resort — Coming Soon',
-      description:
-        'Upcoming luxury eco-retreat featuring private bioclimatic villas, organic farm dining, and wellness trails.',
-      image:
-        'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
-      badge: 'Launching Soon',
-      badgeVariant: 'warning',
-      ctaText: 'Resort Preview',
-      href: '/resort',
-    },
-    ...(shopActive
-      ? [
-          {
-            id: 'shop-rental',
-            title: 'Shop Rental',
-            description:
-              'Prime commercial arcade units located along our main entrance promenade, ideal for agro & artisanal retail.',
-            image:
-              'https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=800&q=80',
-            badge: 'Commercial Lease',
-            badgeVariant: 'neutral',
-            ctaText: 'View Units',
-            href: '/shop-rental',
-          },
-        ]
-      : []),
-  ];
 
   return (
     <div className="relative overflow-hidden bg-bg text-content-main selection:bg-primary-light selection:text-primary-dark">
@@ -364,25 +299,37 @@ export default function HomePage() {
       {/* ==================================================================== */}
       {/* 01. HERO / MAIN BANNER                                               */}
       {/* ==================================================================== */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background Photograph with subtle parallax scale */}
+
+      <section className="relative min-h-[90vh] flex items-start justify-center overflow-hidden">
+        {/* Background Video with fallback image */}
         <motion.div
-          initial={{ scale: 1.08 }}
+          initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 1.8, ease: 'easeOut' }}
-          className="absolute inset-0 z-0"
+          transition={{ duration: 1.8, ease: "easeOut" }}
+          className="absolute inset-0 z-0 overflow-hidden"
         >
-          <img
-            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=85"
-            alt="Willy Nilly Agro Landscape"
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif"
             className="w-full h-full object-cover object-center"
-          />
-          {/* Gradient Overlay for exceptional text contrast */}
+          >
+            <source
+              src="https://res.cloudinary.com/aibkshp5/video/upload/v1793440738/hero.mp4"
+              type="video/mp4"
+            />
+          </video>
+
+          {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/95 via-bg-dark/65 to-black/40" />
         </motion.div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center text-white space-y-7">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-16 text-center text-white space-y-5">
+
           {/* Official Emblem Logo Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
@@ -392,11 +339,12 @@ export default function HomePage() {
           >
             <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/10 backdrop-blur-md p-2 border-2 border-secondary/40 shadow-elevation flex items-center justify-center">
               <img
-                src="/images/logo.png"
+                src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
                 alt="Willy Nilly Official Emblem"
                 className="w-full h-full object-contain drop-shadow"
               />
             </div>
+
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-wide text-white shadow-sm">
               <Sparkles className="w-4 h-4 text-secondary-light" />
               <span>Official Agro-Tourism &amp; Horticulture Sanctuary</span>
@@ -410,8 +358,12 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white drop-shadow-md"
           >
-            Experience Nature, <br className="hidden sm:block" />
-            <span className="text-secondary-light">Hospitality</span> &amp; Horticulture
+            WillyNilli
+            <br className="hidden sm:block" />
+            <span className="text-secondary-light">
+              Agro Forestry
+            </span>{" "}
+            &amp; Resorts
           </motion.h1>
 
           {/* Short Introduction */}
@@ -421,10 +373,17 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="max-w-3xl mx-auto text-base sm:text-xl text-white/90 leading-relaxed font-normal"
           >
-            Welcome to <strong className="font-semibold text-white">{businessName}</strong>. Unwind in serene Guest House accommodations, celebrate milestones across scenic Farm House grounds, explore indigenous botanical nurseries, and discover mindful rural living.
+            Welcome to{" "}
+            <strong className="font-semibold text-white">
+              {businessName}
+            </strong>
+            . Unwind in serene Guest House accommodations, celebrate
+            milestones across scenic Farm House grounds, explore
+            indigenous botanical nurseries, and discover mindful
+            rural living.
           </motion.p>
 
-          {/* CTAs */}
+          {/* Call To Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -459,14 +418,17 @@ export default function HomePage() {
               <p className="text-xl sm:text-2xl font-bold text-white">8+ Acres</p>
               <p className="text-xs text-white/80">Lush Agro Campus</p>
             </div>
+
             <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
               <p className="text-xl sm:text-2xl font-bold text-white">Guest House</p>
               <p className="text-xs text-white/80">Restful Country Stays</p>
             </div>
+
             <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
               <p className="text-xl sm:text-2xl font-bold text-white">Event Lawns</p>
               <p className="text-xs text-white/80">Celebrations &amp; Gatherings</p>
             </div>
+
             <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
               <p className="text-xl sm:text-2xl font-bold text-white">Plant Nursery</p>
               <p className="text-xs text-white/80">Fruit &amp; Herbal Saplings</p>
@@ -476,118 +438,82 @@ export default function HomePage() {
       </section>
 
       {/* ==================================================================== */}
+      {/* 01.5. RESORT COMING SOON SPOTLIGHT                                   */}
+      {/* ==================================================================== */}
+      <ResortComingSoonSection />
+
+      {/* ==================================================================== */}
       {/* 02. EXPLORE OUR EXPERIENCES                                          */}
       {/* ==================================================================== */}
-      <section id="experiences" className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="experiences" className="relative bg-bg pt-20 sm:pt-28">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14 space-y-3"
+          className="text-center max-w-3xl mx-auto mb-10 px-4 sm:px-6 lg:px-8 space-y-3"
         >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-light text-primary-dark text-xs font-semibold">
             <Leaf className="w-3.5 h-3.5" />
             <span>Offerings at a Glance</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-content-main tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-content-main tracking-tight">
             Explore Our Experiences
           </h2>
           <p className="text-content-muted text-base sm:text-lg">
-            Discover each facet of Willy Nilly — from calm bedroom retreats and open festival grounds to organic botanical saplings.
+            Discover each facet of {businessName} — from calm bedroom retreats and open festival grounds to organic botanical saplings.
           </p>
         </motion.div>
 
-        {/* Experience Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {experiencesList.map((exp, idx) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <Card
-                hoverEffect
-                padding="p-0"
-                className="h-full flex flex-col group border border-surface-border bg-surface overflow-hidden"
-              >
-                {/* Image Header */}
-                <div className="relative h-48 sm:h-52 overflow-hidden bg-surface-muted">
-                  <img
-                    src={exp.image}
-                    alt={exp.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 right-3">
-                    <Badge variant={exp.badgeVariant}>{exp.badge}</Badge>
-                  </div>
-                </div>
-
-                {/* Body Content */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-content-main group-hover:text-primary transition-colors">
-                      {exp.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-content-muted leading-relaxed line-clamp-3">
-                      {exp.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-2">
-                    <Link href={exp.href}>
-                      <Button variant="outline" size="sm" className="w-full justify-between">
-                        <span>{exp.ctaText}</span>
-                        <ChevronRight className="w-4 h-4 text-primary" />
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+        {/* Clean, Responsive Experiences Card Grid */}
+        <ExperiencesGrid
+          businessName={businessName}
+          featuredRooms={featuredRooms}
+          farmHouse={farmHouse}
+          plants={plants}
+          shopActive={shopActive}
+        />
       </section>
 
       {/* ==================================================================== */}
       {/* 03. GUEST HOUSE HIGHLIGHTS                                           */}
       {/* ==================================================================== */}
-      <section id="guest-house" className="py-20 bg-surface-muted/60 border-y border-surface-border">
+      <section id="guest-house" className="py-20 sm:py-24 bg-[#F8FAF8] border-y border-stone-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4"
+            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
           >
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-light text-primary-dark text-xs font-semibold mb-2">
-                <BedDouble className="w-3.5 h-3.5" />
-                <span>Restful Country Stays</span>
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0E3D2B] text-xs font-semibold">
+                <BedDouble className="w-3.5 h-3.5 text-emerald-700" />
+                <span>Tranquil Country Stays</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-content-main tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
                 Guest House Highlights
               </h2>
-              <p className="text-content-muted text-sm sm:text-base mt-1 max-w-2xl">
-                Clean, quiet accommodations situated in our lush agro campus. Reserve dates via stay enquiry request.
+              <p className="text-stone-600 text-sm sm:text-base max-w-2xl leading-relaxed">
+                Clean, serene AC and Non-AC accommodations nestled in our lush agro campus. Reserve dates with quick front desk confirmation.
               </p>
             </div>
 
             <div className="flex items-center gap-3">
-              <Link href="/guest-house">
-                <Button variant="outline" size="sm">
-                  <span>View All Rooms</span>
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
+              <Link
+                href="/guest-house"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-stone-300 bg-white text-stone-700 hover:bg-stone-50 hover:text-stone-900 font-semibold text-xs shadow-xs transition-colors"
+              >
+                <span>View All Rooms</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-              <Link href="/guest-house/booking">
-                <Button variant="primary" size="sm">
-                  <Calendar className="w-4 h-4 mr-1.5" />
-                  <span>Request a Booking</span>
-                </Button>
+              <Link
+                href="/guest-house/booking"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#0E3D2B] hover:bg-[#16563D] text-white font-semibold text-xs shadow-sm hover:shadow transition-all active:scale-95"
+              >
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Request a Booking</span>
               </Link>
             </div>
           </motion.div>
@@ -602,45 +528,64 @@ export default function HomePage() {
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
-                <Card
-                  hoverEffect
-                  padding="p-0"
-                  className="h-full flex flex-col bg-surface border border-surface-border group"
-                >
+                <div className="h-full flex flex-col bg-white rounded-2xl border border-stone-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                   {/* Room Photo */}
-                  <div className="relative h-52 bg-surface-muted overflow-hidden">
+                  <div className="relative aspect-[16/10] bg-stone-100 overflow-hidden">
                     <img
                       src={room.images?.[0] || 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80'}
                       alt={room.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Top Badges */}
                     <div className="absolute top-3 left-3">
-                      <Badge variant="neutral">{room.roomType || 'Deluxe'}</Badge>
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/95 backdrop-blur-md text-stone-800 shadow-sm border border-white/40">
+                        {room.roomType || 'Deluxe'}
+                      </span>
                     </div>
+
                     <div className="absolute top-3 right-3">
-                      <Badge variant={room.isAc ? 'primary' : 'warning'}>
+                      <span
+                        className={`px-2.5 py-1 rounded-full text-[11px] font-bold shadow-sm ${
+                          room.isAc ? 'bg-emerald-700 text-white' : 'bg-amber-600 text-white'
+                        }`}
+                      >
                         {room.isAc ? 'AC Room' : 'Non-AC'}
-                      </Badge>
+                      </span>
+                    </div>
+
+                    {/* Room Capacity Overlay */}
+                    <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white text-xs drop-shadow-sm font-medium">
+                      <span className="flex items-center gap-1.5 truncate">
+                        <Users className="w-3.5 h-3.5 text-amber-300 flex-shrink-0" />
+                        <span>{room.bedType || 'Comfort Bed'} &bull; Up to {room.capacityAdults || 2} Guests</span>
+                      </span>
                     </div>
                   </div>
 
                   {/* Room Details */}
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
                     <div className="space-y-2">
-                      <h3 className="text-lg font-bold text-content-main">{room.name}</h3>
-                      <p className="text-xs text-content-muted leading-relaxed line-clamp-2">
+                      <h3 className="text-base sm:text-lg font-bold text-stone-900 group-hover:text-emerald-800 transition-colors line-clamp-1">
+                        {room.name}
+                      </h3>
+
+                      <p className="text-xs text-stone-600 leading-relaxed line-clamp-2">
                         {room.description}
                       </p>
 
                       {/* Room Facilities Pills */}
-                      {room.features && (
-                        <div className="flex flex-wrap gap-1.5 pt-2">
+                      {room.features && room.features.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 pt-1">
                           {room.features.slice(0, 3).map((feat, fIdx) => (
                             <span
                               key={fIdx}
-                              className="text-[11px] px-2 py-0.5 rounded bg-surface-muted text-content-muted border border-surface-border"
+                              className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-900 bg-emerald-50/90 border border-emerald-100 px-2 py-0.5 rounded-md"
                             >
-                              {feat}
+                              <CheckCircle2 className="w-3 h-3 text-emerald-600 flex-shrink-0" />
+                              <span>{feat}</span>
                             </span>
                           ))}
                         </div>
@@ -648,36 +593,54 @@ export default function HomePage() {
                     </div>
 
                     {/* Price and CTA */}
-                    <div className="pt-4 border-t border-surface-border flex items-center justify-between">
+                    <div className="pt-4 border-t border-stone-100 flex items-center justify-between gap-2">
                       <div>
                         {room.priceDisplay !== false && room.pricePerNight ? (
-                          <>
-                            <span className="text-lg font-extrabold text-primary">₹{room.pricePerNight}</span>
-                            <span className="text-xs text-content-muted"> / night</span>
-                          </>
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-xl font-extrabold text-[#0E3D2B]">
+                              ₹{room.pricePerNight}
+                            </span>
+                            <span className="text-xs text-stone-500 font-normal">/ night</span>
+                          </div>
                         ) : (
-                          <span className="text-xs text-content-muted font-medium">Tariff on request</span>
+                          <span className="text-xs text-stone-600 font-semibold bg-stone-100 px-2.5 py-1 rounded-md">
+                            Tariff on request
+                          </span>
                         )}
                       </div>
 
-                      <Link href={`/guest-house/booking?room=${room._id}`}>
-                        <Button size="sm" variant="primary">
-                          Request Stay
-                        </Button>
+                      <Link
+                        href={`/guest-house/booking?room=${room._id}`}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0E3D2B] hover:bg-[#16563D] text-white text-xs font-bold shadow-sm hover:shadow transition-all active:scale-95"
+                      >
+                        <span>Book Stay</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>
-                </Card>
+                </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Scope Note */}
-          <div className="mt-8 flex items-center gap-2 p-3.5 rounded-theme bg-surface border border-surface-border text-xs text-content-muted">
-            <Info className="w-4 h-4 text-primary flex-shrink-0" />
-            <span>
-              <strong>Note on Bookings:</strong> All room requests are processed directly by our front desk. Dates are held upon confirmation; no upfront online payment is taken.
-            </span>
+          {/* Simple Clean Scope Note */}
+          <div className="mt-8 p-4 rounded-2xl bg-white border border-stone-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-stone-600">
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center flex-shrink-0">
+                <Info className="w-4 h-4" />
+              </span>
+              <div>
+                <strong className="text-stone-900 font-bold mr-1">Direct Front Desk Booking:</strong>
+                <span>All room requests are confirmed directly by our concierge. Zero advance online payment required.</span>
+              </div>
+            </div>
+            <Link
+              href="/guest-house"
+              className="inline-flex items-center gap-1 font-bold text-emerald-800 hover:text-emerald-950 flex-shrink-0 self-end sm:self-auto"
+            >
+              <span>Explore all rooms</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </section>
@@ -1133,19 +1096,11 @@ export default function HomePage() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-elevation border border-surface-border bg-surface aspect-[4/5] group">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+                src="https://res.cloudinary.com/aibkshp5/image/upload/v1793429126/willy_nilly/tourist_places/e72icevlouwmal5t0lsl.jpg"
                 alt="Willy Nilly Founder"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
-                <h3 className="text-xl font-bold text-white">Mr. Sarat Kumar Singh</h3>
-                <p className="text-xs uppercase tracking-wider text-secondary-light font-medium mt-0.5">
-                  Founder &amp; Visionary
-                </p>
-                <p className="text-xs text-white/80 mt-2 italic leading-relaxed">
-                  &ldquo;We didn&apos;t set out to manufacture an escape. We simply nurtured soil so people could breathe again.&rdquo;
-                </p>
-              </div>
+
             </div>
           </motion.div>
         </div>
@@ -1215,10 +1170,10 @@ export default function HomePage() {
                   <div>
                     <span className="font-semibold text-content-main block">Email Desk:</span>
                     <a
-                      href={`mailto:${settings?.emailPrimary || DEFAULT_SETTINGS.emailPrimary}`}
+                      href={`mailto:${DEFAULT_SETTINGS.emailPrimary}`}
                       className="hover:text-primary transition-colors"
                     >
-                      {settings?.emailPrimary || DEFAULT_SETTINGS.emailPrimary}
+                      {DEFAULT_SETTINGS.emailPrimary}
                     </a>
                   </div>
                 </div>

@@ -26,9 +26,10 @@ export async function getDashboardMetrics() {
   return apiClient('/api/dashboard');
 }
 
-export async function uploadImage(file) {
+export async function uploadImage(file, folder = '') {
   const formData = new FormData();
   formData.append('file', file);
+  if (folder) formData.append('folder', folder);
 
   return apiClient('/api/upload', {
     method: 'POST',

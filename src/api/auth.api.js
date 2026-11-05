@@ -18,3 +18,17 @@ export async function getAdminSession() {
     method: 'GET',
   });
 }
+
+export async function requestPasswordReset({ email }) {
+  return apiClient('/api/auth/forgot-password', {
+    method: 'POST',
+    body: { email },
+  });
+}
+
+export async function resetPassword({ token, password, confirmPassword }) {
+  return apiClient('/api/auth/reset-password', {
+    method: 'POST',
+    body: { token, password, confirmPassword },
+  });
+}

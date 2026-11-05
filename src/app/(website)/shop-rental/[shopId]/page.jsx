@@ -124,8 +124,11 @@ export default function ShopDetailPage() {
             ) : (
               <Store className="w-16 h-16 text-content-light" />
             )}
-            <div className="absolute top-4 left-4 flex gap-2">
+            <div className="absolute top-4 left-4 flex flex-wrap gap-2">
               <Badge variant="primary">Shop #{shop.shopNumber}</Badge>
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-950/85 text-emerald-200 border border-emerald-500/30 backdrop-blur-sm">
+                Ground Floor • Guest House
+              </span>
               <Badge variant={shop.isAvailable ? 'success' : 'neutral'}>
                 {shop.isAvailable ? 'Available for Lease' : 'Occupied'}
               </Badge>
@@ -134,14 +137,25 @@ export default function ShopDetailPage() {
 
           <div className="space-y-4">
             <h1 className="text-3xl font-extrabold text-content-main">{shop.title}</h1>
-            <div className="flex items-center gap-4 text-sm text-content-muted">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-content-muted">
               <span className="flex items-center gap-1.5 font-semibold text-content-main">
                 <Maximize className="w-4 h-4 text-primary" /> {shop.sizeSqFt} Sq. Ft.
               </span>
               <span>&bull;</span>
-              <span className="flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-primary" /> {shop.location}
+              <span className="flex items-center gap-1.5 text-emerald-800 font-medium">
+                <MapPin className="w-4 h-4 text-primary" />
+                {shop.location.includes('Ground Floor') ? shop.location : `Ground Floor (Guest House) • ${shop.location}`}
               </span>
+            </div>
+
+            {/* Building Co-Location Callout */}
+            <div className="p-4 rounded-xl bg-emerald-50/80 border border-emerald-200 text-xs text-emerald-900 space-y-1">
+              <strong className="block font-bold text-sm text-emerald-950">
+                Ground Floor Commercial Location (Guest House Building)
+              </strong>
+              <p className="leading-relaxed">
+                This commercial shop is located on the ground floor directly underneath the Willy Nilly Guest House suites. It provides front-promenade accessibility with consistent, high-intent daily foot traffic from staying guests, agro-retreat travelers, and weekend holidaymakers.
+              </p>
             </div>
 
             <div className="pt-2">

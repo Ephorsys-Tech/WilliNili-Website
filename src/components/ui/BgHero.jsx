@@ -53,7 +53,14 @@ export function BgHero({
 }) {
   const imgRef     = useRef(null);
   const sectionRef = useRef(null);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
+
+  // Check if image is already cached/complete on mount
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setLoaded(true);
+    }
+  }, [image]);
 
   /* ── Subtle parallax scroll (desktop only, disabled on low-end via will-change) ── */
   useEffect(() => {
@@ -86,36 +93,32 @@ export function BgHero({
 
   const alignClasses   = ALIGNS[align] ?? ALIGNS.center;
   const sizeClass      = SIZES[size]   ?? SIZES.md;
-  const defaultOverlay = 'bg-gradient-to-t from-[#061c14]/92 via-[#0b1a13]/65 to-black/40';
+  const defaultOverlay = 'bg-gradient-to-t from-[#061c14] via-[#0b1a13]/75 to-black/55';
 
   return (
-    /*
-     * FIX: was `justify-end overflow-hidden` — when content overflows min-height on mobile,
-     * `justify-end` causes overflow to go UPWARD which is clipped by overflow-hidden.
-     * Solution: use `justify-center` so overflow stays within bounds, and wrap the
-     * background with its own overflow-hidden div (not the section itself).
-     */
     <section
       ref={sectionRef}
-      className={`relative w-full ${sizeClass} flex flex-col justify-center ${className}`}
+      className={`relative w-full ${sizeClass} flex flex-col justify-center bg-[#071d15] text-white ${className}`}
       aria-label="Page hero banner"
     >
       {/* ── Background Image (overflow clip lives here, not on section) ── */}
-      <div className="absolute inset-0 z-0 overflow-hidden rounded-[inherit]">
-        <img
-          ref={imgRef}
-          src={image}
-          alt={alt}
-          onLoad={() => setLoaded(true)}
-          className={`w-full h-full object-cover object-center will-change-transform transition-opacity duration-700 ${
-            loaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          style={{ transform: 'scale(1.08)' }}
-        />
+      <div className="absolute inset-0 z-0 overflow-hidden rounded-[inherit] bg-[#071d15]">
+        {image ? (
+          <img
+            ref={imgRef}
+            src={image}
+            alt={alt}
+            onLoad={() => setLoaded(true)}
+            className="w-full h-full object-cover object-center will-change-transform transition-opacity duration-300 opacity-90"
+            style={{ transform: 'scale(1.08)' }}
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-[#0e3d2b] via-[#09261a] to-[#04120c] opacity-90" />
+        )}
         {/* Gradient overlay */}
         <div className={`absolute inset-0 ${overlayClass ?? defaultOverlay}`} />
         {/* Top vignette */}
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/35 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/50 to-transparent pointer-events-none" />
       </div>
 
       {/* ── Decorative gold accent bar – right edge ── */}
@@ -275,7 +278,7 @@ export function BgHero({
 
       {/* ── Bottom fade into page background ── */}
       <div
-        className="absolute bottom-0 inset-x-0 h-12 sm:h-16 pointer-events-none z-10"
+        className="absolute bottom-0 inset-x-0 h-6 sm:h-8 pointer-events-none z-10"
         style={{
           background: 'linear-gradient(to top, var(--color-bg) 0%, transparent 100%)',
         }}

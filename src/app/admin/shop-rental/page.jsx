@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Store, Plus, Edit, Trash2, Power, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Store, Plus, Edit, Trash2, Power, AlertTriangle, CheckCircle, X, Image as ImageIcon } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Modal } from '@/components/ui/Modal';
 import { Alert } from '@/components/ui/Alert';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { CloudinaryUploader } from '@/components/admin/CloudinaryUploader';
 import {
   getAdminShops,
   createShop,
@@ -25,9 +26,10 @@ const DEFAULT_SHOP = {
   sizeSqFt: 250,
   rentAmount: 12000,
   rentPeriod: 'Monthly',
-  location: 'Agro Campus Main Entrance Arcade',
+  floorLevel: 'Ground Floor',
+  location: 'Ground Floor, Willy Nilly Guest House Building (Main Entrance Wing)',
   description: '',
-  facilities: ['Shutter Door', 'Electricity Connection', 'Front Paved Road'],
+  facilities: ['Shutter Door', 'Electricity Connection', 'Front Paved Road', 'Shared Restroom Access'],
   images: [],
   isAvailable: true,
 };
@@ -43,6 +45,7 @@ export default function ShopRentalAdminPage() {
   const [formData, setFormData] = useState(DEFAULT_SHOP);
   const [isSaving, setIsSaving] = useState(false);
   const [alertState, setAlertState] = useState(null);
+  const [showManualUrl, setShowManualUrl] = useState(false);
 
   const fetchShops = async () => {
     try {
@@ -89,6 +92,7 @@ export default function ShopRentalAdminPage() {
   const handleOpenCreate = () => {
     setEditingShop(null);
     setFormData(DEFAULT_SHOP);
+    setShowManualUrl(false);
     setIsModalOpen(true);
   };
 
@@ -100,12 +104,14 @@ export default function ShopRentalAdminPage() {
       sizeSqFt: s.sizeSqFt || 200,
       rentAmount: s.rentAmount || 0,
       rentPeriod: s.rentPeriod || 'Monthly',
-      location: s.location || '',
+      floorLevel: s.floorLevel || 'Ground Floor',
+      location: s.location || 'Ground Floor, Willy Nilly Guest House Building',
       description: s.description || '',
       facilities: s.facilities || [],
       images: s.images || [],
       isAvailable: Boolean(s.isAvailable),
     });
+    setShowManualUrl(false);
     setIsModalOpen(true);
   };
 
@@ -247,7 +253,16 @@ export default function ShopRentalAdminPage() {
                     </td>
                     <td className="p-4">{s.sizeSqFt} Sq. Ft.</td>
                     <td className="p-4 font-bold text-content-main">₹{s.rentAmount} /{s.rentPeriod}</td>
-                    <td className="p-4 text-content-muted">{s.location}</td>
+                    <td className="p-4">
+                      <div className="space-y-1">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                          Ground Floor
+                        </span>
+                        <div className="text-content-muted text-[11px] max-w-[200px] truncate" title={s.location}>
+                          {s.location}
+                        </div>
+                      </div>
+                    </td>
                     <td className="p-4">
                       <Badge variant={s.isAvailable ? 'success' : 'neutral'}>
                         {s.isAvailable ? 'Available' : 'Occupied'}
@@ -258,7 +273,7 @@ export default function ShopRentalAdminPage() {
                         <button
                           type="button"
                           onClick={() => handleOpenEdit(s)}
-                          className="p-1.5 rounded-theme text-content-muted hover:text-primary hover:bg-surface-muted"
+                          className="p-1.5 rounded-theme text-content-muted hover:text-primary hover:bg-surface-muted cursor-pointer"
                           title="Edit Shop"
                         >
                           <Edit className="w-4 h-4" />
@@ -266,7 +281,7 @@ export default function ShopRentalAdminPage() {
                         <button
                           type="button"
                           onClick={() => handleArchive(s._id)}
-                          className="p-1.5 rounded-theme text-content-muted hover:text-status-error hover:bg-surface-muted"
+                          className="p-1.5 rounded-theme text-content-muted hover:text-status-error hover:bg-surface-muted cursor-pointer"
                           title="Archive Shop"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -332,13 +347,44 @@ export default function ShopRentalAdminPage() {
             />
           </div>
 
-          <Input
-            label="Location Description"
-            value={formData.location}
-            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            placeholder="e.g. Main Entrance Gate Complex, Ground Floor"
-            required
-          />
+          {/* Co-Location with Guest House Helper Box */}
+          <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 space-y-1">
+            <div className="flex items-center gap-2 font-bold text-emerald-900">
+              <Store className="w-4 h-4 text-emerald-700" />
+              <span>Co-Located on Ground Floor of Willy Nilly Guest House</span>
+            </div>
+            <p className="text-emerald-800 text-[11px] leading-relaxed">
+              All commercial rental shops are located on the ground floor promenade of the main Guest House complex (guest rooms and suites are situated on upper floors).
+            </p>
+          </div>
+
+          <div className="space-y-1.5">
+            <Input
+              label="Location (Ground Floor of Guest House Building)"
+              value={formData.location}
+              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              placeholder="e.g. Ground Floor, Willy Nilly Guest House Building (Main Entrance Wing)"
+              required
+            />
+            {/* Quick Presets */}
+            <div className="flex flex-wrap items-center gap-1.5 pt-1">
+              <span className="text-[10px] text-content-muted font-semibold">Quick Presets:</span>
+              {[
+                'Ground Floor, Guest House Main Front Arcade',
+                'Ground Floor, Guest House East Promenade',
+                'Ground Floor, Guest House Courtyard Wing',
+              ].map((locPreset) => (
+                <button
+                  key={locPreset}
+                  type="button"
+                  onClick={() => setFormData({ ...formData, location: locPreset })}
+                  className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-surface-muted hover:bg-emerald-100 text-content-main hover:text-emerald-900 border border-surface-border transition-colors cursor-pointer"
+                >
+                  + {locPreset.replace('Ground Floor, Guest House ', '')}
+                </button>
+              ))}
+            </div>
+          </div>
 
           <Textarea
             label="Shop Description"
@@ -348,12 +394,114 @@ export default function ShopRentalAdminPage() {
             required
           />
 
-          <Input
-            label="Image URL"
-            value={formData.images[0] || ''}
-            onChange={(e) => setFormData({ ...formData, images: [e.target.value].filter(Boolean) })}
-            placeholder="https://... or /uploads/..."
-          />
+          {/* Shop Photo Upload from Device */}
+          <div className="space-y-3 pt-2 border-t border-surface-border">
+            <CloudinaryUploader
+              label="Shop Unit Photo (Upload from Device)"
+              value={formData.images?.[0] || ''}
+              folder="willy_nilly/shops"
+              aspectRatio="aspect-video"
+              onChange={(url) => {
+                setFormData((prev) => {
+                  const rest = (prev.images || []).slice(1);
+                  return {
+                    ...prev,
+                    images: url ? [url, ...rest] : rest,
+                  };
+                });
+              }}
+              helpText="Select or drag a shop unit photo from your computer or phone (JPEG, PNG, WebP up to 5MB). Uploads directly to Cloudinary."
+            />
+
+            {/* Additional Shop Photos Gallery (Optional) */}
+            <div className="pt-2 border-t border-surface-border/60">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-semibold text-content-main flex items-center gap-1.5">
+                  <ImageIcon className="w-3.5 h-3.5 text-primary" />
+                  Additional Shop Photos ({Math.max(0, (formData.images?.length || 0) - 1)})
+                </span>
+              </div>
+
+              {/* Display existing additional photos as thumbnails with delete button */}
+              {(formData.images?.length || 0) > 1 && (
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-3">
+                  {formData.images.slice(1).map((imgUrl, idx) => (
+                    <div
+                      key={idx}
+                      className="relative group rounded-xl overflow-hidden aspect-video border border-surface-border bg-surface-muted"
+                    >
+                      <img
+                        src={imgUrl}
+                        alt={`Additional shop view ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData((prev) => {
+                            const newImages = [...prev.images];
+                            newImages.splice(idx + 1, 1);
+                            return { ...prev, images: newImages };
+                          });
+                        }}
+                        className="absolute top-1 right-1 p-1 bg-rose-600/90 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rose-700 shadow-sm cursor-pointer"
+                        title="Remove photo"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Upload extra photo from device */}
+              <CloudinaryUploader
+                label=""
+                value=""
+                folder="willy_nilly/shops"
+                aspectRatio="aspect-video"
+                onChange={(extraUrl) => {
+                  if (extraUrl) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      images: [...(prev.images || []), extraUrl],
+                    }));
+                  }
+                }}
+                helpText="Click to upload another view from your device to add to this shop's gallery."
+              />
+            </div>
+
+            {/* Optional manual URL entry toggle */}
+            <div className="pt-1">
+              <button
+                type="button"
+                onClick={() => setShowManualUrl(!showManualUrl)}
+                className="text-[11px] text-content-muted hover:text-primary transition-colors underline cursor-pointer"
+              >
+                {showManualUrl ? 'Hide direct URL input' : 'Or enter direct image URL manually'}
+              </button>
+              {showManualUrl && (
+                <div className="mt-2">
+                  <Input
+                    label="Direct Image URL"
+                    value={formData.images?.[0] || ''}
+                    onChange={(e) => {
+                      const val = e.target.value.trim();
+                      setFormData((prev) => {
+                        const rest = (prev.images || []).slice(1);
+                        return {
+                          ...prev,
+                          images: val ? [val, ...rest] : rest,
+                        };
+                      });
+                    }}
+                    placeholder="https://... or /uploads/..."
+                  />
+                </div>
+              )}
+            </div>
+          </div>
 
           <label className="flex items-center gap-2 cursor-pointer pt-2">
             <input

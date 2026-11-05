@@ -13,8 +13,10 @@ export const POST = handleRoute(async (req) => {
     throw new BadRequestError('No file provided in form data with field name "file"');
   }
 
+  const folder = formData.get('folder') || undefined;
+
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  return saveSecureImage(buffer, file.name);
+  return saveSecureImage(buffer, file.name, { folder });
 }, { status: 201 });
