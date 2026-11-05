@@ -37,7 +37,8 @@ import { getPublicRooms } from '@/api/room.api';
 import { getPublicPlants } from '@/api/horticulture.api';
 import { getFarmHouseContent } from '@/api/farm-house.api';
 import { getPublicGallery } from '@/api/gallery.api';
-import { ExperiencesStoryScroll } from '@/components/home/ExperiencesStoryScroll';
+import { ExperiencesGrid } from '@/components/home/ExperiencesGrid';
+import { ResortComingSoonSection } from '@/components/home/ResortComingSoonSection';
 
 // ==========================================
 // STATIC VERIFIED DEFAULT DATA (Fail-safe)
@@ -298,144 +299,148 @@ export default function HomePage() {
       {/* ==================================================================== */}
       {/* 01. HERO / MAIN BANNER                                               */}
       {/* ==================================================================== */}
-      
-<section className="relative min-h-[90vh] flex items-start justify-center overflow-hidden">
-  {/* Background Video with fallback image */}
-  <motion.div
-    initial={{ scale: 1.05 }}
-    animate={{ scale: 1 }}
-    transition={{ duration: 1.8, ease: "easeOut" }}
-    className="absolute inset-0 z-0 overflow-hidden"
-  >
-    <video
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      poster="https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif"
-      className="w-full h-full object-cover object-center"
-    >
-      <source
-        src="https://res.cloudinary.com/aibkshp5/video/upload/v1793440738/hero.mp4"
-        type="video/mp4"
-      />
-    </video>
 
-    {/* Gradient Overlay */}
-    <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/95 via-bg-dark/65 to-black/40" />
-  </motion.div>
+      <section className="relative min-h-[90vh] flex items-start justify-center overflow-hidden">
+        {/* Background Video with fallback image */}
+        <motion.div
+          initial={{ scale: 1.05 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
+          className="absolute inset-0 z-0 overflow-hidden"
+        >
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="https://res.cloudinary.com/aibkshp5/image/upload/v1793425868/premium_photo-1754269420949-4989af0ba74c.avif"
+            className="w-full h-full object-cover object-center"
+          >
+            <source
+              src="https://res.cloudinary.com/aibkshp5/video/upload/v1793440738/hero.mp4"
+              type="video/mp4"
+            />
+          </video>
 
-  {/* Hero Content */}
-  <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-16 text-center text-white space-y-5">
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/95 via-bg-dark/65 to-black/40" />
+        </motion.div>
 
-    {/* Official Emblem Logo Badge */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.85 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.7, delay: 0.15 }}
-      className="flex flex-col items-center justify-center gap-3"
-    >
-      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/10 backdrop-blur-md p-2 border-2 border-secondary/40 shadow-elevation flex items-center justify-center">
-        <img
-          src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
-          alt="Willy Nilly Official Emblem"
-          className="w-full h-full object-contain drop-shadow"
-        />
-      </div>
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-16 text-center text-white space-y-5">
 
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-wide text-white shadow-sm">
-        <Sparkles className="w-4 h-4 text-secondary-light" />
-        <span>Official Agro-Tourism &amp; Horticulture Sanctuary</span>
-      </div>
-    </motion.div>
+          {/* Official Emblem Logo Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="flex flex-col items-center justify-center gap-3"
+          >
+            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/10 backdrop-blur-md p-2 border-2 border-secondary/40 shadow-elevation flex items-center justify-center">
+              <img
+                src="https://res.cloudinary.com/aibkshp5/image/upload/v1793430544/logo.png"
+                alt="Willy Nilly Official Emblem"
+                className="w-full h-full object-contain drop-shadow"
+              />
+            </div>
 
-    {/* Main Headline */}
-    <motion.h1
-      initial={{ opacity: 0, y: 25 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.3 }}
-      className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white drop-shadow-md"
-    >
-      Nature, Comfort,
-      <br className="hidden sm:block" />
-      <span className="text-secondary-light">
-        Hospitality
-      </span>{" "}
-      &amp; Horticulture
-    </motion.h1>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-wide text-white shadow-sm">
+              <Sparkles className="w-4 h-4 text-secondary-light" />
+              <span>Official Agro-Tourism &amp; Horticulture Sanctuary</span>
+            </div>
+          </motion.div>
 
-    {/* Short Introduction */}
-    <motion.p
-      initial={{ opacity: 0, y: 25 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.4 }}
-      className="max-w-3xl mx-auto text-base sm:text-xl text-white/90 leading-relaxed font-normal"
-    >
-      Welcome to{" "}
-      <strong className="font-semibold text-white">
-        {businessName}
-      </strong>
-      . Unwind in serene Guest House accommodations, celebrate
-      milestones across scenic Farm House grounds, explore
-      indigenous botanical nurseries, and discover mindful
-      rural living.
-    </motion.p>
+          {/* Main Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white drop-shadow-md"
+          >
+            WillyNilli
+            <br className="hidden sm:block" />
+            <span className="text-secondary-light">
+              Agro Forestry
+            </span>{" "}
+            &amp; Resorts
+          </motion.h1>
 
-    {/* Call To Action Buttons */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.5 }}
-      className="flex flex-wrap items-center justify-center gap-4 pt-4"
-    >
-      <a
-        href="#experiences"
-        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-theme bg-primary text-white font-semibold shadow-elevation hover:bg-primary-hover transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-      >
-        <span>Explore Our Experiences</span>
-        <ArrowRight className="w-4 h-4" />
-      </a>
+          {/* Short Introduction */}
+          <motion.p
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="max-w-3xl mx-auto text-base sm:text-xl text-white/90 leading-relaxed font-normal"
+          >
+            Welcome to{" "}
+            <strong className="font-semibold text-white">
+              {businessName}
+            </strong>
+            . Unwind in serene Guest House accommodations, celebrate
+            milestones across scenic Farm House grounds, explore
+            indigenous botanical nurseries, and discover mindful
+            rural living.
+          </motion.p>
 
-      <Link
-        href="/enquiry"
-        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-theme bg-white/15 backdrop-blur-md border border-white/30 text-white font-semibold hover:bg-white hover:text-content-main transition-all transform hover:-translate-y-0.5"
-      >
-        <Send className="w-4 h-4" />
-        <span>Enquire Now</span>
-      </Link>
-    </motion.div>
+          {/* Call To Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="flex flex-wrap items-center justify-center gap-4 pt-4"
+          >
+            <a
+              href="#experiences"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-theme bg-primary text-white font-semibold shadow-elevation hover:bg-primary-hover transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            >
+              <span>Explore Our Experiences</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
 
-    {/* Value Badges */}
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, delay: 0.7 }}
-      className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto pt-10 text-left border-t border-white/15"
-    >
-      <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
-        <p className="text-xl sm:text-2xl font-bold text-white">8+ Acres</p>
-        <p className="text-xs text-white/80">Lush Agro Campus</p>
-      </div>
+            <Link
+              href="/enquiry"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-theme bg-white/15 backdrop-blur-md border border-white/30 text-white font-semibold hover:bg-white hover:text-content-main transition-all transform hover:-translate-y-0.5"
+            >
+              <Send className="w-4 h-4" />
+              <span>Enquire Now</span>
+            </Link>
+          </motion.div>
 
-      <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
-        <p className="text-xl sm:text-2xl font-bold text-white">Guest House</p>
-        <p className="text-xs text-white/80">Restful Country Stays</p>
-      </div>
+          {/* Value Badges */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.7 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto pt-10 text-left border-t border-white/15"
+          >
+            <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
+              <p className="text-xl sm:text-2xl font-bold text-white">8+ Acres</p>
+              <p className="text-xs text-white/80">Lush Agro Campus</p>
+            </div>
 
-      <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
-        <p className="text-xl sm:text-2xl font-bold text-white">Event Lawns</p>
-        <p className="text-xs text-white/80">Celebrations &amp; Gatherings</p>
-      </div>
+            <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
+              <p className="text-xl sm:text-2xl font-bold text-white">Guest House</p>
+              <p className="text-xs text-white/80">Restful Country Stays</p>
+            </div>
 
-      <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
-        <p className="text-xl sm:text-2xl font-bold text-white">Plant Nursery</p>
-        <p className="text-xs text-white/80">Fruit &amp; Herbal Saplings</p>
-      </div>
-    </motion.div>
-  </div>
-</section>
+            <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
+              <p className="text-xl sm:text-2xl font-bold text-white">Event Lawns</p>
+              <p className="text-xs text-white/80">Celebrations &amp; Gatherings</p>
+            </div>
 
+            <div className="bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-theme border border-white/15">
+              <p className="text-xl sm:text-2xl font-bold text-white">Plant Nursery</p>
+              <p className="text-xs text-white/80">Fruit &amp; Herbal Saplings</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ==================================================================== */}
+      {/* 01.5. RESORT COMING SOON SPOTLIGHT                                   */}
+      {/* ==================================================================== */}
+      <ResortComingSoonSection />
 
       {/* ==================================================================== */}
       {/* 02. EXPLORE OUR EXPERIENCES                                          */}
@@ -460,8 +465,8 @@ export default function HomePage() {
           </p>
         </motion.div>
 
-        {/* Dynamic Story Scroll Experience Showcases */}
-        <ExperiencesStoryScroll
+        {/* Clean, Responsive Experiences Card Grid */}
+        <ExperiencesGrid
           businessName={businessName}
           featuredRooms={featuredRooms}
           farmHouse={farmHouse}
@@ -473,40 +478,42 @@ export default function HomePage() {
       {/* ==================================================================== */}
       {/* 03. GUEST HOUSE HIGHLIGHTS                                           */}
       {/* ==================================================================== */}
-      <section id="guest-house" className="py-20 bg-surface-muted/60 border-y border-surface-border">
+      <section id="guest-house" className="py-20 sm:py-24 bg-[#F8FAF8] border-y border-stone-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4"
+            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
           >
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-light text-primary-dark text-xs font-semibold mb-2">
-                <BedDouble className="w-3.5 h-3.5" />
-                <span>Restful Country Stays</span>
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0E3D2B] text-xs font-semibold">
+                <BedDouble className="w-3.5 h-3.5 text-emerald-700" />
+                <span>Tranquil Country Stays</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-content-main tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
                 Guest House Highlights
               </h2>
-              <p className="text-content-muted text-sm sm:text-base mt-1 max-w-2xl">
-                Clean, quiet accommodations situated in our lush agro campus. Reserve dates via stay enquiry request.
+              <p className="text-stone-600 text-sm sm:text-base max-w-2xl leading-relaxed">
+                Clean, serene AC and Non-AC accommodations nestled in our lush agro campus. Reserve dates with quick front desk confirmation.
               </p>
             </div>
 
             <div className="flex items-center gap-3">
-              <Link href="/guest-house">
-                <Button variant="outline" size="sm">
-                  <span>View All Rooms</span>
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
+              <Link
+                href="/guest-house"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-stone-300 bg-white text-stone-700 hover:bg-stone-50 hover:text-stone-900 font-semibold text-xs shadow-xs transition-colors"
+              >
+                <span>View All Rooms</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-              <Link href="/guest-house/booking">
-                <Button variant="primary" size="sm">
-                  <Calendar className="w-4 h-4 mr-1.5" />
-                  <span>Request a Booking</span>
-                </Button>
+              <Link
+                href="/guest-house/booking"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#0E3D2B] hover:bg-[#16563D] text-white font-semibold text-xs shadow-sm hover:shadow transition-all active:scale-95"
+              >
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Request a Booking</span>
               </Link>
             </div>
           </motion.div>
@@ -521,45 +528,64 @@ export default function HomePage() {
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
-                <Card
-                  hoverEffect
-                  padding="p-0"
-                  className="h-full flex flex-col bg-surface border border-surface-border group"
-                >
+                <div className="h-full flex flex-col bg-white rounded-2xl border border-stone-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                   {/* Room Photo */}
-                  <div className="relative h-52 bg-surface-muted overflow-hidden">
+                  <div className="relative aspect-[16/10] bg-stone-100 overflow-hidden">
                     <img
                       src={room.images?.[0] || 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80'}
                       alt={room.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Top Badges */}
                     <div className="absolute top-3 left-3">
-                      <Badge variant="neutral">{room.roomType || 'Deluxe'}</Badge>
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/95 backdrop-blur-md text-stone-800 shadow-sm border border-white/40">
+                        {room.roomType || 'Deluxe'}
+                      </span>
                     </div>
+
                     <div className="absolute top-3 right-3">
-                      <Badge variant={room.isAc ? 'primary' : 'warning'}>
+                      <span
+                        className={`px-2.5 py-1 rounded-full text-[11px] font-bold shadow-sm ${
+                          room.isAc ? 'bg-emerald-700 text-white' : 'bg-amber-600 text-white'
+                        }`}
+                      >
                         {room.isAc ? 'AC Room' : 'Non-AC'}
-                      </Badge>
+                      </span>
+                    </div>
+
+                    {/* Room Capacity Overlay */}
+                    <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white text-xs drop-shadow-sm font-medium">
+                      <span className="flex items-center gap-1.5 truncate">
+                        <Users className="w-3.5 h-3.5 text-amber-300 flex-shrink-0" />
+                        <span>{room.bedType || 'Comfort Bed'} &bull; Up to {room.capacityAdults || 2} Guests</span>
+                      </span>
                     </div>
                   </div>
 
                   {/* Room Details */}
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
                     <div className="space-y-2">
-                      <h3 className="text-lg font-bold text-content-main">{room.name}</h3>
-                      <p className="text-xs text-content-muted leading-relaxed line-clamp-2">
+                      <h3 className="text-base sm:text-lg font-bold text-stone-900 group-hover:text-emerald-800 transition-colors line-clamp-1">
+                        {room.name}
+                      </h3>
+
+                      <p className="text-xs text-stone-600 leading-relaxed line-clamp-2">
                         {room.description}
                       </p>
 
                       {/* Room Facilities Pills */}
-                      {room.features && (
-                        <div className="flex flex-wrap gap-1.5 pt-2">
+                      {room.features && room.features.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 pt-1">
                           {room.features.slice(0, 3).map((feat, fIdx) => (
                             <span
                               key={fIdx}
-                              className="text-[11px] px-2 py-0.5 rounded bg-surface-muted text-content-muted border border-surface-border"
+                              className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-900 bg-emerald-50/90 border border-emerald-100 px-2 py-0.5 rounded-md"
                             >
-                              {feat}
+                              <CheckCircle2 className="w-3 h-3 text-emerald-600 flex-shrink-0" />
+                              <span>{feat}</span>
                             </span>
                           ))}
                         </div>
@@ -567,36 +593,54 @@ export default function HomePage() {
                     </div>
 
                     {/* Price and CTA */}
-                    <div className="pt-4 border-t border-surface-border flex items-center justify-between">
+                    <div className="pt-4 border-t border-stone-100 flex items-center justify-between gap-2">
                       <div>
                         {room.priceDisplay !== false && room.pricePerNight ? (
-                          <>
-                            <span className="text-lg font-extrabold text-primary">₹{room.pricePerNight}</span>
-                            <span className="text-xs text-content-muted"> / night</span>
-                          </>
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-xl font-extrabold text-[#0E3D2B]">
+                              ₹{room.pricePerNight}
+                            </span>
+                            <span className="text-xs text-stone-500 font-normal">/ night</span>
+                          </div>
                         ) : (
-                          <span className="text-xs text-content-muted font-medium">Tariff on request</span>
+                          <span className="text-xs text-stone-600 font-semibold bg-stone-100 px-2.5 py-1 rounded-md">
+                            Tariff on request
+                          </span>
                         )}
                       </div>
 
-                      <Link href={`/guest-house/booking?room=${room._id}`}>
-                        <Button size="sm" variant="primary">
-                          Request Stay
-                        </Button>
+                      <Link
+                        href={`/guest-house/booking?room=${room._id}`}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0E3D2B] hover:bg-[#16563D] text-white text-xs font-bold shadow-sm hover:shadow transition-all active:scale-95"
+                      >
+                        <span>Book Stay</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>
-                </Card>
+                </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Scope Note */}
-          <div className="mt-8 flex items-center gap-2 p-3.5 rounded-theme bg-surface border border-surface-border text-xs text-content-muted">
-            <Info className="w-4 h-4 text-primary flex-shrink-0" />
-            <span>
-              <strong>Note on Bookings:</strong> All room requests are processed directly by our front desk. Dates are held upon confirmation; no upfront online payment is taken.
-            </span>
+          {/* Simple Clean Scope Note */}
+          <div className="mt-8 p-4 rounded-2xl bg-white border border-stone-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-stone-600">
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center flex-shrink-0">
+                <Info className="w-4 h-4" />
+              </span>
+              <div>
+                <strong className="text-stone-900 font-bold mr-1">Direct Front Desk Booking:</strong>
+                <span>All room requests are confirmed directly by our concierge. Zero advance online payment required.</span>
+              </div>
+            </div>
+            <Link
+              href="/guest-house"
+              className="inline-flex items-center gap-1 font-bold text-emerald-800 hover:text-emerald-950 flex-shrink-0 self-end sm:self-auto"
+            >
+              <span>Explore all rooms</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </section>
@@ -1056,7 +1100,7 @@ export default function HomePage() {
                 alt="Willy Nilly Founder"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              
+
             </div>
           </motion.div>
         </div>
@@ -1126,10 +1170,10 @@ export default function HomePage() {
                   <div>
                     <span className="font-semibold text-content-main block">Email Desk:</span>
                     <a
-                      href={`mailto:${ DEFAULT_SETTINGS.emailPrimary}`}
+                      href={`mailto:${DEFAULT_SETTINGS.emailPrimary}`}
                       className="hover:text-primary transition-colors"
                     >
-                      { DEFAULT_SETTINGS.emailPrimary}
+                      {DEFAULT_SETTINGS.emailPrimary}
                     </a>
                   </div>
                 </div>

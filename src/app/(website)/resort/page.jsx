@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Alert } from '@/components/ui/Alert';
 import { Button } from '@/components/ui/Button';
 import { BgHero } from '@/components/ui/BgHero';
+import { PenthaBhitarkanikaTourism } from '@/components/resort/PenthaBhitarkanikaTourism';
 import { getResortContent } from '@/api/settings.api';
 
 export default function ResortPage() {
@@ -42,7 +43,7 @@ export default function ResortPage() {
     <div className="animate-fade-in">
       {/* ─── Hero Banner ─────────────────────────────────── */}
       <BgHero
-        image="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=2000&q=85"
+        image="https://plus.unsplash.com/premium_photo-1661964304872-7b715cf38cd1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
         alt="Luxury eco resort pool at twilight"
         size="lg"
         align="center"
@@ -78,7 +79,7 @@ export default function ResortPage() {
         }
       />
 
-      {/* ─── Page Body ───────────────────────────────────── */}
+      {/* ─── Page Body: Concept Architecture & Notice ──────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
 
         {/* Disabled Booking Notice */}
@@ -144,6 +145,9 @@ export default function ResortPage() {
           </Card>
         </div>
       </div>
+
+      {/* ─── Explore Pentha & Bhitarkanika Tourism Circuit ─── */}
+      <PenthaBhitarkanikaTourism />
     </div>
   );
 }
